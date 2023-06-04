@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.ymall.common.configuration.manger.ConfigManger;
 import org.ymall.commons.config.MinioConfig;
+import org.ymall.commons.config.manger.CommonConfigManger;
 import org.ymall.service.IFileUploadService;
 
 import java.util.UUID;
@@ -29,7 +30,7 @@ import java.util.UUID;
 @Slf4j
 public class FileUploadServiceImpl implements IFileUploadService {
     @Autowired
-    private ConfigManger cm;
+    private CommonConfigManger cm;
 
     @SneakyThrows
     @Override
@@ -43,13 +44,13 @@ public class FileUploadServiceImpl implements IFileUploadService {
         // MinioClient minioClient = new MinioClient("https://play.min.io", "Q3AM3UQ867SPQQA43P2F",
         // "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG");
         MinioClient minioClient =
-                MinioClient.builder()
-                        .endpoint(minioConfig.getEndpointUrl())
-                        .credentials(minioConfig.getAccessKey(), minioConfig.getSecreKey())
-                        .build();
+            MinioClient.builder()
+                .endpoint(minioConfig.getEndpointUrl())
+                .credentials(minioConfig.getAccessKey(), minioConfig.getSecreKey())
+                .build();
         // 检查存储桶是否已经存在
         Boolean isExist =
-                minioClient.bucketExists(BucketExistsArgs.builder().bucket(minioConfig.getBucketName()).build());
+            minioClient.bucketExists(BucketExistsArgs.builder().bucket(minioConfig.getBucketName()).build());
         if (isExist) {
             log.info("Bucket already exists.");
             System.out.println("Bucket already exists.");
@@ -62,10 +63,10 @@ public class FileUploadServiceImpl implements IFileUploadService {
         // 使用putObject上传一个文件到存储桶中。
         //  minioClient.putObject("asiatrip","asiaphotos.zip", "/home/user/Photos/asiaphotos.zip");
         minioClient.putObject(
-                PutObjectArgs.builder().bucket(minioConfig.getBucketName()).object(fileName).stream(
-                                file.getInputStream(), file.getSize(), -1)
-                        .contentType(file.getContentType())
-                        .build());
+            PutObjectArgs.builder().bucket(minioConfig.getBucketName()).object(fileName).stream(
+                    file.getInputStream(), file.getSize(), -1)
+                .contentType(file.getContentType())
+                .build());
         //  System.out.println("/home/user/Photos/asiaphotos.zip is successfully uploaded as asiaphotos.zip to
         //  `asiatrip` bucket.");
         //  文件上传之后的路径： http://39.99.159.121:9000/ymall/xxxxxx

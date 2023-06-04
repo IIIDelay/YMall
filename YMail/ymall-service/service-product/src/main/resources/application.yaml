@@ -4,3 +4,6 @@ spring:
       matching-strategy: ANT_PATH_MATCHER
   jackson:
     time-zone: GMT+8
+  redis:
+    host: 192.168.81.111
+    port: 6379

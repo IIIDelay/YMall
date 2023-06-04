@@ -7,8 +7,6 @@ package org.ymall.common.configuration.manger;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.ymall.common.configuration.properties.ConfigProperties;
-import org.ymall.commons.config.MinioConfig;
 
 /**
  * ConfigManger
@@ -19,11 +17,6 @@ import org.ymall.commons.config.MinioConfig;
 @Component
 @Getter
 public class ConfigManger {
-    @Autowired
-    private ConfigProperties configProperties;
-
-    @Autowired
-    private MinioConfig minioConfig;
 
     @Autowired
     private CustomConfig customConfig;

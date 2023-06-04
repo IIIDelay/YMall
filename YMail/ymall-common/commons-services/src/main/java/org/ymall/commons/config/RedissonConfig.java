@@ -5,13 +5,17 @@ import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.redisson.config.SingleServerConfig;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 /**
  * redisson配置信息
  */
 @Data
-// @ConfigurationProperties("spring.redis")
+@ConfigurationProperties(prefix = "spring.redis")
 public class RedissonConfig {
 
     private String host;
@@ -31,11 +35,11 @@ public class RedissonConfig {
     /**
      * 自动装配
      */
-    // @Bean
+    @Bean
     public RedissonClient redissonSingle() {
         Config config = new Config();
         if (StringUtils.isEmpty(host)) {
-            throw new RuntimeException("host is  empty");
+            throw new RuntimeException("host is empty");
         }
         SingleServerConfig serverConfig = config.useSingleServer()
             // redis://127.0.0.1:7181
