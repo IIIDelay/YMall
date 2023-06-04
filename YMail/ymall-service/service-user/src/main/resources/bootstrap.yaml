@@ -1,0 +1,20 @@
+#从配置中心加载配置文件
+#文件名是通过公式来拼接${prefix}-${spring.profiles.active}.${file-extension}
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.81.111:8848
+        # 注意: 这里namespace是命名空间id!!!
+        namespace: b342eb50-4d4f-4225-8fc4-71167c55c8e1
+        group: DEFAULT_GROUP
+        prefix: service-user
+        file-extension: yaml
+        # 通用配置common, 动态刷新通用配置文件
+        shared-configs[0]:
+          data-id: ymail-common-${spring.profiles.active}.yaml
+          group: DEFAULT_GROUP
+          refresh: true
+
+  profiles:
+    active: @env@
