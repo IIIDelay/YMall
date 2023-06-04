@@ -12,7 +12,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.redis.connection.RedisConfiguration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.stereotype.Component;
-import utils.AttrUtil;
+import utils.AttrTransferUtil;
 
 import javax.sql.DataSource;
 import java.util.Objects;
@@ -48,7 +48,7 @@ public class CommonConfigProperties implements EnvironmentAware{
         if (Objects.equals(deploymentMode, RedisConstants.DeploymentMode.STAND_ALONE)) {
             RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
             configuration.setHostName(environment.getProperty("redis." + deploymentMode.name + ".hostname"));
-            configuration.setPort(AttrUtil.safeGetter(environment.getProperty("redis." + deploymentMode.name + ".port"),
+            configuration.setPort(AttrTransferUtil.safeGetter(environment.getProperty("redis." + deploymentMode.name + ".port"),
                     Integer::parseInt, 0));
             return configuration;
         }
