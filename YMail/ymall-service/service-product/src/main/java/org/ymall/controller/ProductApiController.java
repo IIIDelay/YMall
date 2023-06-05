@@ -1,5 +1,6 @@
 package org.ymall.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.ymall.entity.BaseAttrInfo;
 import org.ymall.entity.SpuPoster;
 import org.ymall.service.IManageService;
+import result.Result;
+import result.ServiceResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -48,6 +51,16 @@ public class ProductApiController {
     @GetMapping("inner/getAttrList/{skuId}")
     public List<BaseAttrInfo> getAttrList(@PathVariable("skuId") Long skuId){
         return manageService.getAttrList(skuId);
+    }
+
+    /**
+     * 获取全部分类信息
+     * @return
+     */
+    @GetMapping("getBaseCategoryList")
+    public ServiceResponse<List<JSONObject>> getBaseCategoryList(){
+        List<JSONObject> list = manageService.getBaseCategoryList();
+        return ServiceResponse.ok(list);
     }
 
 }

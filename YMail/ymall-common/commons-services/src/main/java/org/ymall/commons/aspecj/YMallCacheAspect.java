@@ -5,10 +5,14 @@ import common.RedisConstants;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
 import org.ymall.commons.annotation.YMallCache;
 
 import java.util.Arrays;
@@ -17,19 +21,19 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author atguigu-mqx
  */
-// @Component
-// @Aspect
+@Component
+@Aspect
 public class YMallCacheAspect {
 
-    // @Autowired
+    @Autowired
     private RedissonClient redissonClient;
-    //
-    // @Autowired
+
+    @Autowired
     private RedisTemplate redisTemplate;
 
     //  定义一个环绕通知！
     @SneakyThrows
-    // @Around("@annotation(org.ymall.commons.annotation.YMallCache)")
+    @Around("@annotation(org.ymall.commons.annotation.YMallCache)")
     public Object ymallCacheAspectMethod(ProceedingJoinPoint point) {
         //  定义一个对象
         Object obj = new Object();
@@ -52,7 +56,7 @@ public class YMallCacheAspect {
         String key = prefix + Arrays.asList(point.getArgs()).toString();
         try {
             //  可以通过这个key 获取缓存的数据
-            obj = this.getRedisData(key, methodSignature);
+            obj = this.cacheHit(key, methodSignature);
             if (obj == null) {
                 //  分布式业务逻辑
                 //  设置分布式锁，进入数据库进行查询数据！
@@ -105,7 +109,7 @@ public class YMallCacheAspect {
      * @param key
      * @return
      */
-    private Object getRedisData(String key, MethodSignature methodSignature) {
+    private Object cacheHit(String key, MethodSignature methodSignature) {
         //  在向缓存存储数据的时候，将数据变为Json 字符串了！
         //  通过这个key 获取到缓存的value
         String strJson = (String) this.redisTemplate.opsForValue().get(key);

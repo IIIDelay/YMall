@@ -7,6 +7,8 @@ import org.ymall.entity.BaseCategoryView;
 import org.ymall.entity.SkuInfo;
 import org.ymall.entity.SpuPoster;
 import org.ymall.entity.SpuSaleAttr;
+import result.Result;
+import result.ServiceResponse;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -50,4 +52,10 @@ public class ProductDegradeFeignClient implements ProductFeignClient {
     public List<BaseAttrInfo> getAttrList(Long skuId) {
         return null;
     }
+
+    @Override
+    public ServiceResponse getBaseCategoryList() {
+        return null;
+    }
+
 }

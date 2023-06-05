@@ -4,6 +4,7 @@
 
 package org.ymall.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.ymall.entity.BaseAttrInfo;
@@ -188,5 +189,27 @@ public interface IManageService {
      * @return
      */
     List<BaseAttrInfo> getAttrList(Long skuId);
+
+    /**
+     * getSkuInfoDB
+     *
+     * @param skuId skuId
+     * @return SkuInfo
+     */
+    SkuInfo getSkuInfoDB(Long skuId);
+
+    /**
+     * getPrice
+     *
+     * @param skuId skuId
+     * @return BigDecimal
+     */
+    BigDecimal getPrice(Long skuId);
+
+    /**
+     * 获取全部分类信息
+     * @return
+     */
+    List<JSONObject> getBaseCategoryList();
 
 }

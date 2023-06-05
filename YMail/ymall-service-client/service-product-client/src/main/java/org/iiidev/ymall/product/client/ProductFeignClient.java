@@ -9,6 +9,7 @@ import org.ymall.entity.BaseCategoryView;
 import org.ymall.entity.SkuInfo;
 import org.ymall.entity.SpuPoster;
 import org.ymall.entity.SpuSaleAttr;
+import result.ServiceResponse;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -76,5 +77,12 @@ public interface ProductFeignClient {
      */
     @GetMapping("/api/product/inner/getAttrList/{skuId}")
     List<BaseAttrInfo> getAttrList(@PathVariable("skuId") Long skuId);
+
+    /**
+     * 获取全部分类信息
+     * @return
+     */
+    @GetMapping("/api/product/getBaseCategoryList")
+    ServiceResponse getBaseCategoryList();
 
 }
