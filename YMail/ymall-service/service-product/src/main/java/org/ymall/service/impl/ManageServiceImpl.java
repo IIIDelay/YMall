@@ -26,6 +26,7 @@ import org.ymall.entity.BaseCategory2;
 import org.ymall.entity.BaseCategory3;
 import org.ymall.entity.BaseCategoryView;
 import org.ymall.entity.BaseSaleAttr;
+import org.ymall.entity.BaseTrademark;
 import org.ymall.entity.SkuAttrValue;
 import org.ymall.entity.SkuImage;
 import org.ymall.entity.SkuInfo;
@@ -43,6 +44,7 @@ import org.ymall.mapper.BaseCategory2Mapper;
 import org.ymall.mapper.BaseCategory3Mapper;
 import org.ymall.mapper.BaseCategoryViewMapper;
 import org.ymall.mapper.BaseSaleAttrMapper;
+import org.ymall.mapper.BaseTrademarkMapper;
 import org.ymall.mapper.SkuAttrValueMapper;
 import org.ymall.mapper.SkuImageMapper;
 import org.ymall.mapper.SkuInfoMapper;
@@ -116,6 +118,9 @@ public class ManageServiceImpl implements IManageService {
 
     @Autowired
     private RedissonClient redissonClient;
+
+    @Autowired
+    private BaseTrademarkMapper baseTrademarkMapper;
 
     @Override
     public List<BaseCategory1> getCategory1() {
@@ -666,4 +671,8 @@ public class ManageServiceImpl implements IManageService {
 
     }
 
+    @Override
+    public BaseTrademark getTrademarkByTmId(Long tmId) {
+        return baseTrademarkMapper.selectById(tmId);
+    }
 }

@@ -4,6 +4,7 @@ import org.iiidev.ymall.product.client.ProductFeignClient;
 import org.springframework.stereotype.Component;
 import org.ymall.entity.BaseAttrInfo;
 import org.ymall.entity.BaseCategoryView;
+import org.ymall.entity.BaseTrademark;
 import org.ymall.entity.SkuInfo;
 import org.ymall.entity.SpuPoster;
 import org.ymall.entity.SpuSaleAttr;
@@ -55,6 +56,11 @@ public class ProductDegradeFeignClient implements ProductFeignClient {
 
     @Override
     public ServiceResponse getBaseCategoryList() {
+        return null;
+    }
+
+    @Override
+    public BaseTrademark getTrademark(Long tmId) {
         return null;
     }
 

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.ymall.entity.BaseAttrInfo;
 import org.ymall.entity.BaseCategoryView;
+import org.ymall.entity.BaseTrademark;
 import org.ymall.entity.SkuInfo;
 import org.ymall.entity.SpuPoster;
 import org.ymall.entity.SpuSaleAttr;
@@ -80,9 +81,18 @@ public interface ProductFeignClient {
 
     /**
      * 获取全部分类信息
+     *
      * @return
      */
     @GetMapping("/api/product/getBaseCategoryList")
     ServiceResponse getBaseCategoryList();
+
+    /**
+     * 通过品牌Id 集合来查询数据
+     * @param tmId
+     * @return
+     */
+    @GetMapping("/api/product/inner/getTrademark/{tmId}")
+    BaseTrademark getTrademark(@PathVariable("tmId") Long tmId);
 
 }

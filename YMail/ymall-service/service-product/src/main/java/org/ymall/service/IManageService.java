@@ -13,6 +13,7 @@ import org.ymall.entity.BaseCategory2;
 import org.ymall.entity.BaseCategory3;
 import org.ymall.entity.BaseCategoryView;
 import org.ymall.entity.BaseSaleAttr;
+import org.ymall.entity.BaseTrademark;
 import org.ymall.entity.SkuInfo;
 import org.ymall.entity.SpuImage;
 import org.ymall.entity.SpuInfo;
@@ -211,5 +212,13 @@ public interface IManageService {
      * @return
      */
     List<JSONObject> getBaseCategoryList();
+
+
+    /**
+     * 通过品牌Id 来查询数据
+     * @param tmId
+     * @return
+     */
+    BaseTrademark getTrademarkByTmId(Long tmId);
 
 }

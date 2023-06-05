@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.ymall.entity.BaseAttrInfo;
+import org.ymall.entity.BaseTrademark;
 import org.ymall.entity.SpuPoster;
 import org.ymall.service.IManageService;
 import result.Result;
@@ -61,6 +62,11 @@ public class ProductApiController {
     public ServiceResponse<List<JSONObject>> getBaseCategoryList(){
         List<JSONObject> list = manageService.getBaseCategoryList();
         return ServiceResponse.ok(list);
+    }
+
+    @GetMapping("inner/getTrademark/{tmId}")
+    public BaseTrademark getTrademark(@PathVariable("tmId")Long tmId){
+        return manageService.getTrademarkByTmId(tmId);
     }
 
 }

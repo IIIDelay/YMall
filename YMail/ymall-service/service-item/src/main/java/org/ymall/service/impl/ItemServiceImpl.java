@@ -13,6 +13,7 @@ import org.ymall.entity.BaseCategoryView;
 import org.ymall.entity.SkuInfo;
 import org.ymall.entity.SpuPoster;
 import org.ymall.entity.SpuSaleAttr;
+import org.ymall.list.client.ListFeignClient;
 import org.ymall.service.ItemService;
 
 import java.math.BigDecimal;
@@ -33,6 +34,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ThreadPoolExecutor productThreadPool;
+
+    @Autowired
+    private ListFeignClient listFeignClient;
 
     @Override
     public Map<String, Object> getItemBySkuId(Long skuId) {
@@ -100,6 +104,12 @@ public class ItemServiceImpl implements ItemService {
             }).collect(Collectors.toList());
             result.put("skuAttrList", skuAttrList);
         }, productThreadPool);
+
+        //更新商品incrHotScore
+        CompletableFuture<Void> incrHotScoreCompletableFuture = CompletableFuture.runAsync(() -> {
+            listFeignClient.incrHotScore(skuId);
+        }, productThreadPool);
+
 
         CompletableFuture.allOf(skuCompletableFuture, spuSaleAttrCompletableFuture, skuValueIdsMapCompletableFuture, skuPriceCompletableFuture, categoryViewCompletableFuture, spuPosterListCompletableFuture, skuAttrListCompletableFuture).join();
         return result;
