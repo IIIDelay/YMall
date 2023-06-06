@@ -25,6 +25,7 @@
         <module>ymall-service-client</module>
         <module>web</module>
         <module>web/web-all</module>
+        <module>ware-manage</module>
     </modules>
 
     <properties>
