@@ -5,7 +5,6 @@
 package org.ymall.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.ymall.entity.BaseSaleAttr;
-
+import org.ymall.model.product.BaseSaleAttr;
 public interface BaseSaleAttrMapper extends BaseMapper<BaseSaleAttr> {
 }

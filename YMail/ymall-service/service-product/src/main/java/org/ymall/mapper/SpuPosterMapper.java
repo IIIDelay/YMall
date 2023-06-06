@@ -5,7 +5,7 @@
 package org.ymall.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.ymall.entity.SpuPoster;
+import org.ymall.model.product.SpuPoster;
 
 public interface SpuPosterMapper extends BaseMapper<SpuPoster> {
 }

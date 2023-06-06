@@ -6,7 +6,7 @@ package org.ymall.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
-import org.ymall.entity.SpuSaleAttr;
+import org.ymall.model.product.SpuSaleAttr;
 
 import java.util.List;
 

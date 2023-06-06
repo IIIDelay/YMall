@@ -5,7 +5,7 @@
 package org.ymall.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.ymall.entity.BaseAttrValue;
+import org.ymall.model.product.BaseAttrValue;
 
 /**
  * 属性值表(BaseAttrValue)表数据库访问层

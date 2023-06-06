@@ -4,12 +4,12 @@ import org.iiidev.ymall.product.client.impl.ProductDegradeFeignClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.ymall.entity.BaseAttrInfo;
-import org.ymall.entity.BaseCategoryView;
-import org.ymall.entity.BaseTrademark;
-import org.ymall.entity.SkuInfo;
-import org.ymall.entity.SpuPoster;
-import org.ymall.entity.SpuSaleAttr;
+import org.ymall.model.product.BaseAttrInfo;
+import org.ymall.model.product.BaseCategoryView;
+import org.ymall.model.product.BaseTrademark;
+import org.ymall.model.product.SkuInfo;
+import org.ymall.model.product.SpuPoster;
+import org.ymall.model.product.SpuSaleAttr;
 import result.ServiceResponse;
 
 import java.math.BigDecimal;

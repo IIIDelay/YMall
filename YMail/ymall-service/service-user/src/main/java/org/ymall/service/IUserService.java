@@ -4,6 +4,7 @@
 
 package org.ymall.service;
 
+
 import org.ymall.entity.UserInfo;
 
 public interface IUserService {

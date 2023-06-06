@@ -3,11 +3,11 @@
 <!--namespace约定为接口的全限定名-->
 <mapper namespace="org.ymall.mapper.SpuSaleAttrMapper">
 
-    <resultMap id="spuSaleAttrMap" type="org.ymall.entity.SpuSaleAttr" autoMapping="true">
+    <resultMap id="spuSaleAttrMap" type="org.ymall.model.SpuSaleAttr" autoMapping="true">
 
         <id property="id" column="id"></id>
         <!--一对多-->
-        <collection property="spuSaleAttrValueList" ofType="org.ymall.entity.SpuSaleAttrValue" autoMapping="true">
+        <collection property="spuSaleAttrValueList" ofType="org.ymall.model.SpuSaleAttrValue" autoMapping="true">
             <id property="id" column="sale_attr_value_id"></id>
         </collection>
 

@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.ymall.entity.BaseSaleAttr;
-import org.ymall.entity.SpuInfo;
-import org.ymall.entity.SpuSaleAttr;
+
+import org.ymall.model.product.BaseSaleAttr;
+import org.ymall.model.product.SpuInfo;
+import org.ymall.model.product.SpuSaleAttr;
 import org.ymall.service.IManageService;
 import result.ServiceResponse;
 

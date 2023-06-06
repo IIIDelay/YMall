@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.ymall.entity.SearchParam;
 import org.ymall.list.client.ListFeignClient;
+import org.ymall.model.list.SearchParam;
 import result.Result;
 
 import java.util.ArrayList;

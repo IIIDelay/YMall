@@ -5,9 +5,8 @@
 package org.ymall.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.ymall.entity.SkuSpuInfo;
-import org.ymall.entity.SpuInfo;
-
+import org.ymall.model.product.SkuSpuInfo;
+import org.ymall.model.product.SpuInfo;
 import java.util.List;
 
 public interface SpuInfoMapper extends BaseMapper<SpuInfo> {

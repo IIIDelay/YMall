@@ -8,12 +8,12 @@ import com.alibaba.fastjson.JSON;
 import org.iiidev.ymall.product.client.ProductFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.ymall.entity.BaseAttrInfo;
-import org.ymall.entity.BaseCategoryView;
-import org.ymall.entity.SkuInfo;
-import org.ymall.entity.SpuPoster;
-import org.ymall.entity.SpuSaleAttr;
 import org.ymall.list.client.ListFeignClient;
+import org.ymall.model.product.BaseAttrInfo;
+import org.ymall.model.product.BaseCategoryView;
+import org.ymall.model.product.SkuInfo;
+import org.ymall.model.product.SpuPoster;
+import org.ymall.model.product.SpuSaleAttr;
 import org.ymall.service.ItemService;
 
 import java.math.BigDecimal;

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.ymall.entity.BaseTrademark;
-import org.ymall.entity.vo.CategoryTrademarkVo;
+import org.ymall.model.product.BaseTrademark;
+import org.ymall.model.product.CategoryTrademarkVo;
 import org.ymall.service.BaseCategoryTrademarkService;
 import result.ServiceResponse;
 

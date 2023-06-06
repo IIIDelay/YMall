@@ -5,7 +5,7 @@
 package org.ymall.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.ymall.entity.BaseCategory2;
+import org.ymall.model.product.BaseCategory2;
 
 /**
  * 二级分类表(BaseCategory2)表数据库访问层

@@ -5,9 +5,9 @@
 package org.ymall.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.ymall.entity.BaseCategoryTrademark;
-import org.ymall.entity.BaseTrademark;
-import org.ymall.entity.vo.CategoryTrademarkVo;
+import org.ymall.model.product.BaseCategoryTrademark;
+import org.ymall.model.product.BaseTrademark;
+import org.ymall.model.product.CategoryTrademarkVo;
 
 import java.util.List;
 

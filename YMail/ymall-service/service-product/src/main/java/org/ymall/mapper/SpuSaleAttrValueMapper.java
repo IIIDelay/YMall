@@ -5,7 +5,7 @@
 package org.ymall.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.ymall.entity.SpuSaleAttrValue;
+import org.ymall.model.product.SpuSaleAttrValue;
 
 public interface SpuSaleAttrValueMapper extends BaseMapper<SpuSaleAttrValue> {
 }

@@ -10,8 +10,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.ymall.entity.BaseTrademark;
+
 import org.ymall.mapper.BaseTrademarkMapper;
+import org.ymall.model.product.BaseTrademark;
 import org.ymall.service.IBaseTrademarkService;
 
 @Service

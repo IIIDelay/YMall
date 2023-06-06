@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.ymall.entity.SkuSpuInfo;
+import org.ymall.model.product.SkuSpuInfo;
 
 import java.util.List;
 

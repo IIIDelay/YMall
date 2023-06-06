@@ -17,7 +17,15 @@ spring:
           refresh: true
   profiles:
     active: @env@
+authUrls:
+  url: 192.168.81.111,127.0.0.1
 
 gateway:
   filters:
     blackList: 192.168.81.111,127.0.0.1
+redis:
+  host: 192.168.200.129
+  port: 6379
+  database: 0
+  timeout: 1800000
+  password:

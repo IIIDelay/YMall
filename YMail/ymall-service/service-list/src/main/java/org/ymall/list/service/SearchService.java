@@ -1,7 +1,7 @@
 package org.ymall.list.service;
 
-import org.ymall.entity.SearchParam;
 import org.ymall.list.model.SearchResponseVo;
+import org.ymall.model.list.SearchParam;
 
 import java.io.IOException;
 

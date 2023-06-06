@@ -6,7 +6,7 @@ package org.ymall.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
-import org.ymall.entity.BaseAttrInfo;
+import org.ymall.model.product.BaseAttrInfo;
 
 import java.util.List;
 

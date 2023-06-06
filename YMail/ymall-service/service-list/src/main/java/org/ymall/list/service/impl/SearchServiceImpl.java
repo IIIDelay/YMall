@@ -29,19 +29,20 @@ import org.iiidev.ymall.product.client.ProductFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.ymall.entity.BaseAttrInfo;
-import org.ymall.entity.BaseAttrValue;
-import org.ymall.entity.BaseCategoryView;
-import org.ymall.entity.BaseTrademark;
-import org.ymall.entity.SkuInfo;
+
 import org.ymall.list.model.Goods;
 import org.ymall.list.model.SearchAttr;
-import org.ymall.entity.SearchParam;
 import org.ymall.list.model.SearchResponseAttrVo;
 import org.ymall.list.model.SearchResponseTmVo;
 import org.ymall.list.model.SearchResponseVo;
 import org.ymall.list.repository.GoodsRepository;
 import org.ymall.list.service.SearchService;
+import org.ymall.model.list.SearchParam;
+import org.ymall.model.product.BaseAttrInfo;
+import org.ymall.model.product.BaseAttrValue;
+import org.ymall.model.product.BaseCategoryView;
+import org.ymall.model.product.BaseTrademark;
+import org.ymall.model.product.SkuInfo;
 
 import java.io.IOException;
 import java.util.ArrayList;

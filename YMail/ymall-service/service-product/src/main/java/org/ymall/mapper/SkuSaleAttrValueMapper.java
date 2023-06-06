@@ -5,7 +5,7 @@
 package org.ymall.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.ymall.entity.SkuSaleAttrValue;
+import org.ymall.model.product.SkuSaleAttrValue;
 
 import java.util.List;
 import java.util.Map;

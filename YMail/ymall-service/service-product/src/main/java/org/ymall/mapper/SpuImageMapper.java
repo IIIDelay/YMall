@@ -5,7 +5,7 @@
 package org.ymall.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.ymall.entity.SpuImage;
+import org.ymall.model.product.SpuImage;
 
 public interface SpuImageMapper extends BaseMapper<SpuImage> {
 }

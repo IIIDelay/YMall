@@ -1,8 +1,8 @@
 package org.ymall.list.client.impl;
 
 import org.springframework.stereotype.Component;
-import org.ymall.entity.SearchParam;
 import org.ymall.list.client.ListFeignClient;
+import org.ymall.model.list.SearchParam;
 import result.Result;
 
 @Component

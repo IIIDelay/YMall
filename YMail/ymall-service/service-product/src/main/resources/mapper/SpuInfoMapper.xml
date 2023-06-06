@@ -3,17 +3,17 @@
 
 <!--namespace约定为接口的全限定名-->
 <mapper namespace="org.ymall.mapper.SpuInfoMapper">
-    <resultMap id="pageMap" type="org.ymall.entity.SkuSpuInfo">
+    <resultMap id="pageMap" type="org.ymall.model.SkuSpuInfo">
         <id column="id" property="id"/>
         <result column="price" property="price"/>
         <result column="sku_name" property="skuName"/>
         <result column="spu_id" property="spuId"/>
         <!-- column="{spu_id=spuId}" 左表是主表的spu_id,右边十实体类子表的id -->
-        <collection property="spuInfos" ofType="org.ymall.entity.SpuAttr" column="spu_id" select="selectSpuInfo">
+        <collection property="spuInfos" ofType="org.ymall.model.SpuAttr" column="spu_id" select="selectSpuInfo">
         </collection>
     </resultMap>
 
-    <select id="selectSpuInfo" resultType="org.ymall.entity.SpuAttr">
+    <select id="selectSpuInfo" resultType="org.ymall.model.SpuAttr">
         select *
         from spu_info spu
                  left join spu_sale_attr at

@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.ymall.entity.BaseAttrInfo;
-import org.ymall.entity.BaseAttrValue;
-import org.ymall.entity.BaseCategory1;
-import org.ymall.entity.BaseCategory2;
-import org.ymall.entity.BaseCategory3;
-import org.ymall.entity.SkuInfo;
+import org.ymall.model.product.BaseAttrInfo;
+import org.ymall.model.product.BaseAttrValue;
+import org.ymall.model.product.BaseCategory1;
+import org.ymall.model.product.BaseCategory2;
+import org.ymall.model.product.BaseCategory3;
+import org.ymall.model.product.SkuInfo;
 import org.ymall.service.IManageService;
 import result.ServiceResponse;
 

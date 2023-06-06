@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.ymall.entity.UserInfo;
 import org.ymall.service.IUserService;
 import result.ServiceResponse;
-import utils.IpUtil;
+import org.ymall.commons.helper.IpUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

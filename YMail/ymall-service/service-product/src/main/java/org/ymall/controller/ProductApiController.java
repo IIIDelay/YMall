@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.ymall.entity.BaseAttrInfo;
-import org.ymall.entity.BaseTrademark;
-import org.ymall.entity.SpuPoster;
+
+import org.ymall.model.product.BaseAttrInfo;
+import org.ymall.model.product.BaseTrademark;
+import org.ymall.model.product.SpuPoster;
 import org.ymall.service.IManageService;
-import result.Result;
 import result.ServiceResponse;
 
 import java.util.List;

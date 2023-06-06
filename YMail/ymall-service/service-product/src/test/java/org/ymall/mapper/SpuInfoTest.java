@@ -3,10 +3,11 @@ package org.ymall.mapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.ymall.entity.SkuInfo;
+import org.ymall.model.product.SkuInfo;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * SpuInfoTest
@@ -26,8 +27,8 @@ public class SpuInfoTest {
         BigDecimal bigDecimal = BigDecimal.valueOf(11);
         skuInfo.setPrice(bigDecimal);
         skuInfo.setSkuDesc("dec");
-        skuInfo.setCreateTime(LocalDateTime.now());
-        skuInfo.setUpdateTime(LocalDateTime.now());
+        skuInfo.setCreateTime(new Date());
+        skuInfo.setUpdateTime(new Date());
         skuInfoMapper.insert(skuInfo);
     }
 

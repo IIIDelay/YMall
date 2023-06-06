@@ -2,13 +2,12 @@ package org.iiidev.ymall.product.client.impl;
 
 import org.iiidev.ymall.product.client.ProductFeignClient;
 import org.springframework.stereotype.Component;
-import org.ymall.entity.BaseAttrInfo;
-import org.ymall.entity.BaseCategoryView;
-import org.ymall.entity.BaseTrademark;
-import org.ymall.entity.SkuInfo;
-import org.ymall.entity.SpuPoster;
-import org.ymall.entity.SpuSaleAttr;
-import result.Result;
+import org.ymall.model.product.BaseAttrInfo;
+import org.ymall.model.product.BaseCategoryView;
+import org.ymall.model.product.BaseTrademark;
+import org.ymall.model.product.SkuInfo;
+import org.ymall.model.product.SpuPoster;
+import org.ymall.model.product.SpuSaleAttr;
 import result.ServiceResponse;
 
 import java.math.BigDecimal;

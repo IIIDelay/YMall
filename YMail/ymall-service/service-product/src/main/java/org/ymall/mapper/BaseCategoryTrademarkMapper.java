@@ -5,7 +5,7 @@
 package org.ymall.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.ymall.entity.BaseCategoryTrademark;
+import org.ymall.model.product.BaseCategoryTrademark;
 
 public interface BaseCategoryTrademarkMapper extends BaseMapper<BaseCategoryTrademark> {
 

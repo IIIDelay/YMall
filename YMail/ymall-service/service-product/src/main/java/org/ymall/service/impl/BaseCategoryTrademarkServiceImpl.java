@@ -9,11 +9,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.ymall.entity.BaseCategoryTrademark;
-import org.ymall.entity.BaseTrademark;
-import org.ymall.entity.vo.CategoryTrademarkVo;
 import org.ymall.mapper.BaseCategoryTrademarkMapper;
 import org.ymall.mapper.BaseTrademarkMapper;
+import org.ymall.model.product.BaseCategoryTrademark;
+import org.ymall.model.product.BaseTrademark;
+import org.ymall.model.product.CategoryTrademarkVo;
 import org.ymall.service.BaseCategoryTrademarkService;
 
 import java.util.List;

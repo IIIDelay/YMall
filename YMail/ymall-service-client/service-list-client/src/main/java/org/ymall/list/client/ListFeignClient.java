@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.ymall.entity.SearchParam;
 import org.ymall.list.client.impl.ListDegradeFeignClient;
+import org.ymall.model.list.SearchParam;
 import result.Result;
 
 @FeignClient(value = "service-list", fallback = ListDegradeFeignClient.class)

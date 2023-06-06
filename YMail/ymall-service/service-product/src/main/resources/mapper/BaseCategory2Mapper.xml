@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.ymall.mapper.BaseCategory2Mapper">
 
-    <resultMap type="org.ymall.entity.BaseCategory2" id="BaseCategory2Map">
+    <resultMap type="org.ymall.model.BaseCategory2" id="BaseCategory2Map">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="category1Id" column="category1_id" jdbcType="INTEGER"/>
