@@ -2,7 +2,7 @@
  * Copyright (c) 2023, author: IIIDev
  */
 
-package org.ymall;
+package org.cart;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
