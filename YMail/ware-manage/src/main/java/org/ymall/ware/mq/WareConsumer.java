@@ -10,7 +10,12 @@ import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.ymall.ware.bean.WareOrderTask;
+import org.ymall.ware.constant.MqConst;
+import org.ymall.ware.enums.TaskStatus;
+import org.ymall.ware.mapper.WareOrderTaskDetailMapper;
 import org.ymall.ware.mapper.WareOrderTaskMapper;
+import org.ymall.ware.mapper.WareSkuMapper;
 import org.ymall.ware.service.GwareService;
 
 import java.io.IOException;

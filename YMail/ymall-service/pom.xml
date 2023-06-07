@@ -17,6 +17,9 @@
         <module>service-user</module>
         <module>service-cart</module>
         <module>service-item</module>
+        <module>service-mq</module>
+        <module>service-task</module>
+        <module>service-activity</module>
     </modules>
 
     <properties>

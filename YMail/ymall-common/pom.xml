@@ -17,6 +17,7 @@
         <module>commons-helper</module>
         <module>commons-services</module>
         <module>commons-web</module>
+        <module>commons-mqs</module>
     </modules>
 
     <properties>
