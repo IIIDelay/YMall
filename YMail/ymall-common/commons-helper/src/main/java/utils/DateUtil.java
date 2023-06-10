@@ -1,8 +1,10 @@
 package utils;
 
+import cn.hutool.core.date.LocalDateTimeUtil;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -66,5 +68,51 @@ public class DateUtil {
         }
         // beginDate  <= endDate
         return true;
+    }
+
+    /**
+     * 是否今天
+     *
+     * @param date 日期
+     * @return 是否
+     */
+    public static boolean isToday(LocalDateTime date) {
+        return LocalDateTimeUtil.isSameDay(date, LocalDateTime.now());
+    }
+
+    /**
+     * 创建指定时间
+     *
+     * @param year  年
+     * @param mouth 月
+     * @param day   日
+     * @return 指定时间
+     */
+    public static Date buildTime(int year, int mouth, int day) {
+        return buildTime(year, mouth, day, 0, 0, 0);
+    }
+
+    /**
+     * 创建指定时间
+     *
+     * @param year   年
+     * @param mouth  月
+     * @param day    日
+     * @param hour   小时
+     * @param minute 分钟
+     * @param second 秒
+     * @return 指定时间
+     */
+    public static Date buildTime(int year, int mouth, int day,
+                                 int hour, int minute, int second) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, mouth - 1);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, second);
+        calendar.set(Calendar.MILLISECOND, 0); // 一般情况下，都是 0 毫秒
+        return calendar.getTime();
     }
 }

@@ -1,8 +1,10 @@
 package utils;
 
+import cn.hutool.core.collection.CollUtil;
 import execption.ParamException;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.LinkedList;
@@ -176,4 +178,17 @@ public class ValidationUtils {
         }
     }
 
+    /**
+     * validate
+     *
+     * @param validator validator
+     * @param object    object
+     * @param groups    groups
+     */
+    public static void validate(Validator validator, Object object, Class<?>... groups) {
+        Set<ConstraintViolation<Object>> constraintViolations = validator.validate(object, groups);
+        if (CollUtil.isNotEmpty(constraintViolations)) {
+            throw new ConstraintViolationException(constraintViolations);
+        }
+    }
 }
