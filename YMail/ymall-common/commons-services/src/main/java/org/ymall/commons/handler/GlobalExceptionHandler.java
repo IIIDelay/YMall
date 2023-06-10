@@ -1,6 +1,6 @@
 package org.ymall.commons.handler;
 
-import execption.YMallException;
+import execption.ServiceRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,9 +27,9 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(YMallException.class)
+    @ExceptionHandler(ServiceRuntimeException.class)
     @ResponseBody
-    public Result error(YMallException e) {
+    public Result error(ServiceRuntimeException e) {
         return Result.fail(e.getMessage());
     }
 }

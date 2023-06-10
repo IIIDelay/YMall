@@ -1,12 +1,25 @@
 package utils;
 
+import execption.ParamException;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 校验工具类: 非外部依赖
+ * 校验工具类: 正则, JSR303, MP
  */
-public class ValidatorUtil {
+public class ValidationUtils {
+
+    /**
+     * VALIDATOR : JSR303
+     */
+    private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
 
     /**
      * 正则表达式:验证用户名(不包含中文和特殊字符)如果用户名使用手机号码或邮箱 则结合手机号验证和邮箱验证
@@ -88,6 +101,79 @@ public class ValidatorUtil {
 
         Matcher m = P.matcher(phone);
         return m.matches();
+    }
+
+    /**
+     * 验证数据
+     *
+     * @param in 数据
+     */
+    public static <IN> void validate(IN in) throws ParamException {
+        Set<ConstraintViolation<IN>> validate = VALIDATOR.validate(in);
+        // 验证结果异常
+        throwParamException(validate);
+    }
+
+    /**
+     * 验证数据(分组)
+     *
+     * @param object 数据
+     * @param groups 所在组
+     */
+    public static void validate(Object object, Class<?>... groups) throws ParamException {
+
+        Set<ConstraintViolation<Object>> validate = VALIDATOR.validate(object, groups);
+
+        // 验证结果异常
+        throwParamException(validate);
+    }
+
+    /**
+     * 验证数据中的某个字段(分组)
+     *
+     * @param object       数据
+     * @param propertyName 字段名称
+     */
+    public static void validate(Object object, String propertyName) throws ParamException {
+        Set<ConstraintViolation<Object>> validate = VALIDATOR.validateProperty(object, propertyName);
+
+        // 验证结果异常
+        throwParamException(validate);
+
+    }
+
+    /**
+     * 验证数据中的某个字段(分组)
+     *
+     * @param object       数据
+     * @param propertyName 字段名称
+     * @param groups       所在组
+     */
+    public static void validate(Object object, String propertyName, Class<?>... groups) throws ParamException {
+
+        Set<ConstraintViolation<Object>> validate = VALIDATOR.validateProperty(object, propertyName, groups);
+
+        // 验证结果异常
+        throwParamException(validate);
+
+    }
+
+    /**
+     * 验证结果异常
+     *
+     * @param validate 验证结果
+     */
+    private static <IN> void throwParamException(Set<ConstraintViolation<IN>> validate) throws ParamException {
+        if (validate.size() > 0) {
+            List<String> fieldList = new LinkedList<>();
+            List<String> msgList = new LinkedList<>();
+            for (ConstraintViolation<IN> next : validate) {
+                fieldList.add(next.getPropertyPath().toString());
+                msgList.add(next.getMessage());
+            }
+
+            throw new ParamException(fieldList, msgList);
+        }
     }
 
 }

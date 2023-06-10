@@ -10,7 +10,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel(value = "自定义全局异常类")
-public class YMallException extends RuntimeException {
+public class ServiceRuntimeException extends RuntimeException {
 
     @ApiModelProperty(value = "异常状态码")
     private Integer code;
@@ -21,7 +21,7 @@ public class YMallException extends RuntimeException {
      * @param message
      * @param code
      */
-    public YMallException(String message, Integer code) {
+    public ServiceRuntimeException(String message, Integer code) {
         super(message);
         this.code = code;
     }
@@ -31,7 +31,7 @@ public class YMallException extends RuntimeException {
      *
      * @param resultCodeEnum
      */
-    public YMallException(ResultCodeEnum resultCodeEnum) {
+    public ServiceRuntimeException(ResultCodeEnum resultCodeEnum) {
         super(resultCodeEnum.getMessage());
         this.code = resultCodeEnum.getCode();
     }

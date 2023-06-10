@@ -115,5 +115,11 @@
             <artifactId>easyexcel</artifactId>
             <version>${version.easyexcel}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
