@@ -50,6 +50,9 @@
         <version.easypoi>4.4.0</version.easypoi>
         <version.guava>31.1-jre</version.guava>
         <version.easyexcel>3.2.1</version.easyexcel>
+        <version.weixin-java-pay>4.4.0</version.weixin-java-pay>
+        <version.tika-core>2.7.0</version.tika-core>
+        <version.transmittable-thread-local>2.2.0</version.transmittable-thread-local>
     </properties>
 
     <dependencyManagement>

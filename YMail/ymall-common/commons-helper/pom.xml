@@ -124,7 +124,19 @@
         <dependency>
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-pay</artifactId>
-            <version>4.4.0</version>
+            <version>${version.weixin-java-pay}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+            <version>${version.tika-core}</version> <!-- 文件类型的识别 -->
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+            <version>${version.transmittable-thread-local}</version>
         </dependency>
     </dependencies>
 </project>

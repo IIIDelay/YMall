@@ -4,6 +4,7 @@ import cn.hutool.core.date.LocalDateTimeUtil;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,6 +15,11 @@ import java.util.Date;
 public class DateUtil {
 
     private static final String dateFormat = "yyyy-MM-dd";
+
+    /**
+     * 空的 LocalDateTime 对象，主要用于 DB 唯一索引的默认值
+     */
+    public static LocalDateTime EMPTY_LOCAL_DATE_TIME = buildLocalDateTime(1970, 1, 1);
 
     /**
      * 获取两个时间差 单位：秒
@@ -115,4 +121,48 @@ public class DateUtil {
         calendar.set(Calendar.MILLISECOND, 0); // 一般情况下，都是 0 毫秒
         return calendar.getTime();
     }
+
+    public static LocalDateTime addTime(Duration duration) {
+        return LocalDateTime.now().plus(duration);
+    }
+
+    public static boolean beforeNow(LocalDateTime date) {
+        return date.isBefore(LocalDateTime.now());
+    }
+
+    public static boolean afterNow(LocalDateTime date) {
+        return date.isAfter(LocalDateTime.now());
+    }
+
+    /**
+     * 创建指定时间
+     *
+     * @param year  年
+     * @param mouth 月
+     * @param day   日
+     * @return 指定时间
+     */
+    public static LocalDateTime buildLocalDateTime(int year, int mouth, int day) {
+        return LocalDateTime.of(year, mouth, day, 0, 0, 0);
+    }
+
+    public static LocalDateTime[] buildBetweenTime(int year1, int mouth1, int day1,
+                                                   int year2, int mouth2, int day2) {
+        return new LocalDateTime[]{buildLocalDateTime(year1, mouth1, day1), buildLocalDateTime(year2, mouth2, day2)};
+    }
+
+    /**
+     * 判断当前时间是否在该时间范围内
+     *
+     * @param startTime 开始时间
+     * @param endTime   结束时间
+     * @return 是否
+     */
+    public static boolean isBetween(LocalDateTime startTime, LocalDateTime endTime) {
+        if (startTime == null || endTime == null) {
+            return false;
+        }
+        return LocalDateTimeUtil.isIn(LocalDateTime.now(), startTime, endTime);
+    }
+
 }
