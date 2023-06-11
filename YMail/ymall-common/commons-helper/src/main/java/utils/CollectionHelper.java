@@ -11,8 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -166,5 +168,22 @@ public class CollectionHelper {
             return;
         }
         coll.add(item);
+    }
+
+    /**
+     * toList
+     *
+     * @param inList  inList
+     * @param filter  filter
+     * @param mapping mapping
+     * @return List<OUT>
+     */
+    public static <IN, OUT> List<OUT> toList(List<IN> inList, Predicate<IN> filter, Function<IN, OUT> mapping) {
+        if (CollectionUtils.isEmpty(inList)) {
+            return Collections.emptyList();
+        }
+        return Optional.ofNullable(filter)
+            .map(test -> inList.stream().filter(test).map(mapping).collect(Collectors.toList()))
+            .orElse(inList.stream().map(mapping).collect(Collectors.toList()));
     }
 }
