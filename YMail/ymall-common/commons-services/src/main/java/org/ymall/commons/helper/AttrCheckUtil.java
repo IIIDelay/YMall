@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import org.apache.commons.lang3.tuple.Pair;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -23,6 +26,7 @@ public class AttrCheckUtil {
      * @return List<IN>
      */
     public static <IN, OUT> List<IN> insertDuplicateMPVerify(Supplier<BaseMapper<IN>> supplier, Pair<SFunction<IN, OUT>, OUT> pair) {
+
         LambdaQueryWrapper<IN> queryWrapper = Wrappers.<IN>lambdaQuery().eq(pair.getLeft(), pair.getRight());
         return supplier.get().selectList(queryWrapper);
     }
@@ -41,5 +45,20 @@ public class AttrCheckUtil {
             .ne(idPair.getLeft(), idPair.getRight())
             .eq(columnPair.getLeft(), columnPair.getRight());
         return supplier.get().selectList(queryWrapper);
+    }
+
+    /**
+     * insertDuplicateMGVerify
+     *
+     * @param mongoTemplate mongoTemplate
+     * @param parmPair      parmPair
+     * @param delFlag       delFlag
+     * @param outClass      outClass
+     * @return List<OUT>
+     */
+    public static <IN, OUT> List<OUT> insertDuplicateMGVerify(MongoTemplate mongoTemplate, Pair<String, IN> parmPair, Pair<String, Integer> delFlag, Class<OUT> outClass) {
+        Query query = Query.query(Criteria.where(parmPair.getLeft()).is(parmPair.getRight())
+            .and(delFlag.getLeft()).is(delFlag.getRight()));
+        return mongoTemplate.find(query, outClass);
     }
 }

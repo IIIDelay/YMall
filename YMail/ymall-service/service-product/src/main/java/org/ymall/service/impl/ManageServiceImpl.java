@@ -139,7 +139,7 @@ public class ManageServiceImpl implements IManageService {
     @Override
     public List<BaseCategory3> getCategory3(Long category2Id) {
         // select * from baseCategory3 where Category2Id = ?
-        QueryWrapper queryWrapper = new QueryWrapper<BaseCategory3>();
+        QueryWrapper<BaseCategory3> queryWrapper = new QueryWrapper<BaseCategory3>();
         queryWrapper.eq("category2_id", category2Id);
         return baseCategory3Mapper.selectList(queryWrapper);
     }
@@ -203,10 +203,9 @@ public class ManageServiceImpl implements IManageService {
      */
     private List<BaseAttrValue> getAttrValueList(Long attrId) {
         // select * from baseAttrValue where attrId = ?
-        QueryWrapper queryWrapper = new QueryWrapper<BaseAttrValue>();
+        QueryWrapper<BaseAttrValue> queryWrapper = new QueryWrapper<BaseAttrValue>();
         queryWrapper.eq("attr_id", attrId);
-        List<BaseAttrValue> baseAttrValueList = baseAttrValueMapper.selectList(queryWrapper);
-        return baseAttrValueList;
+        return baseAttrValueMapper.selectList(queryWrapper);
     }
 
 
