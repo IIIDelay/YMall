@@ -1,5 +1,6 @@
 package utils;
 
+import com.alibaba.ttl.TransmittableThreadLocal;
 import lombok.SneakyThrows;
 import org.apache.tika.Tika;
 

@@ -4,13 +4,12 @@
 
 package org.ymall.commons.cms.common.text;
 
-import xin.altitude.cms.common.util.ConvertUtils;
-import xin.altitude.cms.common.util.StringUtil;
+import org.ymall.commons.cms.common.util.ConvertUtils;
+import org.ymall.commons.cms.common.util.StringUtil;
 
 /**
  * 字符串格式化
  *
-
  */
 public class StrFormatter {
     public static final String EMPTY_JSON = "{}";

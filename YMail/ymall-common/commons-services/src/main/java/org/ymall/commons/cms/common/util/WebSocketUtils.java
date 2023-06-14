@@ -8,8 +8,6 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * {@link WebSocketUtils}工具类 用于处理socket会话
- *
-
  **/
 public class WebSocketUtils {
     /**

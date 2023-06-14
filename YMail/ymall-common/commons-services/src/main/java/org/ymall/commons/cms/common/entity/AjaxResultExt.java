@@ -5,7 +5,7 @@ package org.ymall.commons.cms.common.entity;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
-import xin.altitude.cms.common.util.FieldFilterUtils;
+import org.ymall.commons.cms.common.util.FieldFilterUtils;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +16,8 @@ import java.util.List;
 
  */
 public class AjaxResultExt extends AjaxResult {
+
+    private static final long serialVersionUID = -82543170188825812L;
 
     /**
      * 完成分页对象实体类的属性过滤

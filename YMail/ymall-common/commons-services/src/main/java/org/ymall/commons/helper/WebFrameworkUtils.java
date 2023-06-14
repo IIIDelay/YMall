@@ -2,10 +2,11 @@ package org.ymall.commons.helper;
 
 import cn.hutool.core.util.NumberUtil;
 import common.UserTypeEnum;
-import org.springframework.boot.autoconfigure.web.WebProperties;
+import org.ymall.commons.config.properties.WebProperties;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import result.ServiceResponse;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -106,12 +107,12 @@ public class WebFrameworkUtils {
         return getLoginUserId(request);
     }
 
-    public static void setCommonResult(ServletRequest request, CommonResult<?> result) {
+    public static void setCommonResult(ServletRequest request, ServiceResponse<?> result) {
         request.setAttribute(REQUEST_ATTRIBUTE_COMMON_RESULT, result);
     }
 
-    public static CommonResult<?> getCommonResult(ServletRequest request) {
-        return (CommonResult<?>) request.getAttribute(REQUEST_ATTRIBUTE_COMMON_RESULT);
+    public static ServiceResponse<?> getCommonResult(ServletRequest request) {
+        return (ServiceResponse<?>) request.getAttribute(REQUEST_ATTRIBUTE_COMMON_RESULT);
     }
 
     public static HttpServletRequest getRequest() {

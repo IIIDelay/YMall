@@ -4,7 +4,7 @@
 
 package org.ymall.commons.cms.common.text;
 
-import xin.altitude.cms.common.util.StringUtil;
+import org.ymall.commons.cms.common.util.StringUtil;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;

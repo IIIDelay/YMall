@@ -24,7 +24,7 @@ public class AssertUtils {
      * @param ignoreFields 忽略的属性数组
      */
     public static void assertPojoEquals(Object expected, Object actual, String... ignoreFields) {
-        Field[] expectedFields = Optional.ofNullable(ReflectUtil.getFields(expected.getClass())).orElse();
+        Field[] expectedFields = Optional.ofNullable(ReflectUtil.getFields(expected.getClass())).orElse(new Field[0]);
         Arrays.stream(expectedFields).forEach(expectedField -> {
             // 忽略 jacoco 自动生成的 $jacocoData 属性的情况
             if (expectedField.isSynthetic()) {

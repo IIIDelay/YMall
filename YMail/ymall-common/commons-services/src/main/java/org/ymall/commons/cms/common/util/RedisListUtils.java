@@ -5,8 +5,8 @@ package org.ymall.commons.cms.common.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import xin.altitude.cms.common.lang.IQueue;
-import xin.altitude.cms.common.support.RedisQueue;
+import org.ymall.commons.cms.common.lang.IQueue;
+import org.ymall.commons.cms.common.support.RedisQueue;
 
 import java.util.Collection;
 import java.util.List;
@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * {@link RedisListUtils}工具类
  *
-
  * @since 1.6.2
  */
 public class RedisListUtils {

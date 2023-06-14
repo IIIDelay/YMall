@@ -25,8 +25,8 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
-@Component
-@Aspect
+// @Component
+// @Aspect
 @Slf4j
 public class BusLogAop implements Ordered {
     @Autowired

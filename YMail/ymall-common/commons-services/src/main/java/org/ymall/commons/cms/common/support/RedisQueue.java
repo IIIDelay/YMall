@@ -4,9 +4,9 @@ package org.ymall.commons.cms.common.support;
 
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.ListOperations;
-import xin.altitude.cms.common.lang.IQueue;
-import xin.altitude.cms.common.util.JacksonUtils;
-import xin.altitude.cms.common.util.RedisUtils;
+import org.ymall.commons.cms.common.lang.IQueue;
+import org.ymall.commons.cms.common.util.JacksonUtils;
+import org.ymall.commons.cms.common.util.RedisUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;

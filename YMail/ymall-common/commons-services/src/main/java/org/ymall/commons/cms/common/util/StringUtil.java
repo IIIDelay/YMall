@@ -1,12 +1,12 @@
 
 
 
-
 package org.ymall.commons.cms.common.util;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.AntPathMatcher;
-import xin.altitude.cms.common.constant.Constants;
-import xin.altitude.cms.common.text.StrFormatter;
+import org.ymall.commons.cms.common.constant.Constants;
+import org.ymall.commons.cms.common.text.StrFormatter;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class StringUtil extends org.apache.commons.lang3.StringUtils {
+public class StringUtil extends StringUtils {
     /**
      * 空字符串
      */

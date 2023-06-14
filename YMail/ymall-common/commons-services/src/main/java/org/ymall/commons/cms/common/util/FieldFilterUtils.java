@@ -5,7 +5,7 @@ package org.ymall.commons.cms.common.util;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
-import xin.altitude.cms.common.entity.DefaultEntry;
+import org.ymall.commons.cms.common.entity.DefaultEntry;
 
 import java.io.Serializable;
 import java.util.HashSet;

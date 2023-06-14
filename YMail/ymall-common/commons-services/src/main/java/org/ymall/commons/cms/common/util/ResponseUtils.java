@@ -3,7 +3,7 @@ package org.ymall.commons.cms.common.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StreamUtils;
-import xin.altitude.cms.common.entity.AjaxResult;
+import org.ymall.commons.cms.common.entity.AjaxResult;
 
 import javax.servlet.ServletResponse;
 import java.io.IOException;

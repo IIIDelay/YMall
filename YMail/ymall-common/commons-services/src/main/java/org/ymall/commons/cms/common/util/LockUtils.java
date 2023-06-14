@@ -5,8 +5,8 @@ package org.ymall.commons.cms.common.util;
 import org.redisson.api.RLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import xin.altitude.cms.common.entity.JvmLockMeta;
-import xin.altitude.cms.common.entity.LockMeta;
+import org.ymall.commons.cms.common.entity.JvmLockMeta;
+import org.ymall.commons.cms.common.entity.LockMeta;
 
 import java.util.Objects;
 import java.util.Optional;

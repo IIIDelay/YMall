@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-@ConditionalOnMissingBean(value = xin.altitude.cms.common.util.SpringUtils.class)
+@ConditionalOnMissingBean(value = SpringUtils.class)
 public class SpringUtils implements BeanFactoryPostProcessor, ApplicationContextAware {
     /**
      * Spring应用上下文环境

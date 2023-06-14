@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import xin.altitude.cms.common.constant.RedisConstants;
+import org.ymall.commons.cms.common.constant.RedisConstants;
 
 import java.io.Serializable;
 import java.util.Collection;

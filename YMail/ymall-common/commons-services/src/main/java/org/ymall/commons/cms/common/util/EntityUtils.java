@@ -5,7 +5,7 @@ package org.ymall.commons.cms.common.util;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
-import xin.altitude.cms.common.support.ArrayCollector;
+import org.ymall.commons.cms.common.support.ArrayCollector;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;

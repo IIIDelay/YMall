@@ -8,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import xin.altitude.cms.common.converter.DateConverter;
-import xin.altitude.cms.common.converter.ListConverter;
-import xin.altitude.cms.common.entity.AjaxResult;
+import org.ymall.commons.cms.common.converter.DateConverter;
+import org.ymall.commons.cms.common.converter.ListConverter;
+import org.ymall.commons.cms.common.entity.AjaxResult;
 
 import java.beans.PropertyEditorSupport;
 import java.util.Date;

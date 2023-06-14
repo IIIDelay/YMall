@@ -14,7 +14,6 @@ import java.io.Serializable;
 /**
  * RabbitMQ工具类
  *
-
  * @since 2021/03/07 10:34
  **/
 public class RabbitUtils {
