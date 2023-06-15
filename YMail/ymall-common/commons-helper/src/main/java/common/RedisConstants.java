@@ -46,6 +46,7 @@ public class RedisConstants {
 
     //  布隆过滤器使用！
     public static final String SKU_BLOOM_FILTER="sku:bloom:filter";
+    public static final String REDIS_STEAM_01 = "";
 
 
     @AllArgsConstructor
