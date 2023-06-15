@@ -1,6 +1,7 @@
 package common;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * ErrorCodeEnum
@@ -9,7 +10,8 @@ import lombok.AllArgsConstructor;
  * @Date 2023/6/10 16:02
  **/
 @AllArgsConstructor
-public enum ErrorCode {
+@Getter
+public enum ErrorCodeEnum {
     Common_Param_Error(-1, "EP_000001", "参数校验异常", "Failed to valid parameter.");
 
     /**

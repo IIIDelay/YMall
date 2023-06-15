@@ -35,7 +35,7 @@ public class BusLogAop implements Ordered {
     /**
      * 定义BusLogAop的切入点为标记@BusLog注解的方法
      */
-    @Pointcut(value = "@annotation(com.fanfu.anno.BusLog)")
+    @Pointcut(value = "@annotation(org.ymall.common.annotation.BusLogAnno)")
     public void pointcut() {
     }
 
