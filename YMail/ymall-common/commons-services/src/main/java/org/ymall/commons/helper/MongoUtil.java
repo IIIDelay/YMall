@@ -236,4 +236,5 @@ public class MongoUtil {
         page.setRecords(CollectionHelper.toList(entityList, null, mapper));
         return page;
     }
+
 }
