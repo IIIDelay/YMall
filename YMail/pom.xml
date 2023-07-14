@@ -26,6 +26,7 @@
         <module>web</module>
         <module>web/web-all</module>
         <module>ware-manage</module>
+        <module>GOF</module>
     </modules>
 
     <properties>

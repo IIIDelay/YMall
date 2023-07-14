@@ -4,8 +4,10 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
-idea
-*.iml
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
 *.iws
 *.iml
 *.ipr
@@ -34,10 +36,3 @@ build/
 
 ### Mac OS ###
 .DS_Store
-*.idea
-node_modules
-target
-*.iml
-.idea
-*.log
-/.fastRequest
