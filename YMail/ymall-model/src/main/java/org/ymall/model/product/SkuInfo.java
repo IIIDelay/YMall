@@ -22,19 +22,6 @@ import java.util.List;
 @TableName("sku_info")
 public class SkuInfo extends BaseEntity {
 
-
-    public SkuInfo() {
-    }
-
-    public SkuInfo(Long skuId) {
-        setId(skuId);
-    }
-
-    //	判断去重的话，自动调用equals 方法。
-    public boolean equals(SkuInfo skuInfo) {
-        return getId().equals(skuInfo.getId());
-    }
-
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "商品id")

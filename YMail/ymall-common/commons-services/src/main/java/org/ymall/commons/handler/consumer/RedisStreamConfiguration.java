@@ -29,7 +29,7 @@ public class RedisStreamConfiguration {
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
-    @Bean(initMethod = "start", destroyMethod = "stop")
+    // @Bean(initMethod = "start", destroyMethod = "stop")
     public StreamMessageListenerContainer<String, MapRecord<String, String, String>> streamMessageListenerContainer() {
         AtomicInteger index = new AtomicInteger(1);
         int processors = Runtime.getRuntime().availableProcessors();

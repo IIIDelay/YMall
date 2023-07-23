@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.redis.connection.stream.Record;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import java.util.Map;
  * @Author IIIDelay
  * @Date 2023/6/15 22:48
  **/
+@Component
 public class RedisMQHelper implements ApplicationContextAware {
     private StringRedisTemplate redisTemplate;
 

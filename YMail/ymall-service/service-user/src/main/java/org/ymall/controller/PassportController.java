@@ -16,7 +16,7 @@ public class PassportController {
     /**
      * @return
      */
-    @GetMapping("login.html")
+    // @GetMapping("login.html")
     public String login(HttpServletRequest request) {
         String originUrl = request.getParameter("originUrl");
         request.setAttribute("originUrl", originUrl);
