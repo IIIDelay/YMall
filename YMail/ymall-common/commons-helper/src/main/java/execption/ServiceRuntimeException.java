@@ -51,6 +51,17 @@ public class ServiceRuntimeException extends RuntimeException {
         this.code = resultCodeEnum.getCode();
     }
 
+    /**
+     * 接收枚举类型对象
+     *
+     * @param resultCodeEnum
+     */
+    public ServiceRuntimeException(ResultCodeEnum resultCodeEnum, String errMsg) {
+        super(resultCodeEnum.getMessage());
+        this.code = resultCodeEnum.getCode();
+        this.message = errMsg;
+    }
+
 
     /**
      * of

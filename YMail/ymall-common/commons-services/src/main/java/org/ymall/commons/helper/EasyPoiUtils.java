@@ -1,15 +1,23 @@
 package org.ymall.commons.helper;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
+import cn.afterturn.easypoi.excel.entity.params.ExcelImportEntity;
 import cn.hutool.core.util.StrUtil;
+import common.ResultCodeEnum;
+import execption.ServiceRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * EasyPoiUtils
@@ -50,6 +58,35 @@ public class EasyPoiUtils {
             workbook.write(out);
         } catch (Exception e) {
             log.error(StrUtil.format("导出excel: {}失败", fileName), e);
+        }
+    }
+
+    /**
+     * importDataDefault : easyPOI默认导入
+     *
+     * @param inClass      inClass
+     * @param file         file
+     * @param importFields importFields
+     * @return List<IN>
+     */
+    public <IN> List<IN> importDataDefault(Class<IN> inClass, MultipartFile file, String[] importFields) {
+        try {
+            ImportParams importParams = new ImportParams();
+            // 标题
+            importParams.setTitleRows(1);
+            // 表头
+            importParams.setHeadRows(1);
+            // 从哪个sheet开始读
+            importParams.setStartSheetIndex(1);
+            // 从第1个读到第4个sheet
+            importParams.setSheetNum(1);
+            // 校验字段 是否合法的Excel
+            importParams.setImportFields(importFields);
+            // 开启校验 => JSR 303校验注解
+            importParams.setNeedVerify(true);
+            return ExcelImportUtil.importExcel(file.getInputStream(), inClass, importParams);
+        } catch (Exception e) {
+            throw new ServiceRuntimeException(ResultCodeEnum.FAIL, "easyPoi导入Excel失败");
         }
     }
 }
