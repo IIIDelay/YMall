@@ -1,7 +1,6 @@
 package utils;
 
 import execption.ServiceRuntimeException;
-import handler.Either;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
