@@ -24,13 +24,10 @@ import utils.OptionWrapper;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * EasyPoiUtils
@@ -163,7 +160,7 @@ public class EasyPoiUtils {
         }
         excelImportResult.getFailList();
 
-        OptionWrapper.<List<IN>>build().ofNoNon(excelImportResult.getFailList()).ifPresent(failList -> {
+        OptionWrapper.ofNotNone(excelImportResult.getFailList()).ifPresent(failList -> {
             StringBuffer sbf = new StringBuffer();
             failList.forEach(in -> {
                 String errMsgRow = StringUtils.join("第 ", in.getRowNum(), "行导入Excel校验异常: ", in.getErrorMsg(), ". ");

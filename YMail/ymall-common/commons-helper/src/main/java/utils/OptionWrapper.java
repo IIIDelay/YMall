@@ -4,16 +4,14 @@
 
 package utils;
 
-import cn.hutool.core.io.LineHandler;
-import func.CheckConsumer;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * OptionWrapper
@@ -24,28 +22,46 @@ import java.util.function.Consumer;
 public class OptionWrapper<IN> {
     private Optional<IN> optional;
 
-    public static <IN> OptionWrapper<IN> build() {
-        OptionWrapper<IN> inOptionWrapper = new OptionWrapper<>();
-        return inOptionWrapper;
+    public OptionWrapper(Optional<IN> optional) {
+        this.optional = optional;
     }
 
     /**
      * ofNoEmpty
      *
-     * @param in in
      * @return Optional<IN>
      */
-    public OptionWrapper<IN> ofNoNon(IN in) {
+    public static <IN> OptionWrapper<IN> ofNotNone(IN in) {
+        Optional<IN> optional;
         if (in instanceof String && StringUtils.isNotEmpty((CharSequence) in)) {
             optional = Optional.of(in);
         } else if (in instanceof Collection && CollectionUtils.isNotEmpty((Collection<IN>) in)) {
             optional = Optional.of(in);
+        } else if (in.getClass().isArray() && ArrayUtils.isNotEmpty((IN[]) in)) {
+            optional = Optional.of(in);
         } else {
             optional = Optional.ofNullable(in);
         }
-        return this;
+        return new OptionWrapper<>(optional);
     }
 
+    /**
+     * unwrapToOpt
+     *
+     * @return Optional<IN>
+     */
+    public Optional<IN> unwrapToOpt() {
+        if (optional == null) {
+            return Optional.empty();
+        }
+        return optional;
+    }
+
+    /**
+     * ifPresent
+     *
+     * @param checkConsumer checkConsumer
+     */
     public void ifPresent(CheckConsumer<IN, Throwable> checkConsumer) {
         Consumer<IN> consumer = in -> {
             try {
@@ -55,6 +71,13 @@ public class OptionWrapper<IN> {
             }
         };
         optional.ifPresent(consumer);
+    }
+
+    public <U> OptionWrapper<U> map(Function<IN, U> function) {
+        if (optional == null || optional.get() == null) {
+            optional = Optional.empty();
+        }
+        return ofNotNone(function.apply(optional.get()));
     }
 
     public void get() {
