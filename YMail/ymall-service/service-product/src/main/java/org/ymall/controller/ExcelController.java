@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.ymall.commons.helper.EasyExcelUtils;
 import org.ymall.commons.helper.EasyPoiUtils;
 import org.ymall.excel.SkuInfoVO;
 import org.ymall.mapper.SkuInfoMapper;
@@ -51,7 +52,9 @@ public class ExcelController {
             System.out.println("name1 = " + name1);
         });
 
-        EasyPoiUtils.exportData(response, skuInfoVOS, SkuInfoVO.class,
-            "sku excel导出","sku exprot",null);
+        // EasyPoiUtils.exportData(response, skuInfoVOS, SkuInfoVO.class,
+        //     "sku excel导出","sku exprot",null);
+
+        EasyExcelUtils.write(response, "sku excel导出", null, SkuInfoVO.class, skuInfoVOS);
     }
 }

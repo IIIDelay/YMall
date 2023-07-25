@@ -19,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.entity.ContentType;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.multipart.MultipartFile;
-import org.ymall.model.common.EasyPoiEntityBase;
+import org.ymall.commons.pojo.EasyPoiEntityBase;
 import utils.OptionWrapper;
 
 import javax.servlet.ServletOutputStream;

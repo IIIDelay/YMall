@@ -2,7 +2,7 @@
  * Copyright (c) 2023. 版权归III_Delay所有
  */
 
-package org.ymall.model.common;
+package org.ymall.commons.pojo;
 
 import cn.afterturn.easypoi.handler.inter.IExcelDataModel;
 import cn.afterturn.easypoi.handler.inter.IExcelModel;

@@ -2,7 +2,7 @@
  * Copyright (c) 2023. 版权归III_Delay所有
  */
 
-package org.ymall.model.anno;
+package org.ymall.commons.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

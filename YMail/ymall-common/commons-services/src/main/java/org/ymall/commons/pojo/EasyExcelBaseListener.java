@@ -2,7 +2,7 @@
  * Copyright (c) 2023. 版权归III_Delay所有
  */
 
-package org.ymall.model.common;
+package org.ymall.commons.pojo;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.metadata.data.ReadCellData;
@@ -13,7 +13,7 @@ import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
-import org.ymall.model.anno.ExcelPropertyCheck;
+import org.ymall.commons.annotation.ExcelPropertyCheck;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
