@@ -4,14 +4,19 @@
 
 package org.ymall.commons.helper;
 
+import cn.hutool.core.collection.CollUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;
-import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
-import org.springframework.web.multipart.MultipartFile;
+import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
+import org.apache.commons.collections4.CollectionUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,38 +24,57 @@ import java.util.List;
  *
  */
 public class EasyExcelUtils {
-
     /**
-     * 将列表以 Excel 响应给前端
+     * 下载excel
      *
-     * @param response  响应
-     * @param filename  文件名
-     * @param sheetName Excel sheet 名
-     * @param head      Excel head 头
-     * @param data      数据列表哦
-     * @param <T>       泛型，保证 head 和 data 类型的一致性
-     * @throws IOException 写入失败的情况
+     * @param response 响应
+     * @param cls      cls
+     * @param fileName 文件名称
+     * @param data     数据
+     * @throws IOException ioexception
      */
-    public static <T> void write(HttpServletResponse response, String filename, String sheetName,
-                                 Class<T> head, List<T> data) {
-        try {
-            // 输出 Excel
-            EasyExcel.write(response.getOutputStream(), head)
-                .autoCloseStream(false) // 不要自动关闭，交给 Servlet 自己处理
-                .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy()) // 基于 column 长度，自动适配。最大 255 宽度
-                .sheet(sheetName).doWrite(data);
-            // 设置 header 和 contentType。写在最后的原因是，避免报错时，响应 contentType 已经被修改了
-            response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(filename, "UTF-8") + ExcelTypeEnum.XLSX.name());
-            response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    public static <T>void downloadExcel(HttpServletResponse response, Class cls, String fileName,
+                                        List<T> data, List<String> includeColumns) {
+        // 如果传入的data数据是空的话就让data成为一个空集合 变成下载导入模板
+        if (CollUtil.isEmpty(data)) {
+            data = new ArrayList<>();
+        }
+        try (OutputStream os = response.getOutputStream()) {
+            fileName = new String(fileName.getBytes(), StandardCharsets.UTF_8.toString());
+            setResponseHeader(response, fileName + ExcelTypeEnum.XLSX.getValue());
+            ExcelWriterSheetBuilder sheet = EasyExcel.write(os, cls).sheet("sheet 0");
+            if (CollectionUtils.isNotEmpty(includeColumns)) {
+                sheet.includeColumnFieldNames(includeColumns);
+            }
+            sheet.doWrite(data);
+        } catch (IOException e) {
+            throw new RuntimeException("下载导入模板异常");
         }
     }
 
-    public static <T> List<T> read(MultipartFile file, Class<T> head) throws IOException {
-        return EasyExcel.read(file.getInputStream(), head, null)
-            .autoCloseStream(false)  // 不要自动关闭，交给 Servlet 自己处理
-            .doReadAllSync();
+    /**
+     * downloadExcel
+     *
+     * @param response response
+     * @param cls      cls
+     * @param fileName fileName
+     * @param data     data
+     */
+    public static <T>void downloadExcel(HttpServletResponse response, Class cls, String fileName,
+                                        List<T> data) {
+        downloadExcel(response, cls, fileName, data, null);
+    }
+
+    /**
+     * 设置响应头
+     *
+     * @param response 响应
+     * @param fileName 文件名称
+     */
+    public static void setResponseHeader(HttpServletResponse response, String fileName) throws UnsupportedEncodingException {
+        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+        response.setHeader("Connection", "close");
+        response.setHeader("Content-Type", "application/octet-stream");
     }
 
 }

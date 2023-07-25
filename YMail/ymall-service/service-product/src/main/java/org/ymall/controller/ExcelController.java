@@ -7,6 +7,8 @@ package org.ymall.controller;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.thread.ThreadUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,7 @@ import org.ymall.mapper.SkuInfoMapper;
 import org.ymall.model.product.SkuInfo;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -54,7 +57,7 @@ public class ExcelController {
 
         // EasyPoiUtils.exportData(response, skuInfoVOS, SkuInfoVO.class,
         //     "sku excel导出","sku exprot",null);
-
-        EasyExcelUtils.write(response, "sku excel导出", null, SkuInfoVO.class, skuInfoVOS);
+        List<String> price = Lists.newArrayList("isSale", "price", "category3Id");
+        EasyExcelUtils.downloadExcel(response, SkuInfoVO.class, "sku excel导出",skuInfoVOS, price);
     }
 }
