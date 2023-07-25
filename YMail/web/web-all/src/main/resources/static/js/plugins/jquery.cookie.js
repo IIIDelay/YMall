@@ -1,9 +1,5 @@
-/*!
- * jQuery Cookie Plugin v1.4.0
- * https://github.com/carhartl/jquery-cookie
- *
- * Copyright 2013 Klaus Hartl
- * Released under the MIT license
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
  */
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {

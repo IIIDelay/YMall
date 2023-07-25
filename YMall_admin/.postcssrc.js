@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 // https://github.com/michael-ciniawsky/postcss-load-config
 
 module.exports = {

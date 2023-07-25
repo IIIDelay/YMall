@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 import Vue from 'vue'
 import SvgIcon from '@/components/SvgIcon' // svg组件
 

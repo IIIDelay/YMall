@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 package org.ymall.commons.handler.consumer;
 
 import lombok.extern.slf4j.Slf4j;

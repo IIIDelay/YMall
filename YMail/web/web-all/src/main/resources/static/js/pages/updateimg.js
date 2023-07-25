@@ -1,4 +1,8 @@
-	window.onload = function () {
+	/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
+window.onload = function () {
 		var input = document.getElementById("upgteimg");
 		var showui = document.getElementById("showui");
 		var upimg = document.getElementById("image-upload");

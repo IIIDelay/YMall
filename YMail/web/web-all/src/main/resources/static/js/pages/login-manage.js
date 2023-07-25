@@ -1,4 +1,8 @@
-$.fn.drag = function(options) { 
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
+$.fn.drag = function(options) {
     var x, drag = this, isMove = false, defaults = { 
     }; 
     var options = $.extend(defaults, options); 

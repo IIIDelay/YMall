@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 //列表数据加载
 $(function () {
     // $.getJSON("../data/shoplist.json",function (data) {

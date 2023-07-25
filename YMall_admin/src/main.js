@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 import Vue from 'vue'
 
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 package org.ymall.list.client.impl;
 
 import org.springframework.stereotype.Component;

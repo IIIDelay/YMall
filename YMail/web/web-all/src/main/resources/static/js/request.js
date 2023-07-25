@@ -1,4 +1,8 @@
 
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 var request = axios.create({
     baseURL:'http://api.ymall.com',
     timeout:100000

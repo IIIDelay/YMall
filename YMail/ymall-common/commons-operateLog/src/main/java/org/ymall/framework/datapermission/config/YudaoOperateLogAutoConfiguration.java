@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 package org.ymall.framework.datapermission.config;
 
 import cn.iocoder.yudao.framework.operatelog.core.aop.OperateLogAspect;

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 import router from './router'
 import store from './store'
 import NProgress from 'nprogress' // Progress 进度条

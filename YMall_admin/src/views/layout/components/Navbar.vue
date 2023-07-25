@@ -1,3 +1,7 @@
+<!--
+  - Copyright (c) 2023. 版权归III_Delay所有
+  -->
+
 <template>
   <el-menu class="navbar" mode="horizontal">
     <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 /*!plugins/normalize/normalize.css*/
 /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
 html {
@@ -1164,11 +1168,6 @@ img {
   background: #c81623 none repeat scroll 0 0;
 }
 /*!components/ui-modules/nav/jquery.autocomplete.css*/
-/*! jQuery UI - v1.12.1 - 2017-03-06
-* http://jqueryui.com
-* Includes: core.css, autocomplete.css, menu.css, theme.css
-* To view and modify this theme, visit http://jqueryui.com/themeroller/?scope=&folderName=base&cornerRadiusShadow=8px&offsetLeftShadow=0px&offsetTopShadow=0px&thicknessShadow=5px&opacityShadow=30&bgImgOpacityShadow=0&bgTextureShadow=flat&bgColorShadow=666666&opacityOverlay=30&bgImgOpacityOverlay=0&bgTextureOverlay=flat&bgColorOverlay=aaaaaa&iconColorError=cc0000&fcError=5f3f3f&borderColorError=f1a899&bgTextureError=flat&bgColorError=fddfdf&iconColorHighlight=777620&fcHighlight=777620&borderColorHighlight=dad55e&bgTextureHighlight=flat&bgColorHighlight=fffa90&iconColorActive=ffffff&fcActive=ffffff&borderColorActive=003eff&bgTextureActive=flat&bgColorActive=007fff&iconColorHover=555555&fcHover=2b2b2b&borderColorHover=cccccc&bgTextureHover=flat&bgColorHover=ededed&iconColorDefault=777777&fcDefault=454545&borderColorDefault=c5c5c5&bgTextureDefault=flat&bgColorDefault=f6f6f6&iconColorContent=444444&fcContent=333333&borderColorContent=dddddd&bgTextureContent=flat&bgColorContent=ffffff&iconColorHeader=444444&fcHeader=333333&borderColorHeader=dddddd&bgTextureHeader=flat&bgColorHeader=e9e9e9&cornerRadius=3px&fwDefault=normal&fsDefault=1em&ffDefault=Arial%2CHelvetica%2Csans-serif
-* Copyright jQuery Foundation and other contributors; Licensed MIT */
 .ui-helper-hidden {
   display: none;
 }
@@ -2043,15 +2042,6 @@ a.ui-button:active,
   box-shadow: 0 0 5px #666;
 }
 /*!plugins/sui/sui.min.css*/
-/*!
- * Bootstrap v2.3.2
- *
- * Copyright 2013 Twitter, Inc
- * Licensed under the Apache License v2.0
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Designed and built with all the love in the world by @mdo and @fat.
- */
 .clearfix:before,
 .clearfix:after {
   display: table;
@@ -11435,16 +11425,7 @@ input[type="submit"].btn.btn-mini {
 }
 .affix {
   position: fixed;
-} /*!
- * Bootstrap Responsive v2.3.2
- *
- * Copyright 2013 Twitter, Inc
- * Licensed under the Apache License v2.0
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Designed and built with all the love in the world by @mdo and @fat.
- */
-@-ms-viewport {
+} @-ms-viewport {
   width: device-width;
 }
 .hidden {
@@ -12188,15 +12169,6 @@ input[type="submit"].btn.btn-mini {
   }
 }
 /*!plugins/sui/sui-append.min.css*/
-/*!
- * Bootstrap v2.3.2
- *
- * Copyright 2013 Twitter, Inc
- * Licensed under the Apache License v2.0
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Designed and built with all the love in the world by @mdo and @fat.
- */
 .clearfix:before,
 .clearfix:after {
   display: table;
@@ -13393,12 +13365,6 @@ tr.introjs-showElement > th {
   color: #9d261d;
 }
 /*!plugins/cssgrids/cssgrids-min.css*/
-/*!
-Pure v0.4.2
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-https://github.com/yui/pure/blob/master/LICENSE.md
-*/
 .yui3-g {
   letter-spacing: -0.31em;
   *letter-spacing: normal;
@@ -13425,13 +13391,7 @@ https://github.com/yui/pure/blob/master/LICENSE.md
 }
 .yui3-g [class*="yui3-u"] {
   font-family: sans-serif;
-} /*!
-Pure v0.4.2
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-https://github.com/yui/pure/blob/master/LICENSE.md
-*/
-.yui3-u-1,
+} .yui3-u-1,
 .yui3-u-1-1,
 .yui3-u-1-2,
 .yui3-u-1-3,

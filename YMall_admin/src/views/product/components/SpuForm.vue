@@ -1,3 +1,7 @@
+<!--
+  - Copyright (c) 2023. 版权归III_Delay所有
+  -->
+
 <template>
   <!--表单-->
   <el-form :model="spuForm" label-width="70px">

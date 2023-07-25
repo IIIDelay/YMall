@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 'use strict'
 const path = require('path')
 const utils = require('./utils')

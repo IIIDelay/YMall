@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 //**************************************************************
 // jQZoom allows you to realize a small magnifier window,close
 // to the image or images on your web page easily.

@@ -2,6 +2,10 @@
 
 
 
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 package org.ymall.commons.cms.common.entity;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

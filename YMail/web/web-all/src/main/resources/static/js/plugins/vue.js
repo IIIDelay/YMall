@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 /*!
  * Vue.js v2.5.16
  * (c) 2014-2018 Evan You

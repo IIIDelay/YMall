@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 /**
  * jquery plugin -- jquery.slideunlock.js
  * Description: a slideunlock plugin based on jQuery

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 package org.iiidev.ymall.product.client.impl;
 
 import org.iiidev.ymall.product.client.ProductFeignClient;

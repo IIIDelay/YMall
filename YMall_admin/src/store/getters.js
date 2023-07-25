@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 const getters = {
   sidebar: state => state.app.sidebar,
   device: state => state.app.device,

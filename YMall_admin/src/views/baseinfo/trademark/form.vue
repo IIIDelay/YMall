@@ -1,3 +1,7 @@
+<!--
+  - Copyright (c) 2023. 版权归III_Delay所有
+  -->
+
 <template>
   <div class="app-container">
     <el-form label-width="120px">
@@ -14,7 +18,7 @@
           class="avatar-uploader">
           <img :src="trademark.logoUrl">
         </el-upload>
-        
+
       </el-form-item>
 
       <el-form-item>

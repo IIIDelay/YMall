@@ -1,5 +1,8 @@
-package org.ymall.model.comment;
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
 
+package org.ymall.model.comment;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;

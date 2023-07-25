@@ -1,3 +1,7 @@
+<!--
+  - Copyright (c) 2023. 版权归III_Delay所有
+  -->
+
 <template>
   <div class="dashboard-container">
     <div class="dashboard-text">欢迎：{{ name }}</div>

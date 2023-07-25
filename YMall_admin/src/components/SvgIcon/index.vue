@@ -1,3 +1,7 @@
+<!--
+  - Copyright (c) 2023. 版权归III_Delay所有
+  -->
+
 <template>
   <svg :class="svgClass" aria-hidden="true">
     <use :xlink:href="iconName"/>

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import app from './modules/app'

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 import axios from 'axios'
 import { Message, MessageBox } from 'element-ui'
 

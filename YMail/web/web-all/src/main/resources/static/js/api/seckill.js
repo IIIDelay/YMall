@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 var seckill = {
 
     api_name: '/api/activity/seckill',

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 -- product 日志记录表
 create table if not exists bus_log
 (

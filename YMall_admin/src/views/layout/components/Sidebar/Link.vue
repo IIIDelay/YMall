@@ -1,4 +1,8 @@
 
+<!--
+  - Copyright (c) 2023. 版权归III_Delay所有
+  -->
+
 <template>
   <!-- eslint-disable vue/require-component-is-->
   <component v-bind="linkProps(to)">

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
 package org.ymall.activity.receiver;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
