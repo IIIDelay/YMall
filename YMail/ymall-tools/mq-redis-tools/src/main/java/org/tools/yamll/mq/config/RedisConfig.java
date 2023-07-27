@@ -1,4 +1,8 @@
-package org.ymall.redis.mq.config;
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
+package org.tools.yamll.mq.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

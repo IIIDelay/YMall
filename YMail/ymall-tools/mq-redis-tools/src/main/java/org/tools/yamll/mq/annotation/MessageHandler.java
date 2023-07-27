@@ -1,4 +1,8 @@
-package org.ymall.redis.mq.annotation;
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
+package org.tools.yamll.mq.annotation;
 
 import org.springframework.stereotype.Component;
 

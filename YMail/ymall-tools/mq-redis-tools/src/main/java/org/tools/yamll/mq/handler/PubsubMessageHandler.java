@@ -1,4 +1,8 @@
-package org.ymall.redis.mq.handler;
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
+package org.tools.yamll.mq.handler;
 
 import cn.hutool.core.util.StrUtil;
 import org.springframework.data.redis.connection.RedisConnection;

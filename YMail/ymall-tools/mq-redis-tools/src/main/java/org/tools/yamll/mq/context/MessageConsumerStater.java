@@ -1,4 +1,8 @@
-package org.ymall.redis.mq.context;
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
+package org.tools.yamll.mq.context;
 
 import cn.hutool.core.util.ArrayUtil;
 import lombok.NonNull;

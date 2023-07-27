@@ -1,4 +1,8 @@
-package org.ymall.redis.mq.pojo;
+/*
+ * Copyright (c) 2023. 版权归III_Delay所有
+ */
+
+package org.tools.yamll.mq.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
