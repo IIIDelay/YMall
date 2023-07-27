@@ -4,11 +4,6 @@
 
 package org.ymall.easy.validator.errors;
 
-/**
- * @author hkp
- * @date 2022/6/2 3:48 PM
- * @since 1.0
- */
 public interface ExcelValidObjectError {
 
     /**

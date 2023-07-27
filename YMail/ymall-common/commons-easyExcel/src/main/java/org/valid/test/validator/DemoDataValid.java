@@ -17,11 +17,6 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-/**
- * @author hkp
- * @date 2022/6/6 11:19 AM
- * @since 1.0
- */
 @Documented
 @Target({TYPE})
 @Retention(RUNTIME)

@@ -8,11 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * @author hkp
- * @date 2022/6/6 11:00 AM
- * @since
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

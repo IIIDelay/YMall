@@ -23,11 +23,6 @@ import org.ymall.easy.validator.SpringValidatorExcelValidator;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author hkp
- * @date 2022/6/2 11:40 AM
- * @since 1.0
- */
 @Configuration
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class EasyExcelAutoConfiguration {
