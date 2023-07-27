@@ -333,13 +333,13 @@ public class CartServiceImpl implements CartService {
         //获取临时用户购物车数据
         List<CartInfo> cartInfoList = null;
         if(!StringUtils.isEmpty(userTempId)){
-            BoundHashOperations<String, String, CartInfo> boundHashOps = this.redisTemplate.boundHashOps(this.getCartKey(userTempId));
+            BoundHashOperations<String, String, CartInfo> boundHashOps = redisTemplate.boundHashOps(this.getCartKey(userTempId));
             cartInfoList = boundHashOps.values();
         }
 
         //获取用户购物车数据
         if(!StringUtils.isEmpty(userId)){
-            BoundHashOperations<String, String, CartInfo> boundHashOps = this.redisTemplate.boundHashOps(this.getCartKey(userId));
+            BoundHashOperations<String, String, CartInfo> boundHashOps = redisTemplate.boundHashOps(this.getCartKey(userId));
             cartInfoList = boundHashOps.values();
         }
 
@@ -351,6 +351,11 @@ public class CartServiceImpl implements CartService {
             });
         }
         return cartInfoList;
+    }
+
+    // TODO...
+    private Object getCartKey(String userId) {
+        return null;
     }
 
 }

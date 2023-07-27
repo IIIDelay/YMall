@@ -22,8 +22,8 @@
         <module>commons-services</module>
         <module>commons-web</module>
         <module>commons-mqs</module>
-        <module>commons-operateLog</module>
         <module>commons-easyExcel</module>
+        <module>commons-stream</module>
     </modules>
 
     <properties>

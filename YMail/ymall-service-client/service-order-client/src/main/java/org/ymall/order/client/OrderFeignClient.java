@@ -31,6 +31,6 @@ public interface OrderFeignClient {
      * api/order/auth/trade
      */
     @GetMapping("/api/order/auth/trade")
-    Result<Map> trade();
+    Result<Map<String,Object>> trade();
 
 }

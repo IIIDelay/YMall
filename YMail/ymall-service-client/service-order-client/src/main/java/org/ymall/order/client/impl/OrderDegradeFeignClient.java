@@ -19,7 +19,7 @@ public class OrderDegradeFeignClient implements OrderFeignClient {
     }
 
     @Override
-    public Result<Map> trade() {
+    public Result<Map<String,Object>> trade() {
         return Result.fail();
     }
 }

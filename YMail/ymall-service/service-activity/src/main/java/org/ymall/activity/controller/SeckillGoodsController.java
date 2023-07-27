@@ -4,7 +4,9 @@
 
 package org.ymall.activity.controller;
 
+import common.RedisConstants;
 import common.ResultCodeEnum;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
@@ -30,17 +32,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/activity/seckill")
+@RequiredArgsConstructor(onConstructor = @_(@Autowired))
 public class SeckillGoodsController {
 
+    private final SeckillGoodsService seckillGoodsService;
 
-    @Autowired
-    private SeckillGoodsService seckillGoodsService;
+    private final RedisTemplate redisTemplate;
 
-    @Autowired
-    private RedisTemplate redisTemplate;
-
-    @Autowired
-    private RabbitService rabbitService;
+    private final RabbitService rabbitService;
 
     /**
      * /api/activity/seckill/auth/seckillOrder/{skuId}
@@ -109,7 +108,7 @@ public class SeckillGoodsController {
         // 获取用户id
         String userId = AuthContextHolder.getUserId(request);
 
-        SeckillGoods seckillGoods = (SeckillGoods) this.redisTemplate.boundHashOps(RedisConst.SECKILL_GOODS).get(skuId.toString());
+        SeckillGoods seckillGoods = (SeckillGoods) this.redisTemplate.boundHashOps(RedisConstants.SECKILL_GOODS).get(skuId.toString());
 
         // 判断
         if (seckillGoods != null) {

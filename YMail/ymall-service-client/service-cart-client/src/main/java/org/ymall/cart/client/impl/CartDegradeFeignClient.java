@@ -4,7 +4,11 @@
 
 package org.ymall.cart.client.impl;
 
+import org.springframework.stereotype.Component;
 import org.ymall.cart.client.CartFeignClient;
+import org.ymall.model.cart.CartInfo;
+
+import java.util.List;
 
 @Component
 public class CartDegradeFeignClient implements CartFeignClient {
