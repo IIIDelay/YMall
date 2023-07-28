@@ -4,94 +4,113 @@
 
 package org.ymall.commons.cms.common.util;
 
-import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
+import common.StrPool;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cglib.beans.BeanCopier;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 对象属性赋值工具类
- *
-
- * @since 2019/11/30 22:53
- **/
+ */
 public class BeanCopyUtils {
-    private BeanCopyUtils() {
-    }
+    private static Map<String, BeanCopier> beanCopierMap = new ConcurrentHashMap<>();
 
     /**
-     * 如果目标对象与源对象有相同字段，并且不为空，则忽略复制
+     * copyProperties
      *
-     * @param source 源对象
-     * @param target 目标对象
+     * @param source           source
+     * @param target           target
+     * @param ignoreProperties ignoreProperties
+     * @return U
      */
-    public static void copyProperties(Object source, Object target) {
-        if (source != null && target != null) {
-            List<Field> fieldList = ReflectionKit.getFieldList(target.getClass());
-            Set<String> set = new HashSet<>();
-            try {
-                for (Field field : fieldList) {
-                    field.setAccessible(true);
-                    Optional.ofNullable(field.get(target)).ifPresent(e -> set.add(field.getName()));
-                }
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-            String[] ignoreProperties = set.toArray(new String[0]);
-            BeanUtils.copyProperties(source, target, ignoreProperties);
-        }
-    }
-
-    /**
-     * 只复制原对象中指定的字段（不管此字段是否为null） 非指定字段忽略
-     *
-     * @param source            原对象
-     * @param target            目标对象
-     * @param includeProperties 指定的字段名
-     */
-    public static void copyProperties(Object source, Object target, String... includeProperties) {
-        if (source != null && target != null) {
-            Set<String> set = Arrays.stream(includeProperties).collect(Collectors.toSet());
-            List<Field> fieldList = ReflectionKit.getFieldList(source.getClass());
-            String[] ignoreProperties = fieldList.stream().map(Field::getName).filter(s -> !set.contains(s)).toArray(String[]::new);
-            // 使用Spring内置工具包（反射实现）
-            BeanUtils.copyProperties(source, target, ignoreProperties);
-        }
-    }
-
-    /**
-     * 只复制原对象中指定的字段 非指定字段忽略
-     *
-     * @param source            原对象
-     * @param target            目标对象
-     * @param includeProperties 指定的字段名
-     */
-    public static void copyProperties(Object source, Object target, List<String> includeProperties) {
-        copyProperties(source, target, includeProperties.toArray(new String[0]));
-    }
-
-    /**
-     * 复制对象属性
-     *
-     * @param source 源对象
-     * @param clazz  目标类对象
-     * @param <T>    目标类泛型
-     * @return 目标对象实例
-     */
-    public static <T> T copyProperties(Object source, Class<T> clazz) {
-        try {
-            T target = clazz.newInstance();
-            BeanUtils.copyProperties(source, target);
+    public static <T,U> U copyProperties(T source, U target, String ...ignoreProperties) {
+        if (ArrayUtils.isNotEmpty(ignoreProperties)) {
+            BeanUtils.copyProperties(source, target,ignoreProperties);
             return target;
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
         }
-        return null;
+        BeanUtils.copyProperties(source, target);
+        return target;
+    }
+
+    /**
+     * 初始化 BeanCopier
+     *
+     * @param source
+     * @param target
+     * @return
+     */
+    private static BeanCopier initCopier(Class source, Class target) {
+        BeanCopier beanCopier = BeanCopier.create(source, target, false);
+        beanCopierMap.put(source.getName() + "_" + target.getName(), beanCopier);
+        return beanCopier;
+    }
+
+    /**
+     * 获取BeanCopier
+     *
+     * @param source
+     * @param target
+     * @return
+     */
+    private static BeanCopier getBeanCopier(Class source, Class target) {
+        String combineName = StringUtils.join(source.getClass().getName(), StrPool.UNDERSCORE, target.getName());
+        BeanCopier beanCopier = beanCopierMap.get(combineName);
+        if (beanCopier != null) {
+            return beanCopier;
+        }
+        return initCopier(source, target);
+    }
+
+    /**
+     * Pojo 类型转换（浅复制，字段名&类型相同则被复制）
+     *
+     * @param source      原对象
+     * @param targetClass 目标类
+     * @param <T>
+     * @return
+     */
+    public static <T, U> U convert(T source, Class<U> targetClass) {
+        if (source == null) {
+            return null;
+        }
+        BeanCopier beanCopier = getBeanCopier(source.getClass(), targetClass);
+        try {
+            U target = targetClass.getDeclaredConstructor().newInstance();
+            beanCopier.copy(source, target, null);
+            return target;
+        } catch (Exception e) {
+            throw new RuntimeException("对象拷贝失败" + source + "_" + targetClass);
+        }
+    }
+
+    /**
+     * Pojo 类型转换（浅复制，字段名&类型相同则被复制）
+     *
+     * @param source      原对象
+     * @param targetClass 目标类
+     * @param <E>
+     * @return
+     */
+    public static <E> List<E> convert(List source, Class<E> targetClass) {
+        if (source == null) {
+            return null;
+        }
+        try {
+            if (source.isEmpty()) {
+                return source.getClass().getDeclaredConstructor().newInstance();
+            }
+            List result = source.getClass().getDeclaredConstructor().newInstance();
+            for (Object each : source) {
+                result.add(convert(each, targetClass));
+            }
+            return result;
+        } catch (Exception e) {
+            throw new RuntimeException("对象拷贝失败" + source + "_" + targetClass);
+        }
     }
 }
