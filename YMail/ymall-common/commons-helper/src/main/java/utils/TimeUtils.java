@@ -13,6 +13,12 @@ import java.time.LocalTime;
  */
 public class TimeUtils {
 
+    /**
+     * getPasswordErrorLockTime
+     *
+     * @param time time
+     * @return LocalDateTime
+     */
     public static LocalDateTime getPasswordErrorLockTime(String time) {
         if (time == null || "".equals(time)) {
             return LocalDateTime.MAX;

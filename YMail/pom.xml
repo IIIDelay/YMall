@@ -59,6 +59,8 @@
         <version.weixin-java-pay>4.4.0</version.weixin-java-pay>
         <version.tika-core>2.7.0</version.tika-core>
         <version.transmittable-thread-local>2.2.0</version.transmittable-thread-local>
+        <version.spring.retry>1.3.4</version.spring.retry>
+        <version.apm-toolkit-trace>8.10.0</version.apm-toolkit-trace>
     </properties>
 
     <dependencyManagement>

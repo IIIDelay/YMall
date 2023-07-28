@@ -107,7 +107,7 @@
         <dependency>
             <groupId>org.apache.skywalking</groupId>
             <artifactId>apm-toolkit-trace</artifactId>
-            <version>8.10.0</version>
+            <version>${version.apm-toolkit-trace}</version>
         </dependency>
 
         <dependency>
@@ -128,6 +128,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+            <version>${version.spring.retry}</version>
         </dependency>
 
     </dependencies>
