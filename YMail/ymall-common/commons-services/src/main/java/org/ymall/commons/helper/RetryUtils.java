@@ -7,6 +7,7 @@ package org.ymall.commons.helper;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 /**
  * RetryUtils
@@ -16,30 +17,35 @@ import java.util.concurrent.TimeUnit;
  **/
 @Slf4j
 public class RetryUtils {
+
     /**
      * retry
      *
      * @param count            count
-     * @param runnable         runnable
+     * @param supplier         supplier
      * @param intervalMillTime intervalMillTime
+     * @return OUT
      */
-    public void retry(int count, Runnable runnable, int intervalMillTime) {
-        int num = count;
-        try {
-            while (num <= count) {
-                runnable.run();
-            }
-        } catch (Exception e) {
+    public static <OUT> OUT retry(int count, Supplier<OUT> supplier, int intervalMillTime) {
+        OUT out = null;
+        int num = 0;
+        while (num < count) {
             try {
-                num--;
-                log.warn("逻辑重试中, 次数: {}", num);
-                TimeUnit.MILLISECONDS.sleep(intervalMillTime);
-                if (num <= 0) {
-                    throw new RuntimeException(e);
+                out = supplier.get();
+                break;
+            } catch (Exception e) {
+                try {
+                    ++num;
+                    System.out.println("num = " + num);
+                    TimeUnit.MILLISECONDS.sleep(intervalMillTime);
+                    if (num >= count) {
+                        throw new RuntimeException(e);
+                    }
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
                 }
-            } catch (InterruptedException ex) {
-                throw new RuntimeException(ex);
             }
         }
+        return out;
     }
 }
