@@ -1,0 +1,648 @@
+
+# =====================索引(DB)相关操作=====================
+# 创建数据库
+use 20230620_mongo_study
+
+# 查看当前库
+db
+
+# 往库中插入数据
+db.user.insert({'id':1,'name':'zhangsan'})
+
+# =====================集合相关操作=====================
+# 查看库中所有的集合
+show tables
+show courseslections
+
+# 创建集合（隐式创建）
+db.emplyees.insert({'id':1,'name':'张三'})
+
+# 删除集合
+db.employees.drop()
+
+# =====================文档相关操作(插入)=====================
+== 单条插入
+db.user.insert({'name':'张三丰','age':126,'birthday':'1980-01-01'})
+
+== 多条插入
+db.user.insertMany([
+{'name':'刘备','age':46,'description':'刘皇叔'},
+{'name':'关羽','age':44,'description':'关二爷'},
+{'name':'张飞','age':46,'description':'张翼德'}
+])
+
+db.user.insert([
+{'name':'诸葛亮','age':32,'description':'诸葛孔明'},
+{'name':'赵云','age':30,'description':'浑身是胆'},
+{'name':'马谡','age':29,'description':'失街亭'}
+])
+
+for (let i = 1; i <= 100; i++) {
+db.user.insert({"_id":i + 100,'name':'李白' + i + 100,'age':20 + i})
+}
+# =====================文档相关操作(查询)=====================
+== 查询所有
+db.user.find()
+db.user.find().pretty()
+
+== 等值查询
+db.user.find({'age':24}).pretty()
+db.user.find({'age':24,'name':'李白4100'}).pretty()
+
+== 非等值查询
+1、小于查询
+db.user.find({age:{$lt:25}}).pretty()
+2、大于查询
+db.user.find({age:{$gt:25}}).pretty()
+3、大于等于查询
+db.user.find({age:{$gte:25}}).pretty()
+4、小于等于查询
+db.user.find({age:{$lte:25}}).pretty()
+5、不等值查询
+db.user.find({age:{$ne:25}}).pretty()
+
+== and查询
+db.user.find({'_id':101,'name':'李白1100'}).pretty()
+
+== or查询
+db.user.find({$or:[{'_id':101},{'name':'赵云'}]}).pretty()
+db.user.find({$or:[{'_id':101},{'age':{$gt:100}}]}).pretty()
+
+== and + or 联合查询
+db.user.find({age:{$gt:24},$or:[{'name':'张三丰'},{'name':'李白81100'}]}).pretty()
+
+== 数组查询
+1、初始化数据
+db.user.insert({'name':'李太白','age':30,'likes':['吸烟','喝酒','烫头']})
+2、查询user集合中，兴趣爱好为 烫头 的文档记录
+db.user.find({'likes':'烫头'}).pretty()
+3、查询user集合中,喜好为3个的文档列表
+db.user.find({'likes':{$size:3}}).pretty()
+
+== 模糊查询
+1、查询user集合中name字段包含 '白' 的所有文档信息
+db.user.find({'name':/白/}).pretty()
+
+== 排序查询
+1、查询user集合中的所有文档，按照id降序排序
+db.user.find().sort({'_id':-1}).pretty()
+2、查询user集合中的所有文档，按照age升序排序
+db.user.find().sort({'age':1}).pretty()
+
+== 分页查询
+1、查询user集合中的前2条记录
+db.user.find().skip(0).limit(2).pretty()
+2、查询user集合中的第3~4条记录
+db.user.find().skip(2).limit(2).pretty()
+
+== count查询
+1、初始化脚本
+for (let i=1; i<=10000; i++) {
+db.orders.insert({'_id':i,'name':'order_'+i})
+}
+2、查询orders集合中共有多少条记录
+db.orders.count()
+3、查询orders集合中，name为order_100的文档共有多少条
+db.orders.find({'name':'order_100'}).count()
+4、查询orders集合中，id大于5000的文档共有多少条
+db.orders.find({'_id':{$gt:5000}}).count()
+
+== 去重查询
+1、数据初始化
+for (let i=1; i<=100; i++) {
+db.employees.insert({'_id':i,'name':'李白','age':24})
+}
+db.employees.insert([
+{'_id':101,'name':'韩愈','age':34},
+{'_id':102,'name':'柳宗元','age':35},
+{'_id':103,'name':'欧阳修','age':36},
+{'_id':104,'name':'王安石','age':37},
+{'_id':105,'name':'苏轼','age':24},
+{'_id':106,'name':'苏辙','age':25},
+{'_id':107,'name':'苏洵','age':48},
+{'_id':108,'name':'曾巩','age':36}
+])
+2、employees集合中按照name去重查询
+db.employees.distinct('name')
+
+== 返回指定字段查询
+1、employees集合中返回name字段
+db.employees.find({},{'_id':0,'age':0})
+
+# =====================文档相关操作(删除)=====================
+== 删除所有
+1、删除emplyees集合中所有的文档
+db.emplyees.remove({})
+说明：集合中的文档没有了，但是表结构还在
+db.emplyees.drop()
+说明：表结构也不存在，类比MySQL的delete * from emplyees 和 drop emplyees
+
+== 根据id删除
+1、删除user集合中id为10的文档记录
+db.user.remove({'_id':10})
+2、根据字段名称删除所有符合条件的文档
+db.user.find().pretty()
+db.user.remove({'name':/李白/})
+
+# =====================文档相关操作(更新)=====================
+1、数据初始化
+(1)、清空user集合中所有的数据
+db.user.remove({})
+(2)、数据初始化
+for (let i=1; i<=10; i++) {
+db.user.insert({'_id':i,'name':'李白','age':24});
+}
+db.user.insert({'_id':11,'name':'李太白','age':24});
+2、将user集合中id为11的文档，age字段修改为124
+db.user.update({'_id':11},{'age':124})
+说明：该种方式的更新，会将除了id和age字段外的其他字段去除，例如id为11的文档，
+修改前:{'_id':i,'name':'李白','age':24}
+修改后:{ "_id" : 11, "age" : 124 }
+3、保留原始更新
+db.user.update({'_id':10},{$set:{'name':'李白','age':124,'likes':['吸烟','喝酒','烫头']}})
+db.user.update({'_id':9},{$set:{'age':124}})
+4、批量更新（保留原始更新&更新条件存在）
+需求：批量更新user集合，将name为 李白 的文档记录，年龄统一修改为24
+db.user.update({'name':'李白'},{$set:{'age':24}},{multi:true})
+5、批量更新（保留原始更新&更新条件不存在,upsert为默认值false）
+需求：批量更新user集合，将name为 杜甫 的文档记录，年龄统一修改为34
+db.user.update({'name':'杜甫'},{$set:{'age':34}},{multi:true})
+执行结果分析：由于user集合中没有name为杜甫的文档，且upsert默认为false。故执行结果为0个匹配,0个更新,0个插入
+6、批量更新（保留原始更新&更新条件不存在,upsert为true）
+db.user.update({'name':'杜甫'},{$set:{'age':34}},{multi:true,upsert:true})
+执行结果分析：upsert设置为true，当匹配不到文档时，将会插入一条新文档
+
+# =====================$type的使用=====================
+1、数据初始化
+db.courses.insert({
+title: 'PHP教程',
+description: 'PHP是一种创建动态交互性站点的强有力的服务器端脚本语言。',
+by: '李白',
+url: 'http:www.baidu.com',
+tags: ['php'],
+likes: 200
+}),
+db.courses.insert({
+title: 'Java教程',
+description: 'Java是由Sun Microsystems公司于1995年5月推出的高级程序设计语言。',
+by: '李白',
+url: 'http:www.baidu.com',
+tags: ['java'],
+likes: 550
+}),
+db.courses.insert({
+title: 'MongoDB教程',
+description: 'MongoDB是一个NoSQL数据库',
+by: '李白',
+url: 'http:www.baidu.com',
+tags: ['mongodb'],
+likes: 100
+}),
+db.courses.insert({
+title: 8848,
+description: '8848是B站的一个好网站',
+by: '李白',
+url: 'http:www.baidu.com',
+tags: ['8848'],
+likes: 10000
+})
+2、查询title为String的所有文档记录
+db.courses.find({'title':{$type:'string'}}).pretty()
+db.courses.find({'title':{$type:2}}).pretty()
+3、查询title为数字的所有文档记录
+db.courses.find({'title':{$type:'double'}}).pretty()
+db.courses.find({'title':{$type:1}}).pretty()
+4、查询courses集合中，tags为数组的所有文档
+db.courses.find({'tags':{$type:'array'}}).pretty()
+db.courses.find({'tags':{$type:4}}).pretty()
+# =====================聚合查询(一)=====================
+1、数据初始化
+db.language.insert({
+title: 'MongoDB Overview',
+description: 'MongoDB is a nosql database',
+by_user: 'runoob.com',
+url: 'http://www.runoob.com',
+tags: ['mongodb','database','NoSQL'],
+likes: 100
+}),
+db.language.insert({
+title: 'NoSQL Overview',
+description: 'NoSQL database is very fast',
+by_user: 'runoob.com',
+url: 'http://www.runoob.com',
+tags: ['mongodb','database','NoSQL'],
+likes: 10
+}),
+db.language.insert({
+title: 'Redis Overview',
+description: 'redis is not only sql',
+by_user: 'runoob.com',
+url: 'http://www.redis.com',
+tags: ['redis','database','NoSQL'],
+likes: 100
+}),
+db.language.insert({
+title: 'Neo4j Overview',
+description: 'Neo4j is a nosql database',
+by_user: 'Neo4j',
+url: 'http://www.neo4j.com',
+tags: ['neo4j','database','NoSQL'],
+likes: 750
+})
+2、统计每个作者所写的文章数
+db.language.aggregate([
+{$group:{'_id':'$by_user','num_tutorial':{$sum:1}}}
+])
+3、统计每个作者所写文章的平均点赞数
+db.language.aggregate([
+{$group:{'_id':'$by_user','avg_stars':{$avg:'$likes'}}}
+])
+
+4、统计每个作者所写文章的总点赞数
+db.language.aggregate([
+{$group:{'_id':'$by_user','total_stars':{$sum:'$likes'}}}
+])
+5、统计每个作者所写文章的最大点赞数
+db.language.aggregate([
+{$group:{'_id':'$by_user','max_stars':{$max:'$likes'}}}
+])
+6、统计每个作者所写文章的最小点赞数
+db.language.aggregate([
+{$group:{'_id':'$by_user','max_stars':{$min:'$likes'}}}
+])
+7、$push:将值加入一个数组中，不会判断是否有重复值
+db.language.aggregate([
+{$group:{'_id':'$by_user',url:{$push:'$url'}}}
+])
+8、$addToSet:将值加入一个数组中,会判断是否有重复的值,若相同的值在数组中已经存在了,则不加入
+db.language.aggregate([
+{$group:{'_id':'$by_user',url:{$addToSet:'$url'}}}
+])
+9、$first:根据资源文档的排序获取第一个文档数据
+db.language.aggregate([
+{$group:{'_id':'$by_user',url:{$first:'$url'}}}
+])
+10、$last:根据资源文档的排序获取最后一个文档数据
+db.language.aggregate([
+{$group:{'_id':'$by_user',url:{$last:'$url'}}}
+])
+# =====================聚合查询(二)=====================
+1、数据初始化
+(1)、清空orders集合
+db.orders.remove({})
+(2)、插入数据
+db.orders.insert(
+[
+{
+"street": "西兴街道",
+"city": "杭州",
+"state": "浙江省",
+"country": "中国",
+"zip": "24344-1715",
+"phone": "18866668888",
+"name": "李白",
+"userId": "3573",
+"orderDate": "2019-01-02 03:20:08.805",
+"status": "completed",
+"shippingFee": 8.00,
+"orderLines": [{
+"product": "iPhone5",
+"sku": "2001",
+"qty": 1,
+"price": 100.00,
+"cost": 100.00
+},
+{
+"product": "iPhone5s",
+"sku": "2002",
+"qty": 2,
+"price": 200.00,
+"cost": 400.00
+},
+{
+"product": "iPhone6",
+"sku": "2003",
+"qty": 1,
+"price": 300.00,
+"cost": 300.00
+},
+{
+"product": "iPhone6s",
+"sku": "2004",
+"qty": 2,
+"price": 400.00,
+"cost": 800.00
+},
+{
+"product": "iPhone8",
+"sku": "2005",
+"qty": 2,
+"price": 500.00,
+"cost": 1000.00
+}
+],
+"total": 2600
+},
+{
+"street": "长河街道",
+"city": "杭州",
+"state": "浙江省",
+"country": "中国",
+"zip": "24344-1716",
+"phone": "18866668881",
+"name": "杜甫",
+"userId": "3574",
+"orderDate": "2019-02-02 13:20:08.805",
+"status": "completed",
+"shippingFee": 5.00,
+"orderLines": [{
+"product": "iPhone5",
+"sku": "2001",
+"qty": 1,
+"price": 100.00,
+"cost": 100.00
+},
+{
+"product": "iPhone5s",
+"sku": "2002",
+"qty": 2,
+"price": 200.00,
+"cost": 400.00
+},
+{
+"product": "iPhone6",
+"sku": "2003",
+"qty": 1,
+"price": 300.00,
+"cost": 300.00
+},
+{
+"product": "iPhone6s",
+"sku": "2004",
+"qty": 2,
+"price": 400.00,
+"cost": 800.00
+},
+{
+"product": "iPhone8",
+"sku": "2005",
+"qty": 2,
+"price": 500.00,
+"cost": 1000.00
+}
+],
+"total": 2600
+},
+{
+"street": "浦沿街道",
+"city": "杭州",
+"state": "浙江省",
+"country": "中国",
+"zip": "24344-1717",
+"phone": "18866668882",
+"name": "王安石",
+"userId": "3575",
+"orderDate": "2019-03-02 14:20:08.805",
+"status": "completed",
+"shippingFee": 20.00,
+"orderLines": [{
+"product": "iPhone5",
+"sku": "2001",
+"qty": 1,
+"price": 100.00,
+"cost": 100.00
+},
+{
+"product": "iPhone5s",
+"sku": "2002",
+"qty": 2,
+"price": 200.00,
+"cost": 400.00
+},
+{
+"product": "iPhone6",
+"sku": "2003",
+"qty": 1,
+"price": 300.00,
+"cost": 300.00
+},
+{
+"product": "iPhone6s",
+"sku": "2004",
+"qty": 2,
+"price": 400.00,
+"cost": 800.00
+},
+{
+"product": "iPhone12 ProMax",
+"sku": "2006",
+"qty": 1,
+"price": 1500.00,
+"cost": 1500.00
+}
+],
+"total": 3100
+},
+{
+"street": "长庆街道",
+"city": "杭州",
+"state": "浙江省",
+"country": "中国",
+"zip": "24344-1717",
+"phone": "18866668883",
+"name": "苏东坡",
+"userId": "3576",
+"orderDate": "2019-04-02 15:20:08.805",
+"status": "completed",
+"shippingFee": 10.00,
+"orderLines": [
+{
+"product": "iPhone6s",
+"sku": "2004",
+"qty": 2,
+"price": 400.00,
+"cost": 800.00
+},
+{
+"product": "iPhone12 ProMax",
+"sku": "2006",
+"qty": 1,
+"price": 1500.00,
+"cost": 1500.00
+}
+],
+"total": 2300
+}
+]
+)
+2、计算到目前为止所有订单的销售额
+db.orders.aggregate([
+{$group:{'_id':null,'total':{$sum:'$total'}}}
+])
+3、查询2019年第一季度(1月1日-3月31日)已完成订单(completed)的订单总金额和订单总数
+db.orders.aggregate([
+{$match:{'status':'completed','orderDate':{$gte:'2019-01-01',$lt:'2019-04-01'}}},
+{$group:{'_id':null,'total':{$sum:'$total'},'shippingFee':{$sum:'$shippingFee'},'count':{$sum:1}}},
+{$project:{'grandTotal':{'$add':['$total','$shippingFee']},'count':'$count','_id':0}}
+])
+
+# =====================聚合查询(三)=====================
+1、初始化数据
+db.articles.insert([
+{'_id':1,'name':'三国演义','author':'罗贯中','likes':1000},
+{'_id':2,'name':'水浒传','author':'施耐庵','likes':1002},
+{'_id':3,'name':'西游记','author':'吴承恩','likes':1004},
+{'_id':4,'name':'红楼梦','author':'曹雪芹','likes':1006}
+])
+2、$project：articles集合，查询书名和作者
+db.articles.aggregate({
+$project: {'_id':0,'likes':0}
+})
+3、$match：articles集合，查询id大于1的书籍点赞数之和
+db.articles.aggregate([
+{$match:{'_id':{$gt:1}}},
+{$group:{'_id':null,'stars':{$sum:'$likes'}}},
+{$project:{'_id':0}}
+])
+4、$skip：跳过前xxx条记录
+db.articles.aggregate({
+$skip: 2
+})
+
+# =====================聚合查询(四)=====================
+1、初始化数据 sale:false不打折商品、true打折商品
+db.order_detail.insert([
+{'goodsid':'1001','amount':2,'price':10.2,'sale':false},
+{'goodsid':'1002','amount':3,'price':14.8,'sale':false},
+{'goodsid':'1003','amount':10,'price':50,'sale':false},
+{'goodsid':'1004','amount':2,'price':10,'sale':true}
+])
+2、查询不打折商品的销售总额
+db.order_detail.aggregate([
+{$match:{'sale':false}},
+{$group:{'_id':null,'totalAmount':{$sum:{$multiply:['$amount','$price']}}}},
+{$project: {'totalAmount':'$totalAmount'}}
+])
+3、查询每件商品的销售总额
+db.order_detail.aggregate([
+{$group:{'_id':'$goodsid','totalAmount':{$sum:{$multiply:['$amount','$price']}}}},
+{$project: {'totalAmount':'$totalAmount'}}
+])
+4、查询商品销售总数
+db.order_detail.aggregate([
+{$group:{'_id':'$goodsid','totalNum':{$sum:'$amount'}}},
+{$project: {'totalNum':'$totalNum'}}
+])
+
+# =====================聚合查询(五)=====================
+1、初始化数据(中文)
+db.courses.insert(
+[
+{course:"隐私保护基础",teacher:"吴娟",classperiod:32,experimental_lessons:0,classnum:1},
+{course:"网络安全管理",teacher:"吴娟",classperiod:32,experimental_lessons:0,classnum:1},
+{course:"NoSQL数据库技术",teacher:"陈雨婕",classperiod:48,experimental_lessons:15,classnum:1},
+{course:"操作系统" ,teacher:"陈雨婕",classperiod:64,experimental_lessons:15,classnum:1},
+{course:"大数据处理技术",teacher:"陈雨婕" ,classperiod:48,experimental_lessons:15,classnum:3},
+{course:"人工智能",teacher:"邓敏娜",classperiod:48,experimental_lessons:15,classnum:1},
+{course:"算法分析与设计",teacher:"邓敏娜",classperiod:48,experimental_lessons:0,classnum:2},
+{course:"统计分析技术",teacher:"段红叶",classperiod:32,experimental_lessons:8,classnum:1},
+{course:"非结构化大数据分析",teacher:"段红叶" ,classperiod:32,experimental_lessons:0,classnum:1},
+{course:"计算机网络" ,teacher:"段红叶",classperiod:48,experimental_lessons:0,classnum:2},
+{course:"数据结构与算法课程实践",teacher:"段红叶",classperiod:32,experimental_lessons:0,classnum:1},
+{course:"三维动画模型与渲染",teacher:"韩战壕",classperiod:48,experimental_lessons:15,classnum:1},
+{course:"面向对象程序设计",teacher:"李贝贝",classperiod:64,experimental_lessons:15,classnum:2},
+{course:"面向对象程序设计课程实践",teacher:"李贝贝" ,classperiod:24,experimental_lessons:0,classnum:2},
+{course:"数字信号处理",teacher:"刘欢欢",classperiod:48,experimental_lessons:8,classnum:1},
+{course:"操作系统",teacher:"刘欢欢",classperiod:64,experimental_lessons:15,classnum:2},
+{course:"云计算技术" ,teacher:"王磊",classperiod:48,experimental_lessons:0,classnum:1},
+{course:"智能科学与技术导论",teacher:"王磊",classperiod:48,experimental_lessons:0,classnum:1},
+{course:"虚拟现实与可视化",teacher:"王磊" ,classperiod:48,experimental_lessons:15,classnum:1},
+{course:"系统设计与分析",teacher:"王磊",classperiod:48,experimental_lessons:0,classnum:2},
+{course:"数据库技术课程实践",teacher:"王磊",classperiod:32,experimental_lessons:0,classnum:1},
+{course:"面向对象程序设计",teacher:"韦茜妤",classperiod:64,experimental_lessons:15,classnum:2},
+{course:"面向对象程序设计课程实践",teacher:"韦茜妤" ,classperiod:24,experimental_lessons:0,classnum:2},
+{course:"HTML5开发技术",teacher:"韦茜妤",classperiod:48,experimental_lessons:15,classnum:2},
+{course:"数据结构与算法课程实践",teacher:"韦茜妤" ,classperiod:32,experimental_lessons:0,classnum:1}
+]
+),
+初始化数据(英文)
+db.courses_en_US.insert(
+[
+{course:"Privacy protection foundation",teacher:"wu juan",classperiod:32,experimental_lessons:0,classnum:1},
+{course:"Network Security Management",teacher:"wu juan",classperiod:32,experimental_lessons:0,classnum:1},
+{course:"NoSQL database technology",teacher:"chen yu jie",classperiod:48,experimental_lessons:15,classnum:1},
+{course:"operating system" ,teacher:"chen yu jie",classperiod:64,experimental_lessons:15,classnum:1},
+{course:"Big data Processing Technology",teacher:"chen yu jie" ,classperiod:48,experimental_lessons:15,classnum:3},
+{course:"artificial intelligence",teacher:"deng min na",classperiod:48,experimental_lessons:15,classnum:1},
+{course:"Algorithm Analysis and Design",teacher:"deng min na",classperiod:48,experimental_lessons:0,classnum:2},
+{course:"Statistical analysis techniques",teacher:"duan ye hong",classperiod:32,experimental_lessons:8,classnum:1},
+{course:"Unstructured Big data analysis",teacher:"duan ye hong" ,classperiod:32,experimental_lessons:0,classnum:1},
+{course:"computer network" ,teacher:"duan ye hong",classperiod:48,experimental_lessons:0,classnum:2},
+{course:"Practice of Data Structure and Algorithms Course",teacher:"duan ye hong",classperiod:32,experimental_lessons:0,classnum:1},
+{course:"3D Animation Model and Rendering",teacher:"han zhan hao",classperiod:48,experimental_lessons:15,classnum:1},
+{course:"Object-Oriented Programming",teacher:"li bei bei",classperiod:64,experimental_lessons:15,classnum:2},
+{course:"Object Oriented Programming Course Practice",teacher:"li bei bei" ,classperiod:24,experimental_lessons:0,classnum:2},
+{course:"Digital signal processing",teacher:"liu huan huan",classperiod:48,experimental_lessons:8,classnum:1},
+{course:"operating system",teacher:"liu huan huan",classperiod:64,experimental_lessons:15,classnum:2},
+{course:"Cloud computing technology" ,teacher:"wang lei",classperiod:48,experimental_lessons:0,classnum:1},
+{course:"Introduction to Intelligent Science and Technology",teacher:"wang lei",classperiod:48,experimental_lessons:0,classnum:1},
+{course:"Virtual Reality and Visualization",teacher:"wang lei" ,classperiod:48,experimental_lessons:15,classnum:1},
+{course:"system design and analysis",teacher:"wang lei",classperiod:48,experimental_lessons:0,classnum:2},
+{course:"Database Technology Course Practice",teacher:"wang lei",classperiod:32,experimental_lessons:0,classnum:1},
+{course:"Object-Oriented Programming",teacher:"wei qian yu",classperiod:64,experimental_lessons:15,classnum:2},
+{course:"Object Oriented Programming Course Practice",teacher:"wei qian yu" ,classperiod:24,experimental_lessons:0,classnum:2},
+{course:"HTML5 development technology",teacher:"wei qian yu",classperiod:48,experimental_lessons:15,classnum:2},
+{course:"Practice of Data Structure and Algorithms Course",teacher:"wei qian yu" ,classperiod:32,experimental_lessons:0,classnum:1}
+]
+)
+
+2、统计每个老师共上多少接课
+db.courses.aggregate([
+{$group:{'_id':'$teacher','lesson_num':{$sum:{$multiply:['$classperiod','$classnum']}}}}
+])
+
+db.courses_en_US.aggregate([
+{$group:{'_id':'$teacher','lesson_num':{$sum:{$multiply:['$classperiod','$classnum']}}}}
+])
+
+3、课时超过32节课的老师有谁，他们分别有多少节超过32课时的课
+db.courses.aggregate([
+{$match:{'classperiod':{$gt:32}}},
+{$group:{'_id':'$teacher','classnum':{$sum:1}}}
+])
+
+db.orders.aggregate([
+{$match:{'status':'completed','orderDate':{$gte: '2019-01-01',$lt: '2019-04-01'}}},
+{$group:{'_id':null,'total':{$sum:'$total'},'shippingFee':{$sum:'$shippingFee'},'count':{$sum:1}}},
+{$project:{'grandTotal':{$add:['$total','$shippingFee']},'_id':0,}}
+])
+
+db.orders.aggregate([
+{$match:{'status':'completed','orderDate':{$gte: '2019-01-01',$lt: '2019-04-01'}}},
+{$group:{'_id':null,'total':{$sum:'$total'},'shippingFee':{$sum:'$shippingFee'},'count':{$sum:1}}},
+{$project: {'grandTotal':{$add: ['$total','$shippingFee']},'_id':0}}
+])
+
+db.orders.aggregate([
+{$match:{'status':'completed','orderDate':{$gte: '2019-01-01',$lt: '2019-04-01'}}},
+{$group:{'_id':null,'total':{$sum:'$total'},'shippingFee':{$sum:'$shippingFee'},'count':{$sum:1}}},
+{$project: {'grandTotal':{$add: ['$total','$shippingFee']},'_id':0}}
+])
+
+db.orders.aggregate([
+{$match: {'status':'completed','orderDate': {$gte: '2019-01-01', $lt: '2019-04-01'}}},
+{$group: {'_id':null,'total':{$sum: '$total'},'shippingFee': {$sum: '$shippingFee'},'count': {$sum:1}}},
+{$project: {'grandTotal': {$add: ['$total','$shippingFee']},'_id': 0}}
+])
+
+db.orders.aggregate([
+{$match: {'status':'completed','orderDate': {$gte: '2019-01-01', $lt: '2019-04-01'}}},
+{$group: {'_id':null,'total':{$sum: '$total'},'shippingFee': {$sum: '$shippingFee'},'count': {$sum:1}}},
+{$project: {'grandTotal': {$add: ['$total','$shippingFee']},'_id': 0}}
+])
+
+db.orders.aggregate([
+{$match: {'status': 'completed', 'orderDate': {$gte: '2019-01-01', $lt: '2019-04-01'}}},
+{$group: {'_id': null, 'total': {$sum: '$total'}, 'shippingFee': {$sum: '$shippingFee'}, 'count': {$sum: 1}}},
+{$project: {'grandTotal': {$add: ['$total', '$shippingFee']}, '_id': 0}}
+])
