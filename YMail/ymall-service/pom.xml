@@ -24,6 +24,7 @@
         <module>service-mq</module>
         <module>service-task</module>
         <module>service-activity</module>
+        <module>service-order</module>
     </modules>
 
     <properties>

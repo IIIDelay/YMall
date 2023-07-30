@@ -9,8 +9,8 @@ import org.springframework.data.redis.connection.stream.*;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StreamOperations;
 import org.springframework.data.redis.stream.StreamMessageListenerContainer;
-import org.ymall.redis.mq.annotation.MessageHandler;
-import org.ymall.redis.mq.annotation.MessageListener;
+import org.tools.yamll.mq.annotation.MessageHandler;
+import org.tools.yamll.mq.annotation.MessageListener;
 
 import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;

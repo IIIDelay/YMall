@@ -307,7 +307,7 @@ public class CartServiceImpl implements CartService {
 
                 // 判断是否选中
 
-//                return item.getIsChecked().intValue()==1;
+                // return item.getIsChecked().intValue()==1;
                 return "1".equals(String.valueOf(item.getIsChecked()));
 
             }).collect(Collectors.toList());
@@ -330,24 +330,24 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<CartInfo> getCartList(String userId, String userTempId) {
-        //获取临时用户购物车数据
+        // 获取临时用户购物车数据
         List<CartInfo> cartInfoList = null;
-        if(!StringUtils.isEmpty(userTempId)){
+        if (!StringUtils.isEmpty(userTempId)) {
             BoundHashOperations<String, String, CartInfo> boundHashOps = redisTemplate.boundHashOps(this.getCartKey(userTempId));
             cartInfoList = boundHashOps.values();
         }
 
-        //获取用户购物车数据
-        if(!StringUtils.isEmpty(userId)){
+        // 获取用户购物车数据
+        if (!StringUtils.isEmpty(userId)) {
             BoundHashOperations<String, String, CartInfo> boundHashOps = redisTemplate.boundHashOps(this.getCartKey(userId));
             cartInfoList = boundHashOps.values();
         }
 
-        if(!CollectionUtils.isEmpty(cartInfoList)){
+        if (!CollectionUtils.isEmpty(cartInfoList)) {
             //  展示购物车列表的时候应该有顺序！ 京东：按照更新时间！ 苏宁：创建时间！
-            cartInfoList.sort((o1,o2)->{
+            cartInfoList.sort((o1, o2) -> {
                 //  使用时间进行比较
-                return DateUtil.truncatedCompareTo(o2.getUpdateTime(),o1.getUpdateTime(), Calendar.SECOND);
+                return DateUtil.truncatedCompareTo(o2.getUpdateTime(), o1.getUpdateTime(), Calendar.SECOND);
             });
         }
         return cartInfoList;

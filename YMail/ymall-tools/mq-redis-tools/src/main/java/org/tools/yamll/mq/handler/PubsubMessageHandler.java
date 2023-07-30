@@ -7,8 +7,8 @@ package org.tools.yamll.mq.handler;
 import cn.hutool.core.util.StrUtil;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.ymall.redis.mq.annotation.MessageHandler;
-import org.ymall.redis.mq.annotation.MessageListener;
+import org.tools.yamll.mq.annotation.MessageHandler;
+import org.tools.yamll.mq.annotation.MessageListener;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;

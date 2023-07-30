@@ -13,10 +13,10 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-import org.ymall.redis.mq.annotation.MessageConsumer;
-import org.ymall.redis.mq.annotation.MessageHandler;
-import org.ymall.redis.mq.annotation.MessageListener;
-import org.ymall.redis.mq.handler.AbstractMessageHandler;
+import org.tools.yamll.mq.annotation.MessageConsumer;
+import org.tools.yamll.mq.annotation.MessageHandler;
+import org.tools.yamll.mq.annotation.MessageListener;
+import org.tools.yamll.mq.handler.AbstractMessageHandler;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;

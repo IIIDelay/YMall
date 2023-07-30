@@ -7,9 +7,9 @@ package org.tools.yamll.mq.context;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.stream.ObjectRecord;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.ymall.redis.mq.annotation.MessageConsumer;
-import org.ymall.redis.mq.annotation.MessageListener;
-import org.ymall.redis.mq.pojo.Message;
+import org.tools.yamll.mq.annotation.MessageConsumer;
+import org.tools.yamll.mq.annotation.MessageListener;
+import org.tools.yamll.mq.pojo.Message;
 
 import javax.annotation.Resource;
 

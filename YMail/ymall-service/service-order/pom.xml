@@ -9,11 +9,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.ymall</groupId>
-        <artifactId>ymall-service-client</artifactId>
+        <artifactId>YMail</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>service-user-client</artifactId>
+    <artifactId>service-order</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -24,25 +25,31 @@
     <dependencies>
         <dependency>
             <groupId>org.ymall</groupId>
-            <artifactId>ymall-model</artifactId>
+            <artifactId>service-product-client</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>org.ymall</groupId>
-            <artifactId>commons-services</artifactId>
+            <artifactId>service-cart-client</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!-- 服务调用feign -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>org.ymall</groupId>
+            <artifactId>service-user-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>service-order</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

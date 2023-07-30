@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.tools.yamll.mq.pojo.Message;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
