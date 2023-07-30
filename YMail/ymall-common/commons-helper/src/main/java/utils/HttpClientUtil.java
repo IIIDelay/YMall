@@ -10,6 +10,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
@@ -44,6 +45,12 @@ import java.util.List;
 import java.util.Map;
 
 public class HttpClientUtil {
+    private static final int CONNECT_TIME_OUT;
+
+    static {
+        CONNECT_TIME_OUT = 3000;
+    }
+
 
     /**
      * doGet
@@ -91,6 +98,10 @@ public class HttpClientUtil {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         // 创建http GET请求
         HttpGet httpGet = new HttpGet(url);
+        RequestConfig requestConfig = RequestConfig.custom()
+            .setConnectTimeout(CONNECT_TIME_OUT)
+            .build();
+        httpGet.setConfig(requestConfig);
         CloseableHttpResponse response = null;
         try {
             // 执行请求
@@ -198,7 +209,7 @@ public class HttpClientUtil {
      */
     public static HttpResponse doPost(String host, String path, String method,
                                       Map<String, String> headers, Map<String, String> querys,
-                                      String body)  {
+                                      String body) {
         try {
             HttpClient httpClient = wrapClient(host);
 
