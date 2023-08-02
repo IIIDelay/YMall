@@ -7,7 +7,7 @@ package org.ymall.commons.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import common.RedisConstants;
+import org.iiidev.ymall.common.RedisConstants;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;

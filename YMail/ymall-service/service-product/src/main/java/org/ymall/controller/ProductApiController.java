@@ -15,7 +15,7 @@ import org.ymall.model.product.BaseAttrInfo;
 import org.ymall.model.product.BaseTrademark;
 import org.ymall.model.product.SpuPoster;
 import org.ymall.service.IManageService;
-import result.ServiceResponse;
+import org.iiidev.ymall.result.ServiceResponse;
 
 import java.util.List;
 import java.util.Map;

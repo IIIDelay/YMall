@@ -6,7 +6,7 @@ package org.iiidev.ymall.item.client.impl;
 
 import org.iiidev.ymall.item.client.ItemFeignClient;
 import org.springframework.stereotype.Component;
-import result.ServiceResponse;
+import org.iiidev.ymall.result.ServiceResponse;
 
 @Component
 public class ItemDegradeFeignClient implements ItemFeignClient {

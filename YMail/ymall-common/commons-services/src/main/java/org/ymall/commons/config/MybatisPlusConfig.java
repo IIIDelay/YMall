@@ -7,7 +7,7 @@ package org.ymall.commons.config;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
-import func.CheckFunction;
+import org.iiidev.ymall.func.CheckFunction;
 import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.ymall.list.client.impl.ListDegradeFeignClient;
 import org.ymall.model.list.SearchParam;
-import result.Result;
+import org.iiidev.ymall.result.Result;
 
 @FeignClient(value = "service-list", fallback = ListDegradeFeignClient.class)
 public interface ListFeignClient {

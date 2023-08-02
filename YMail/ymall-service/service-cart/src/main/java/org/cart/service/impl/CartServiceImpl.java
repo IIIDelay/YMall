@@ -4,7 +4,7 @@
 
 package org.cart.service.impl;
 
-import common.RedisConstants;
+import org.iiidev.ymall.common.RedisConstants;
 import org.cart.service.CartService;
 import org.iiidev.ymall.product.client.ProductFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.ymall.model.cart.CartInfo;
 import org.ymall.model.product.SkuInfo;
-import utils.DateUtil;
+import org.iiidev.ymall.utils.DateUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;

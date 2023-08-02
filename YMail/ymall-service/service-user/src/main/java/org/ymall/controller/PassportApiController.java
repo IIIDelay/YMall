@@ -5,7 +5,7 @@
 package org.ymall.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import common.RedisConstants;
+import org.iiidev.ymall.common.RedisConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.ymall.entity.UserInfo;
 import org.ymall.service.IUserService;
-import result.ServiceResponse;
+import org.iiidev.ymall.result.ServiceResponse;
 import org.ymall.commons.helper.IpUtil;
 
 import javax.servlet.http.HttpServletRequest;

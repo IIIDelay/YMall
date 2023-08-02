@@ -4,8 +4,8 @@
 
 package dto;
 
-import Annotation.JcBigDecConvert;
-import common.UnitConvertType;
+import org.iiidev.ymall.Annotation.JcBigDecConvert;
+import org.iiidev.ymall.common.UnitConvertType;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.ymall.model.product.BaseTrademark;
 import org.ymall.service.IBaseTrademarkService;
-import result.ServiceResponse;
+import org.iiidev.ymall.result.ServiceResponse;
 
 @RestController
 @RequestMapping("/admin/product/baseTrademark")

@@ -8,7 +8,7 @@ import org.iiidev.ymall.item.client.impl.ItemDegradeFeignClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import result.ServiceResponse;
+import org.iiidev.ymall.result.ServiceResponse;
 
 @FeignClient(value = "service-item", fallback = ItemDegradeFeignClient.class)
 public interface ItemFeignClient {

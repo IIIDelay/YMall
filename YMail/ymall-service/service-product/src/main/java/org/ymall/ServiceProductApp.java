@@ -4,7 +4,7 @@
 
 package org.ymall;
 
-import common.RedisConstants;
+import org.iiidev.ymall.common.RedisConstants;
 import org.redisson.api.RBloomFilter;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;

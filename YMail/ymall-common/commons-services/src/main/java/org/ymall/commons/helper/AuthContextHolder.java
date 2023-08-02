@@ -4,7 +4,7 @@
 
 package org.ymall.commons.helper;
 
-import common.AuthContants;
+import org.iiidev.ymall.common.AuthContants;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;

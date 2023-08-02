@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.ymall.list.client.ListFeignClient;
 import org.ymall.model.list.SearchParam;
-import result.Result;
+import org.iiidev.ymall.result.Result;
 
 import java.util.ArrayList;
 import java.util.HashMap;

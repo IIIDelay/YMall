@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.ymall.order.client.OrderFeignClient;
-import result.Result;
+import org.iiidev.ymall.result.Result;
 
 import java.util.Map;
 

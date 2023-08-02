@@ -14,7 +14,7 @@ import org.ymall.model.product.BaseTrademark;
 import org.ymall.model.product.SkuInfo;
 import org.ymall.model.product.SpuPoster;
 import org.ymall.model.product.SpuSaleAttr;
-import result.ServiceResponse;
+import org.iiidev.ymall.result.ServiceResponse;
 
 import java.math.BigDecimal;
 import java.util.List;

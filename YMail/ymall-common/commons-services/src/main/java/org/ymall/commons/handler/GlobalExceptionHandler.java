@@ -4,12 +4,12 @@
 
 package org.ymall.commons.handler;
 
-import execption.ServiceRuntimeException;
+import org.iiidev.ymall.execption.ServiceRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import result.Result;
+import org.iiidev.ymall.result.Result;
 
 /**
  * 全局异常处理类

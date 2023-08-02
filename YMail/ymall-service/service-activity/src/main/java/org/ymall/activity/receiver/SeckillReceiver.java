@@ -6,7 +6,7 @@ package org.ymall.activity.receiver;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.rabbitmq.client.Channel;
-import common.RedisConstants;
+import org.iiidev.ymall.common.RedisConstants;
 import lombok.SneakyThrows;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Exchange;
@@ -22,7 +22,7 @@ import org.ymall.activity.service.SeckillGoodsService;
 import org.ymall.model.activity.SeckillGoods;
 import org.ymall.model.activity.UserRecode;
 import org.ymall.mqs.constant.MqConst;
-import utils.DateUtil;
+import org.iiidev.ymall.utils.DateUtil;
 
 import java.util.Date;
 import java.util.List;

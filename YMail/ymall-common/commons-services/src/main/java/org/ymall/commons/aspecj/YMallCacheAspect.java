@@ -5,7 +5,7 @@
 package org.ymall.commons.aspecj;
 
 import com.alibaba.fastjson.JSON;
-import common.RedisConstants;
+import org.iiidev.ymall.common.RedisConstants;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;

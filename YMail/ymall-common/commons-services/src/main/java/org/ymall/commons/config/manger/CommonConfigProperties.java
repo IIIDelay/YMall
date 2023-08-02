@@ -5,14 +5,14 @@
 package org.ymall.commons.config.manger;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import common.RedisConstants;
+import org.iiidev.ymall.common.RedisConstants;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.connection.RedisConfiguration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.stereotype.Component;
-import utils.AttrTransferUtil;
+import org.iiidev.ymall.utils.AttrTransferUtil;
 
 import javax.sql.DataSource;
 import java.util.Objects;

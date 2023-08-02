@@ -4,7 +4,7 @@
 
 package org.ymall.commons.helper;
 
-import utils.FileUtils;
+import org.iiidev.ymall.utils.FileUtils;
 
 import java.util.HashMap;
 import java.util.Map;

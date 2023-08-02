@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.ymall.model.order.OrderInfo;
 import org.ymall.order.client.impl.OrderDegradeFeignClient;
-import result.Result;
+import org.iiidev.ymall.result.Result;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @FeignClient(value = "service-order",fallback = OrderDegradeFeignClient.class)

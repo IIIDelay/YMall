@@ -135,9 +135,16 @@
             <artifactId>spring-retry</artifactId>
             <version>${version.spring.retry}</version>
         </dependency>
+
         <dependency>
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.5</version>
         </dependency>
 
     </dependencies>

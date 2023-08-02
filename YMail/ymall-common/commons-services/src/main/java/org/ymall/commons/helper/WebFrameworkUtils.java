@@ -5,12 +5,12 @@
 package org.ymall.commons.helper;
 
 import cn.hutool.core.util.NumberUtil;
-import common.UserTypeEnum;
+import org.iiidev.ymall.common.UserTypeEnum;
 import org.ymall.commons.config.properties.WebProperties;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import result.ServiceResponse;
+import org.iiidev.ymall.result.ServiceResponse;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;

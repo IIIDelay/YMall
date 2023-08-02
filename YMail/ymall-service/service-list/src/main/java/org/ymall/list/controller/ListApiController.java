@@ -17,7 +17,7 @@ import org.ymall.list.model.Goods;
 import org.ymall.list.model.SearchResponseVo;
 import org.ymall.list.service.SearchService;
 import org.ymall.model.list.SearchParam;
-import result.Result;
+import org.iiidev.ymall.result.Result;
 
 import java.io.IOException;
 

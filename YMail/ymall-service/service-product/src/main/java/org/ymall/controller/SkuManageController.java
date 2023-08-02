@@ -19,7 +19,7 @@ import org.ymall.model.product.SkuInfo;
 import org.ymall.model.product.SpuImage;
 import org.ymall.model.product.SpuSaleAttr;
 import org.ymall.service.IManageService;
-import result.ServiceResponse;
+import org.iiidev.ymall.result.ServiceResponse;
 
 import java.math.BigDecimal;
 import java.util.List;

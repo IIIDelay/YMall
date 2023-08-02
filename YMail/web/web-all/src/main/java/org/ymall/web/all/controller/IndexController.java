@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import result.Result;
-import result.ServiceResponse;
+import org.iiidev.ymall.result.Result;
+import org.iiidev.ymall.result.ServiceResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileWriter;

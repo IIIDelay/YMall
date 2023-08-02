@@ -7,7 +7,7 @@ package org.ymall.commons.helper;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import common.MongodbConstant;
+import org.iiidev.ymall.common.MongodbConstant;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
@@ -17,7 +17,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.util.Pair;
-import utils.CollectionHelper;
+import org.iiidev.ymall.utils.CollectionHelper;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;

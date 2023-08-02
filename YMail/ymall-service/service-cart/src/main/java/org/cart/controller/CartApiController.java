@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.ymall.commons.helper.AuthContextHolder;
 import org.ymall.model.cart.CartInfo;
-import result.Result;
+import org.iiidev.ymall.result.Result;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

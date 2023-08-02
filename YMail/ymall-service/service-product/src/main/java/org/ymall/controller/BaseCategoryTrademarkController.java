@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.ymall.model.product.BaseTrademark;
 import org.ymall.model.product.CategoryTrademarkVo;
 import org.ymall.service.BaseCategoryTrademarkService;
-import result.ServiceResponse;
+import org.iiidev.ymall.result.ServiceResponse;
 
 import java.util.List;
 

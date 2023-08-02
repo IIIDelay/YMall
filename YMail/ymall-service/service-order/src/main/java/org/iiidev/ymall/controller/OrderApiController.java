@@ -19,7 +19,7 @@ import org.ymall.model.cart.CartInfo;
 import org.ymall.model.order.OrderDetail;
 import org.ymall.model.order.OrderInfo;
 import org.ymall.model.user.UserAddress;
-import result.Result;
+import org.iiidev.ymall.result.Result;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;

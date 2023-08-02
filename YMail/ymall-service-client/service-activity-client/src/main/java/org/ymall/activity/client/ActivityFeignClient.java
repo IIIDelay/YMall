@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.ymall.activity.client.impl.ActivityDegradeFeignClient;
-import result.Result;
+import org.iiidev.ymall.result.Result;
 
 @FeignClient(value = "service-activity", fallback = ActivityDegradeFeignClient.class)
 public interface ActivityFeignClient {

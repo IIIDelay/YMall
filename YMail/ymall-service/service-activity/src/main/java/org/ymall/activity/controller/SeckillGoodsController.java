@@ -4,8 +4,8 @@
 
 package org.ymall.activity.controller;
 
-import common.RedisConstants;
-import common.ResultCodeEnum;
+import org.iiidev.ymall.common.RedisConstants;
+import org.iiidev.ymall.common.ResultCodeEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,9 +22,9 @@ import org.ymall.model.activity.SeckillGoods;
 import org.ymall.model.activity.UserRecode;
 import org.ymall.mqs.constant.MqConst;
 import org.ymall.mqs.service.RabbitService;
-import result.Result;
-import utils.DateUtil;
-import utils.MD5Util;
+import org.iiidev.ymall.result.Result;
+import org.iiidev.ymall.utils.DateUtil;
+import org.iiidev.ymall.utils.MD5Util;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;

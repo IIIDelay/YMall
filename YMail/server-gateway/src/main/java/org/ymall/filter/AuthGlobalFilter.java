@@ -5,7 +5,7 @@
 package org.ymall.filter;
 
 import com.alibaba.fastjson.JSONObject;
-import common.ResultCodeEnum;
+import org.iiidev.ymall.common.ResultCodeEnum;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.server.ServerWebExchange;
 import org.ymall.util.IpUtil;
 import reactor.core.publisher.Mono;
-import result.Result;
+import org.iiidev.ymall.result.Result;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;

@@ -4,8 +4,9 @@
 
 package utils;
 
-import common.UnitConvertType;
+import org.iiidev.ymall.common.UnitConvertType;
 import dto.MyYearSumReportDTO;
+import org.iiidev.ymall.utils.UnitConvertUtil;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

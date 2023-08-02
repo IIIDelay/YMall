@@ -18,7 +18,7 @@ import org.ymall.model.product.BaseSaleAttr;
 import org.ymall.model.product.SpuInfo;
 import org.ymall.model.product.SpuSaleAttr;
 import org.ymall.service.IManageService;
-import result.ServiceResponse;
+import org.iiidev.ymall.result.ServiceResponse;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@
 
 package org.ymall.commons.cms.common.util;
 
-import common.StrPool;
+import org.iiidev.ymall.common.StrPool;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;

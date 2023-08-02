@@ -4,7 +4,7 @@
 
 package org.ymall.activity.service.impl;
 
-import common.RedisConstants;
+import org.iiidev.ymall.common.RedisConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import org.ymall.activity.service.SeckillGoodsService;
 import org.ymall.activity.util.CacheHelper;
 import org.ymall.model.activity.OrderRecode;
 import org.ymall.model.activity.SeckillGoods;
-import utils.MD5Util;
+import org.iiidev.ymall.utils.MD5Util;
 
 import java.util.List;
 import java.util.concurrent.locks.Lock;

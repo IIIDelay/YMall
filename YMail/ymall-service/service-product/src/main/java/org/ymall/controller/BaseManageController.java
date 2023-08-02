@@ -25,7 +25,7 @@ import org.ymall.model.product.BaseCategory2;
 import org.ymall.model.product.BaseCategory3;
 import org.ymall.model.product.SkuInfo;
 import org.ymall.service.IManageService;
-import result.ServiceResponse;
+import org.iiidev.ymall.result.ServiceResponse;
 
 import java.util.List;
 

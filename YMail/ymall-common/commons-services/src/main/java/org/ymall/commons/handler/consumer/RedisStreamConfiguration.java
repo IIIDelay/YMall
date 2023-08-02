@@ -4,9 +4,8 @@
 
 package org.ymall.commons.handler.consumer;
 
-import common.RedisConstants;
+import org.iiidev.ymall.common.RedisConstants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.stream.Consumer;
