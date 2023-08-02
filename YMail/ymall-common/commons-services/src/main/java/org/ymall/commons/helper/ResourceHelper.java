@@ -5,10 +5,13 @@
 package org.ymall.commons.helper;
 
 
+import cn.hutool.core.io.FileTypeUtil;
+import com.alibaba.excel.support.ExcelTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.io.IOUtils;
+import org.iiidev.ymall.utils.FileTypeUtils;
 import org.springframework.http.MediaType;
 import org.springframework.http.MediaTypeFactory;
 import org.springframework.web.multipart.MultipartFile;

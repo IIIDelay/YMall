@@ -5,14 +5,16 @@
 package org.ymall.commons.helper;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Assert;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
+import com.google.common.collect.Lists;
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.util.ResourceUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -21,11 +23,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Excel 工具类
- *
  */
 public class EasyExcelUtils {
 
@@ -39,8 +42,8 @@ public class EasyExcelUtils {
      * @param data     数据
      * @throws IOException ioexception
      */
-    public static <T>void downloadExcel(HttpServletResponse response, Class cls, String fileName,
-                                        List<T> data, List<String> includeColumns) {
+    public static <T> void downloadExcel(HttpServletResponse response, Class cls, String fileName,
+                                         List<T> data, List<String> includeColumns) {
         // 如果传入的data数据是空的话就让data成为一个空集合 变成下载导入模板
         if (CollUtil.isEmpty(data)) {
             data = new ArrayList<>();
@@ -66,9 +69,33 @@ public class EasyExcelUtils {
      * @param fileName fileName
      * @param data     data
      */
-    public static <T>void downloadExcel(HttpServletResponse response, Class cls, String fileName,
-                                        List<T> data) {
+    public static <T> void downloadExcel(HttpServletResponse response, Class cls, String fileName,
+                                         List<T> data) {
         downloadExcel(response, cls, fileName, data, null);
+    }
+
+    /**
+     * importDefault
+     *
+     * @param file      file
+     * @param headClazz headClazz
+     * @return List<OUT>
+     */
+    public static <OUT> List<OUT> importDefault(MultipartFile file, Class<OUT> headClazz) {
+        try {
+            if (file == null || file.getSize() <= 0) {
+                return Collections.emptyList();
+            }
+            checkType(file.getName());
+            return EasyExcel.read(file.getInputStream(), headClazz, null)
+                .autoCloseStream(false)
+                .doReadAllSync().stream()
+                .filter(in -> in.getClass().isAssignableFrom(headClazz))
+                .map(in -> (OUT) in)
+                .collect(Collectors.toList());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -83,4 +110,9 @@ public class EasyExcelUtils {
         response.setHeader("Content-Type", "application/octet-stream");
     }
 
+    private static void checkType(String fileName) {
+        List<String> excelTypes = Lists.newArrayList(ExcelTypeEnum.XLSX.getValue(), ExcelTypeEnum.XLS.getValue());
+        boolean contains = excelTypes.contains(FilenameUtils.getExtension(fileName));
+        Assert.isFalse(contains, () -> new RuntimeException("导入文件类型非excel类型"));
+    }
 }
