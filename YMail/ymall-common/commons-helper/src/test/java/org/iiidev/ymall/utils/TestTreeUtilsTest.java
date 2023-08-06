@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,11 +44,51 @@ public class TestTreeUtilsTest {
         dept5.setParentId(4);
         list.add(dept5);
 
-        List<DeptVo> tree = TreeUtils.buildTree(list, Dept::getDeptId);
-        System.out.println(tree);
+        Map<String, Object> stringObjectMap = TestTreeUtils.buildTree(list, Dept::getDeptId);
+        System.out.println(stringObjectMap);
     }
 
     public static class Dept{
 
+        private int deptId;
+        private int parentId;
+
+        public void setDeptId(int deptId) {
+            this.deptId = deptId;
+        }
+
+        public int getDeptId() {
+            return deptId;
+        }
+
+        public void setParentId(int parentId) {
+            this.parentId = parentId;
+        }
+
+        public int getParentId() {
+            return parentId;
+        }
+    }
+
+    public static class DeptVo{
+
+        private int deptId;
+        private int parentId;
+
+        public void setDeptId(int deptId) {
+            this.deptId = deptId;
+        }
+
+        public int getDeptId() {
+            return deptId;
+        }
+
+        public void setParentId(int parentId) {
+            this.parentId = parentId;
+        }
+
+        public int getParentId() {
+            return parentId;
+        }
     }
 }

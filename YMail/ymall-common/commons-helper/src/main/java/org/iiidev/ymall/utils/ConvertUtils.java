@@ -4,6 +4,7 @@
 
 package org.iiidev.ymall.utils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.iiidev.ymall.func.MyFunction;
 
 import java.lang.invoke.SerializedLambda;
@@ -12,11 +13,6 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- 
- * @description 通过
- * @date 2023-06-30 09:47
- */
 public class ConvertUtils {
 
     public ConvertUtils() {
@@ -61,6 +57,6 @@ public class ConvertUtils {
         } else {
             throw new IllegalArgumentException("无效的getter方法：" + methodName);
         }
-        return StringUtils.firstToLowerCase(methodName);
+        return StringUtils.uncapitalize(methodName);
     }
 }
