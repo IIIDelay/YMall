@@ -9,11 +9,16 @@ import cn.hutool.core.lang.Assert;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
+import com.alibaba.excel.write.metadata.style.WriteCellStyle;
+import com.alibaba.excel.write.metadata.style.WriteFont;
+import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -114,5 +119,36 @@ public class EasyExcelUtils {
         List<String> excelTypes = Lists.newArrayList(ExcelTypeEnum.XLSX.getValue(), ExcelTypeEnum.XLS.getValue());
         boolean contains = excelTypes.contains(FilenameUtils.getExtension(fileName));
         Assert.isFalse(contains, () -> new RuntimeException("导入文件类型非excel类型"));
+    }
+
+    /**
+     * 设置表格内容居中显示策略
+     */
+    public static HorizontalCellStyleStrategy buildStyleStrategy() {
+        // 这里需要设置不关闭流
+        WriteCellStyle headWriteCellStyle = new WriteCellStyle();
+        // 设置背景颜色
+        headWriteCellStyle.setFillForegroundColor(IndexedColors.SKY_BLUE.getIndex());
+        // 设置头字体
+        WriteFont headWriteFont = new WriteFont();
+        headWriteFont.setFontHeightInPoints((short) 15);
+        headWriteFont.setBold(true);
+        headWriteCellStyle.setWriteFont(headWriteFont);
+        // 设置头居中
+        headWriteCellStyle.setHorizontalAlignment(HorizontalAlignment.CENTER);
+
+        // 内容策略
+        WriteCellStyle contentWriteCellStyle = new WriteCellStyle();
+        WriteFont headWriteFont2 = new WriteFont();
+        headWriteFont2.setFontHeightInPoints((short) 13);
+        // 设置 水平居中
+        contentWriteCellStyle.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        // 垂直居中
+        contentWriteCellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        contentWriteCellStyle.setBorderLeft(BorderStyle.THIN);
+        contentWriteCellStyle.setBorderRight(BorderStyle.THIN);
+        contentWriteCellStyle.setBorderTop(BorderStyle.THIN);
+        contentWriteCellStyle.setBorderBottom(BorderStyle.THIN);
+        return new HorizontalCellStyleStrategy(headWriteCellStyle, contentWriteCellStyle);
     }
 }
