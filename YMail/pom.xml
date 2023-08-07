@@ -32,6 +32,7 @@
         <module>ware-manage</module>
         <module>GOF</module>
         <module>ymall-tools</module>
+        <module>LEARN</module>
     </modules>
 
     <properties>
