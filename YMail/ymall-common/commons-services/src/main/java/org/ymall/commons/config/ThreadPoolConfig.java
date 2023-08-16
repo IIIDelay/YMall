@@ -4,7 +4,6 @@
 
 package org.ymall.commons.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,14 +17,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 public class ThreadPoolConfig {
 
-    @Autowired
-    private ToolProperties prop;
-
     /**
      * 默认CPU密集型
      */
-    @Bean("cpuDenseExecutor")
-    public ThreadPoolTaskExecutor cpuDense() {
+    @Bean(value = "cpuDenseExecutor", destroyMethod = "shutdown")
+    public ThreadPoolTaskExecutor cpuDense(ToolProperties prop) {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         int logicCpus = Runtime.getRuntime().availableProcessors();
         if (prop.getPoolCpuNumber() != null) {
@@ -50,19 +46,19 @@ public class ThreadPoolConfig {
     /**
      * 默认io密集型
      */
-    @Bean("ioDenseExecutor")
-    public ThreadPoolTaskExecutor ioDense() {
+    @Bean(value = "ioDenseExecutor", destroyMethod = "shutdown")
+    public ThreadPoolTaskExecutor ioDense(ToolProperties prop) {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         int logicCpus = Runtime.getRuntime().availableProcessors();
         if (prop.getPoolCpuNumber() != null) {
-            executor.setCorePoolSize((int) (prop.getPoolCpuNumber() * 80));
+            executor.setCorePoolSize(prop.getPoolCpuNumber() * 80);
         } else {
-            executor.setCorePoolSize((int) (logicCpus * 80));
+            executor.setCorePoolSize(logicCpus * 80);
         }
         if (prop.getPoolCpuNumber() != null) {
-            executor.setMaxPoolSize((int) (prop.getPoolCpuNumber() * 200));
+            executor.setMaxPoolSize(prop.getPoolCpuNumber() * 200);
         } else {
-            executor.setMaxPoolSize((int) (logicCpus * 200));
+            executor.setMaxPoolSize(logicCpus * 200);
         }
         // Spring默认使用LinkedBlockingQueue
         executor.setQueueCapacity(5);
