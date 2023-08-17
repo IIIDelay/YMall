@@ -4,18 +4,27 @@
 
 package utils;
 
+import com.alibaba.excel.util.NumberDataFormatterUtils;
 import org.iiidev.ymall.execption.ServiceRuntimeException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.iiidev.ymall.utils.Either;
+import org.junit.jupiter.api.Test;
 
+import java.text.Format;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TestEither {
+
+    @Test
+    public void name() {
+        Optional optional = new Optional();
+    }
 
     public static void main(String[] args) {
         // Stream中不允许抛出异常

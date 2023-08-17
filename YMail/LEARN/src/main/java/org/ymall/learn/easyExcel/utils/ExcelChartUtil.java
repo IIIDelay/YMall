@@ -51,8 +51,6 @@ import org.openxmlformats.schemas.drawingml.x2006.chart.STOrientation;
 import org.openxmlformats.schemas.drawingml.x2006.chart.STTickLblPos;
 /**
  * Excel图表工具类
- * @author cheng-qiang
- * @date 2022年08月16日10:13
  */
 public class ExcelChartUtil {
 

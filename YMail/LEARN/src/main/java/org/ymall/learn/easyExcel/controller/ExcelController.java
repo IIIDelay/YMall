@@ -2,18 +2,8 @@ package org.ymall.learn.easyExcel.controller;
 
 import cn.hutool.core.util.IdUtil;
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelReader;
 import com.alibaba.fastjson.JSON;
-import com.cheng.annotation.CommentWriteHandler;
-import com.cheng.annotation.ExcelError;
-import com.cheng.annotation.ExcelReader;
-import com.cheng.config.BtJsonResult;
-import com.cheng.config.RedisService;
-import com.cheng.dto.User;
-import com.cheng.dto.UserExtra;
-import com.cheng.dto.UserImport;
-import com.cheng.listener.AnalysisEventCustomListener;
-import com.cheng.listener.JdbcEventListener;
-import com.cheng.utils.EasyExcelUtils;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
@@ -21,6 +11,16 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.ymall.learn.easyExcel.annotation.CommentWriteHandler;
+import org.ymall.learn.easyExcel.annotation.ExcelError;
+import org.ymall.learn.easyExcel.config.BtJsonResult;
+import org.ymall.learn.easyExcel.config.RedisService;
+import org.ymall.learn.easyExcel.dto.User;
+import org.ymall.learn.easyExcel.dto.UserExtra;
+import org.ymall.learn.easyExcel.dto.UserImport;
+import org.ymall.learn.easyExcel.listener.AnalysisEventCustomListener;
+import org.ymall.learn.easyExcel.listener.JdbcEventListener;
+import org.ymall.learn.easyExcel.utils.EasyExcelUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +40,7 @@ import java.util.*;
 public class ExcelController {
 
     @Resource
-    private  ExcelReader excelReader;
+    private ExcelReader excelReader;
 
     @Resource
     private  DataService dataService;
@@ -77,7 +77,7 @@ public class ExcelController {
         sheetName.add("员工信息");
         // sheetName.add("员工信息2");
         Map<String,Class<?>> classMap = new HashMap<>();
-        classMap.put("员工信息",UserExtra.class);
+        classMap.put("员工信息", UserExtra.class);
         // classMap.put("员工信息2",UserExtra.class);
         EasyExcelUtils.writeSelectedSheet(classMap,sheetName,"用户信息_数据导入",response);
     }
@@ -148,7 +148,7 @@ public class ExcelController {
         InputStream inputStream = file.getInputStream();
         Map<String, Map<String, String>> dictionaryTableDataMap = EasyExcelUtils.getDictionaryTableDataMap(inputStream);
         redisService.setEx(EasyExcelUtils.DICTIONARY_TABLE,dictionaryTableDataMap,EasyExcelUtils.EXPIRE_TIME);
-        ExcelReader.Meta<UserImport> excelDataMeta = new ExcelReader.Meta<>();
+        org.ymall.learn.easyExcel.annotation.ExcelReader.Meta<UserImport> excelDataMeta = new ExcelReader.Meta<>();
         excelDataMeta.setExcelStream(file.getInputStream());
         excelDataMeta.setDomain(UserImport.class);
         excelDataMeta.setHeadRowNumber(EasyExcelUtils.HEAD_ROW_NUMBER);
