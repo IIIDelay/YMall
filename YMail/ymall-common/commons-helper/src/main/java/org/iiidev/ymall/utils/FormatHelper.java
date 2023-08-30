@@ -4,6 +4,7 @@
 
 package org.iiidev.ymall.utils;
 
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
@@ -18,14 +19,18 @@ public class FormatHelper {
      * format
      *
      * @param in           in
-     * @param patten       patten
-     * @param scale        scale
+     * @param patten       pattenr
      * @param roundingMode roundingMode
      * @return String
      */
-    public static <IN extends Number> String format(IN in, String patten, int scale, RoundingMode roundingMode) {
+    public static <IN extends Number> String format(IN in, String patten, RoundingMode roundingMode) {
         DecimalFormat format = new DecimalFormat(patten);
         format.setRoundingMode(roundingMode);
         return format.format(in);
+    }
+
+    public static void main(String[] args) {
+        String format = format(BigDecimal.valueOf(22.232222822), "0.0000%", RoundingMode.HALF_UP);
+        System.out.println("format = " + format);
     }
 }

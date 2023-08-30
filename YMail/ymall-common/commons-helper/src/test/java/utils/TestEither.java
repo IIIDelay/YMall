@@ -23,7 +23,7 @@ public class TestEither {
 
     @Test
     public void name() {
-        Optional optional = new Optional();
+
     }
 
     public static void main(String[] args) {

@@ -39,7 +39,6 @@ public class SpringUtils implements BeanFactoryPostProcessor, ApplicationContext
      * @param name 实例名称
      * @return Object 一个以所给名字注册的bean的实例
      */
-    @SuppressWarnings("unchecked")
     public static <T> T getBean(String name) throws BeansException {
         return (T) beanFactory.getBean(name);
     }
@@ -58,12 +57,12 @@ public class SpringUtils implements BeanFactoryPostProcessor, ApplicationContext
     public static void refreshBean(String name, Object bean) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(bean);
-        //获取上下文
+        // 获取上下文
         DefaultListableBeanFactory defaultListableBeanFactory =
             (DefaultListableBeanFactory) applicationContext.getAutowireCapableBeanFactory();
-        //销毁指定实例
+        // 销毁指定实例
         defaultListableBeanFactory.destroySingleton(name);
-        //重新注册同名实例，这样在其他地方注入的实例还是同一个名称，但是实例内容已经重新加载
+        // 重新注册同名实例，这样在其他地方注入的实例还是同一个名称，但是实例内容已经重新加载
         defaultListableBeanFactory.registerSingleton(name, bean);
     }
 

@@ -9,11 +9,15 @@ import cn.hutool.core.map.TableMap;
 import cn.hutool.core.net.url.UrlBuilder;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
+import org.iiidev.ymall.execption.ServiceRuntimeException;
 import org.springframework.util.StringUtils;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -21,9 +25,9 @@ import java.util.Map;
 /**
  * HTTP 工具类
  */
+@Slf4j
 public class HttpUtils {
 
-    @SuppressWarnings("unchecked")
     public static String replaceUrlQuery(String url, String key, String value) {
         UrlBuilder builder = UrlBuilder.of(url, Charset.defaultCharset());
         // 先移除
@@ -122,5 +126,15 @@ public class HttpUtils {
             return new String[]{clientId, clientSecret};
         }
         return null;
+    }
+
+    public String readRowBody(HttpServletRequest httpServletRequest) {
+        try (BufferedReader bufferedReader = httpServletRequest.getReader()) {
+            String body = IOUtils.toString(bufferedReader);
+            return body;
+        } catch (Exception exception) {
+            log.error("读取httpServletRequest的row body异常");
+            throw ServiceRuntimeException.of("读取httpServletRequest的row body异常");
+        }
     }
 }
