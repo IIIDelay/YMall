@@ -4,11 +4,13 @@
 
 package org.iiidev.ymall.utils;
 
+import cn.hutool.core.lang.Assert;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.apache.commons.lang3.tuple.Pair;
+import org.iiidev.ymall.execption.ServiceRuntimeException;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;
@@ -16,6 +18,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -56,23 +59,18 @@ public class ReflectHelper {
     }
 
     /**
-     * fillPropertyDMethod
+     * 获取属性的读写方法
      *
-     * @param inClass     inClass
-     * @param readMethod  readMethod
-     * @param writeMethod writeMethod
+     * @param inClass inClass
      */
-    public <IN> void fillPropertyDMethod(Class<IN> inClass, List<Method> readMethod, List<Method> writeMethod) {
+    public <IN> void getReadWriteMethod(Class<IN> inClass) {
         try {
-            if (CollectionUtils.isEmpty(readMethod) || CollectionUtils.isEmpty(writeMethod)) {
-                return;
-            }
+            Assert.notNull(inClass, () -> ServiceRuntimeException.of("input param not empty"));
             BeanInfo beanInfo = Introspector.getBeanInfo(inClass);
+            List<Pair<Method, Method>> readWriteMethod = new ArrayList<>();
             Lists.newArrayList(beanInfo.getPropertyDescriptors())
-                .forEach(propertyDescriptor -> {
-                    readMethod.add(propertyDescriptor.getReadMethod());
-                    writeMethod.add(propertyDescriptor.getWriteMethod());
-                });
+                .forEach(propertyDescriptor ->
+                    readWriteMethod.add(Pair.of(propertyDescriptor.getReadMethod(), propertyDescriptor.getWriteMethod())));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
