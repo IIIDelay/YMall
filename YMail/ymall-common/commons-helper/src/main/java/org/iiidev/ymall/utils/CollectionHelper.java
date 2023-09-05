@@ -6,6 +6,7 @@ package org.iiidev.ymall.utils;
 
 import cn.hutool.core.collection.CollUtil;
 import org.apache.commons.collections4.CollectionUtils;
+import org.checkerframework.checker.units.qual.K;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -191,4 +192,31 @@ public class CollectionHelper {
             .map(test -> inList.stream().filter(test).map(mapping).collect(Collectors.toList()))
             .orElse(inList.stream().map(mapping).collect(Collectors.toList()));
     }
+
+    public static <IN,K> Map<K, Integer> countNum01(List<IN> inList, Function<IN, K> keyFunc) {
+        Map<K, Integer> integerMap = inList.stream().collect(Collectors.toMap(keyFunc, k -> 1, Integer::sum));
+        return integerMap;
+    }
+
+    public static <IN, K> Map<K, Long> countNum02(List<IN> inList, Function<IN, K> keyFunc) {
+        Map<K, Long> collect = inList.stream().collect(Collectors.groupingBy(keyFunc, Collectors.counting()));
+        return collect;
+    }
+
+    public static <IN, K> Map<K, Integer> countNum03(List<IN> inList, Function<IN, K> keyFunc) {
+        Map<K, Integer> integerMap = new HashMap<>();
+        for (IN in : inList) {
+            integerMap.merge(keyFunc.apply(in), 1, Integer::sum);
+        }
+        return integerMap;
+    }
+
+    public static <IN, K> Map<K, Integer> countNum04(List<IN> inList, Function<IN, K> keyFunc) {
+        Map<K, Integer> integerMap = new HashMap<>();
+        for (IN in : inList) {
+            integerMap.compute(keyFunc.apply(in), (k,v)->v==null?1:++v);
+        }
+        return integerMap;
+    }
+
 }

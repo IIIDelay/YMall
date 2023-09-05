@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CriteriaXTest {
     @Test
     public void testCriteria() {
-        CriteriaX criteriaX = CriteriaX.build();
+        CriteriaX criteriaX = CriteriaX.build(true);
 
         criteriaX.nilIs("age", 18);
         Criteria criteria = Criteria.where("name").is("zhangsan");
@@ -31,5 +31,8 @@ public class CriteriaXTest {
         criteriaX.nilWhere("this.lastUpdateTime > this.lastReadTime");
         String json = criteriaX.get().getCriteriaObject().toJson();
         System.out.println("json = " + json);
+
+        Criteria eleMatch = criteriaX.getEleMatch();
+        System.out.println("eleMatch.getCriteriaObject().toJson() = " + eleMatch.getCriteriaObject().toJson());
     }
 }
