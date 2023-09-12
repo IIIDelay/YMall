@@ -6,9 +6,10 @@ package org.iiidev.ymall.utils;
 
 import cn.hutool.core.collection.CollUtil;
 import org.apache.commons.collections4.CollectionUtils;
-import org.checkerframework.checker.units.qual.K;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -168,14 +169,6 @@ public class CollectionHelper {
         return from.stream().map(valueFunc).reduce(accumulator).get();
     }
 
-    public static <T> void addIfNotNull(Collection<T> coll, T item) {
-        if (item == null) {
-            return;
-        }
-        coll.add(item);
-
-    }
-
     /**
      * toList
      *
@@ -217,6 +210,34 @@ public class CollectionHelper {
             integerMap.compute(keyFunc.apply(in), (k,v)->v==null?1:++v);
         }
         return integerMap;
+    }
+
+    /**
+     * allNotEmpty
+     *
+     * @param ins ins
+     * @return boolean
+     */
+    public static <IN>boolean allNotEmpty(Collection<IN> ...ins){
+        if (ArrayUtils.isEmpty(ins)) {
+            return false;
+        }
+        return Arrays.stream(ins).allMatch(CollectionUtils::isNotEmpty);
+    }
+
+    public static <IN>boolean anyEmpty(Collection<IN> ...ins){
+        if (ArrayUtils.isEmpty(ins)) {
+            return true;
+        }
+        return Arrays.stream(ins).anyMatch(CollectionUtils::isEmpty);
+    }
+
+    public static <IN> boolean allEmpty(Collection<IN>... ins) {
+        if (ArrayUtils.isEmpty(ins)) {
+            return true;
+        }
+
+        return Arrays.stream(ins).allMatch(CollectionUtils::isEmpty);
     }
 
 }

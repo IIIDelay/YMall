@@ -2,7 +2,6 @@ package org.ymall.learn.easyExcel.controller;
 
 import cn.hutool.core.util.IdUtil;
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.ExcelReader;
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.ymall.learn.easyExcel.annotation.CommentWriteHandler;
 import org.ymall.learn.easyExcel.annotation.ExcelError;
+import org.ymall.learn.easyExcel.annotation.ExcelReader;
 import org.ymall.learn.easyExcel.config.BtJsonResult;
 import org.ymall.learn.easyExcel.config.RedisService;
 import org.ymall.learn.easyExcel.dto.User;
@@ -148,7 +148,7 @@ public class ExcelController {
         InputStream inputStream = file.getInputStream();
         Map<String, Map<String, String>> dictionaryTableDataMap = EasyExcelUtils.getDictionaryTableDataMap(inputStream);
         redisService.setEx(EasyExcelUtils.DICTIONARY_TABLE,dictionaryTableDataMap,EasyExcelUtils.EXPIRE_TIME);
-        org.ymall.learn.easyExcel.annotation.ExcelReader.Meta<UserImport> excelDataMeta = new ExcelReader.Meta<>();
+        ExcelReader.Meta<UserImport> excelDataMeta = new ExcelReader.Meta<>();
         excelDataMeta.setExcelStream(file.getInputStream());
         excelDataMeta.setDomain(UserImport.class);
         excelDataMeta.setHeadRowNumber(EasyExcelUtils.HEAD_ROW_NUMBER);

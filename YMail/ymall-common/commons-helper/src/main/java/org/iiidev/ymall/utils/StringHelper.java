@@ -63,6 +63,12 @@ public class StringHelper {
     }
 
     public static void main(String[] args) {
+        String s2 = StringUtils.stripToEmpty("    a  a   ");
+        String s3 = StringUtils.trimToEmpty("  a  a  ");
+        System.out.println("s2 = " + s2);
+        System.out.println("s3 = " + s3);
+        System.out.println("s2.equals(s3) = " + s2.equals(s3));
+
         /* StringBuffer sb = new StringBuffer();
         List<String> strings = Lists.newArrayList("张三", "lisi", "王五", "zhaoliu", "4eeee");
         for (String string : strings) {

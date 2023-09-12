@@ -1,9 +1,11 @@
 package org.ymall.learn.easyExcel.dto;
 
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.cheng.annotation.ImportExcel;
-import com.cheng.annotation.NameCodeConverter;
+
+
 import lombok.Data;
+import org.ymall.learn.easyExcel.annotation.ImportExcel;
+import org.ymall.learn.easyExcel.annotation.NameCodeConverter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
