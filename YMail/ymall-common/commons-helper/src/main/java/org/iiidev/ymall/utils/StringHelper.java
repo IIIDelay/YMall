@@ -9,6 +9,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * StringHelper
@@ -17,6 +19,16 @@ import java.util.List;
  * @Date 2023/9/10 16:40
  **/
 public class StringHelper {
+    public static long countMatchRegex(String instr, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(instr);
+        int count = 0;
+        while (matcher.find()) {
+            count++;
+        }
+        return count;
+    }
+
     public static String limitJoin(List<String> inStrs, String split, int limitLen){
         if (CollectionUtils.isEmpty(inStrs)) {
             return StringUtils.EMPTY;
