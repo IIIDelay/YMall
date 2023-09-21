@@ -815,4 +815,27 @@ public class EasyExcelUtils {
         }
         return new HashMap<>();
     }
+
+    /**
+     * getWeakBook : 获取指定行对象
+     *
+     * @param file       file
+     * @param sheetIndex sheetIndex
+     * @param rowIndex   rowIndex
+     * @return Row
+     */
+    public Row getWeakBook(MultipartFile file, int sheetIndex, int rowIndex) {
+        if (file == null || file.getSize() <= 0) {
+            return null;
+        }
+        try {
+            InputStream inputStream = file.getInputStream();
+            Workbook wb = WorkbookFactory.create(inputStream);
+            Sheet sheetAt = wb.getSheetAt(sheetIndex);
+            Row row = sheetAt.getRow(rowIndex);
+            return row;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

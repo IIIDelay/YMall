@@ -4,10 +4,21 @@
 
 package org.iiidev.ymall.utils;
 
+import cn.hutool.core.math.MathUtil;
+import cn.hutool.core.util.NumberUtil;
 import com.google.common.collect.Lists;
+import com.google.zxing.common.detector.MathUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.springframework.format.number.NumberStyleFormatter;
+import org.springframework.util.PatternMatchUtils;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.text.NumberFormat;
+import java.util.Formatter;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -75,6 +86,18 @@ public class StringHelper {
     }
 
     public static void main(String[] args) {
+        DecimalFormat format = new DecimalFormat();
+
+        format.setGroupingUsed(true);
+        BigDecimal bigDecimal = new BigDecimal("111111111111111111111111111111111111111111111111");
+        String format1 = format.format(bigDecimal);
+        System.out.println("format = " + format1);
+
+        Formatter formatter = new Formatter();
+        formatter.format("sssa%s", "xx");
+        System.out.println("formatter.toString() = " + formatter.toString());
+
+
         String s2 = StringUtils.stripToEmpty("    a  a   ");
         String s3 = StringUtils.trimToEmpty("  a  a  ");
         System.out.println("s2 = " + s2);
