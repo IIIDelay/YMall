@@ -5,7 +5,6 @@
 package org.ymall.commons.helper;
 
 import lombok.Data;
-import org.omg.PortableInterceptor.INACTIVE;
 
 import java.io.Serializable;
 

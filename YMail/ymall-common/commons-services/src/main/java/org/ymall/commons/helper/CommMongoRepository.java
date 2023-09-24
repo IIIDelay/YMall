@@ -5,22 +5,16 @@
 package org.ymall.commons.helper;
 
 import cn.hutool.core.lang.Assert;
-import com.google.common.reflect.TypeResolver;
-import org.apache.commons.lang3.reflect.TypeUtils;
-import org.apache.ibatis.reflection.TypeParameterResolver;
 import org.iiidev.ymall.execption.ServiceRuntimeException;
 import org.springframework.core.ResolvableType;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.TypedAggregation;
 import org.springframework.data.mongodb.core.query.Query;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
 import java.util.List;
-import java.util.Map;
 
 /**
  * mongodb持久层抽象类
@@ -34,18 +28,27 @@ public abstract class CommMongoRepository<IN extends Serializable> {
     @Resource
     private MongoTemplate mongoTemplate;
 
-    private Class<IN> inClazz;
+    private Class<IN> docClazz;
 
     public CommMongoRepository() {
         getSuperClazz();
     }
 
-    public IN findOne(Long _id) {
-        return mongoTemplate.findOne(Query.query(Criteria.where(ID).is(_id)), inClazz);
+    public IN findById(Long _id) {
+        return mongoTemplate.findById(_id, docClazz);
+    }
+
+    public IN findOne(Query query) {
+        return mongoTemplate.findOne(query, docClazz);
     }
 
     public List<IN> find(Query query) {
-        return mongoTemplate.find(query, inClazz);
+        return mongoTemplate.find(query, docClazz);
+    }
+
+    public <OUT> List<OUT> aggregate(TypedAggregation<?> aggregation, Class<OUT> outClass) {
+        AggregationResults<OUT> aggregate = mongoTemplate.aggregate(aggregation, docClazz, outClass);
+        return aggregate.getMappedResults();
     }
 
     private void getSuperClazz() {
@@ -53,7 +56,7 @@ public abstract class CommMongoRepository<IN extends Serializable> {
         while (true) {
             if (type.getRawClass().equals(CommMongoRepository.class)) {
                 Assert.notEmpty(type.getGenerics(), () -> ServiceRuntimeException.of("实现类未指定泛型"));
-                inClazz = (Class<IN>) type.getGeneric(0).resolve();
+                docClazz = (Class<IN>) type.getGeneric(0).resolve();
                 break;
             } else {
                 type = type.getSuperType();

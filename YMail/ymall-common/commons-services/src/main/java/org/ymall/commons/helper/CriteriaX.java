@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
@@ -159,6 +160,18 @@ public class CriteriaX {
             return new CriteriaX(true);
         }
         return new CriteriaX(false);
+    }
+
+    /**
+     * 消费原始对象
+     *
+     * @param consumer consumer
+     * @return CriteriaX
+     */
+    public CriteriaX peekFinalOriginal(Consumer<Criteria> consumer){
+        Optional.ofNullable(consumer)
+            .ifPresent(setter -> setter.accept(finalCriteria));
+        return this;
     }
 
     public Criteria get() {
