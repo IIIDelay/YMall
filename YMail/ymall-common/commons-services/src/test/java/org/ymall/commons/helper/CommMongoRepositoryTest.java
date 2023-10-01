@@ -4,8 +4,6 @@
 
 package org.ymall.commons.helper;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * CommMongoRepositoryTest
  *
