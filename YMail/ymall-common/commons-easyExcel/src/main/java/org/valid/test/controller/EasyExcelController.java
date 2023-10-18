@@ -4,6 +4,7 @@
 
 package org.valid.test.controller;
 
+import org.springframework.stereotype.Indexed;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,6 @@ import org.ymall.easy.validator.ReadRows;
 import org.ymall.easy.validator.errors.ExcelValidErrors;
 import org.ymall.easy.validator.errors.ExcelValidObjectError;
 
-import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -26,14 +26,16 @@ import java.util.stream.Collectors;
 @RequestMapping("/easy/excel")
 public class EasyExcelController {
 
-@PostMapping("/list/obj")
-public List<DemoData> listObj(@ExcelParam @Validated List<DemoData> list, ExcelValidErrors errors) {
-    if (errors.hasErrors()) {
-        String messages = errors.getAllErrors().stream().map(ExcelValidObjectError::getMessage).collect(Collectors.joining(" | "));
-        throw new RuntimeException("发现异常:" + messages);
+    @PostMapping("/list/obj")
+    public List<DemoData> listObj(@ExcelParam @Validated List<DemoData> list, ExcelValidErrors errors) {
+        if (errors.hasErrors()) {
+            String messages = errors.getAllErrors().stream()
+                .map(ExcelValidObjectError::getMessage)
+                .collect(Collectors.joining(" | "));
+            throw new RuntimeException("发现异常:" + messages);
+        }
+        return list;
     }
-    return list;
-}
 
     @PostMapping("/list/rows")
     public ReadRows<DemoData> readRows(@ExcelParam(value = "file") @Validated ReadRows<DemoData> readRows) {

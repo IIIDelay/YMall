@@ -8,9 +8,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.iiidev.ymall.common.RedisConstants;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.iiidev.ymall.common.RedisConstants;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -260,7 +260,7 @@ public class ManageServiceImpl implements IManageService {
                 List<SpuSaleAttrValue> spuSaleAttrValueList = spuSaleAttr.getSpuSaleAttrValueList();
                 //  判断
                 if (!CollectionUtils.isEmpty(spuSaleAttrValueList)) {
-                    //  循环遍历
+                    // 循环遍历,赋值...
                     for (SpuSaleAttrValue spuSaleAttrValue : spuSaleAttrValueList) {
                         //   需要将spuId， sale_attr_name 赋值
                         spuSaleAttrValue.setSpuId(spuInfo.getId());
@@ -613,37 +613,37 @@ public class ManageServiceImpl implements IManageService {
         // 声明获取所有分类数据集合
         List<BaseCategoryView> baseCategoryViewList = baseCategoryViewMapper.selectList(null);
         // 循环上面的集合并安一级分类Id 进行分组
-        Map<Long, List<BaseCategoryView>> category1Map  = baseCategoryViewList.stream().collect(Collectors.groupingBy(BaseCategoryView::getCategory1Id));
+        Map<Long, List<BaseCategoryView>> category1Map = baseCategoryViewList.stream().collect(Collectors.groupingBy(BaseCategoryView::getCategory1Id));
         int index = 1;
         // 获取一级分类下所有数据
-        for (Map.Entry<Long, List<BaseCategoryView>> entry1  : category1Map.entrySet()) {
+        for (Map.Entry<Long, List<BaseCategoryView>> entry1 : category1Map.entrySet()) {
             // 获取一级分类Id
-            Long category1Id  = entry1.getKey();
+            Long category1Id = entry1.getKey();
             // 获取一级分类下面的所有集合
-            List<BaseCategoryView> category2List1  = entry1.getValue();
+            List<BaseCategoryView> category2List1 = entry1.getValue();
             //
             JSONObject category1 = new JSONObject();
             category1.put("index", index);
-            category1.put("categoryId",category1Id);
+            category1.put("categoryId", category1Id);
             // 一级分类名称
-            category1.put("categoryName",category2List1.get(0).getCategory1Name());
+            category1.put("categoryName", category2List1.get(0).getCategory1Name());
             // 变量迭代
             index++;
             // 循环获取二级分类数据
-            Map<Long, List<BaseCategoryView>> category2Map  = category2List1.stream().collect(Collectors.groupingBy(BaseCategoryView::getCategory2Id));
+            Map<Long, List<BaseCategoryView>> category2Map = category2List1.stream().collect(Collectors.groupingBy(BaseCategoryView::getCategory2Id));
             // 声明二级分类对象集合
             List<JSONObject> category2Child = new ArrayList<>();
             // 循环遍历
-            for (Map.Entry<Long, List<BaseCategoryView>> entry2  : category2Map.entrySet()) {
+            for (Map.Entry<Long, List<BaseCategoryView>> entry2 : category2Map.entrySet()) {
                 // 获取二级分类Id
-                Long category2Id  = entry2.getKey();
+                Long category2Id = entry2.getKey();
                 // 获取二级分类下的所有集合
-                List<BaseCategoryView> category3List  = entry2.getValue();
+                List<BaseCategoryView> category3List = entry2.getValue();
                 // 声明二级分类对象
                 JSONObject category2 = new JSONObject();
 
-                category2.put("categoryId",category2Id);
-                category2.put("categoryName",category3List.get(0).getCategory2Name());
+                category2.put("categoryId", category2Id);
+                category2.put("categoryName", category3List.get(0).getCategory2Name());
                 // 添加到二级分类集合
                 category2Child.add(category2);
 
@@ -652,18 +652,18 @@ public class ManageServiceImpl implements IManageService {
                 // 循环三级分类数据
                 category3List.stream().forEach(category3View -> {
                     JSONObject category3 = new JSONObject();
-                    category3.put("categoryId",category3View.getCategory3Id());
-                    category3.put("categoryName",category3View.getCategory3Name());
+                    category3.put("categoryId", category3View.getCategory3Id());
+                    category3.put("categoryName", category3View.getCategory3Name());
 
                     category3Child.add(category3);
                 });
 
                 // 将三级数据放入二级里面
-                category2.put("categoryChild",category3Child);
+                category2.put("categoryChild", category3Child);
 
             }
             // 将二级数据放入一级里面
-            category1.put("categoryChild",category2Child);
+            category1.put("categoryChild", category2Child);
             list.add(category1);
         }
         return list;

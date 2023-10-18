@@ -6,5 +6,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.ymall.mapper.BaseAttrValueMapper">
 
+    <!-- <select id="queryBaseAttrValueList" resultType="org.ymall.model.product.BaseAttrValue">
+        select * from base_attr_value
+        <where>
+            (value_name, attr_id) in
+            <foreach collection="baseAttrValues" item="ele" open="(" close=")" separator=",">
+                (#{ele.valueName}, #{ele.attrId})
+            </foreach>
+        </where>
+    </select> -->
+
+    <select id="queryBaseAttrValueList" resultType="org.ymall.model.product.BaseAttrValue">
+        select * from base_attr_value
+        <where>
+            (value_name, attr_id) in
+            <foreach collection="map.entrySet()" item="val" index="key" open="(" close=")" separator=",">
+                (#{key}, #{val})
+            </foreach>
+        </where>
+    </select>
 </mapper>
 
