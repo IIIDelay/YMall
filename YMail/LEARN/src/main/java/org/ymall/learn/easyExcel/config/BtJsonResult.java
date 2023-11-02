@@ -2,18 +2,22 @@ package org.ymall.learn.easyExcel.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * @author cheng-qiang
  * @date 2021年10月15日11:05
  */
+@Data
+@Builder
 public class BtJsonResult {
 
-    public static final  String ERROR = "500";
+    public static final String ERROR = "500";
 
-    public static final  String SUCCESS = "200";
+    public static final String SUCCESS = "200";
 
-    public static final  String NO_FOUND = "404";
+    public static final String NO_FOUND = "404";
 
     // 定义jackson对象
     private static final ObjectMapper MAPPER = new ObjectMapper();

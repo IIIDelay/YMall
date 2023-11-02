@@ -141,5 +141,11 @@
             <version>1.5</version>
         </dependency>
 
+        <dependency>
+            <groupId>xin.altitude.cms</groupId>
+            <artifactId>ucode-cms-common</artifactId>
+            <version>1.6.4</version>
+        </dependency>
+
     </dependencies>
 </project>
