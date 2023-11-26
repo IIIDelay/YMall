@@ -9,6 +9,7 @@ import cn.hutool.core.map.TableMap;
 import cn.hutool.core.net.url.UrlBuilder;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.HttpException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.iiidev.ymall.execption.ServiceRuntimeException;
@@ -18,6 +19,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -136,5 +142,29 @@ public class HttpUtils {
             log.error("读取httpServletRequest的row body异常");
             throw ServiceRuntimeException.of("读取httpServletRequest的row body异常");
         }
+    }
+
+    /**
+     * recordErrorHTTPLog : 记录原生http请求的一场
+     *
+     * @param httpURLConnection httpURLConnection
+     * @throws IOException
+     */
+    public static void recordErrorHTTPLog(HttpURLConnection httpURLConnection) throws IOException {
+        InputStream inputStream = null;
+
+        try {
+            inputStream = httpURLConnection.getResponseCode() < 400 ? httpURLConnection.getInputStream() : httpURLConnection.getErrorStream();
+        } catch (IOException var4) {
+            if (!(var4 instanceof FileNotFoundException)) {
+                throw new HttpException(var4);
+            }
+        }
+
+        if (null == inputStream) {
+            inputStream = new ByteArrayInputStream(StrUtil.format("Error request, response status: {}", new Object[]{httpURLConnection.getResponseCode()}).getBytes());
+        }
+
+        System.out.println("inputStream = " + inputStream);
     }
 }
