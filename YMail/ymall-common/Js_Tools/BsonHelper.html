@@ -1,0 +1,83 @@
+<!--
+  ~ Copyright (c) 2023. 版权归III_Delay所有
+  -->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.min.js"></script>
+</head>
+<body style="background-color: antiquewhite">
+<div style="display:flex;padding-top: 30px;padding-left: 30px" id='root'>
+  <div style="width: 50%;height: 600px">
+    <span>请输入需要解析的BSON: </span>
+    <button style="border-radius: 4px;border: coral 2px solid;font-size: 15px" @click="parseFun">解析</button>
+    <br>
+    <br>
+    <textarea placeholder="当前仅支持处理$date!" style=";font-family: '微软雅黑';border-radius: 8px;border: blueviolet 2px solid ;width: 60%;height: 80%" v-model="inputBson"></textarea>
+  </div>
+
+  <div style="width: 50%;height: 600px">
+    <span>结果: </span>
+    <br>
+    <br>
+    <textarea oninput="this.style.height = this.scrollHeight + 'px';" style="font-family: '微软雅黑';border-radius: 8px;border: blueviolet 2px solid ;width: 60%;height: 80%;"  readonly>{{resultBson}}</textarea>
+  </div>
+
+</div>
+
+
+</body>
+<style>
+    span {
+        font-size: 20px;
+        color: blueviolet;
+    }
+</style>
+<script>
+    let vm = new Vue({
+        data() {
+            return {
+                inputBson: '',
+                resultBson: ''
+            }
+        },
+        methods: {
+            parseFun() {
+                if (this.inputBson == null || this.inputBson === '') {
+                    return;
+                }
+                let bsonObj = JSON.parse(this.inputBson);
+
+                childExec(bsonObj, null, null);
+                let result = JSON.stringify(bsonObj, null, 4);
+                let regexObj = new RegExp("\"new Date(.*)\"", "gm");
+
+                result = result.replace(regexObj, "new Date$1")
+                this.resultBson = result;
+            }
+        }
+    }).$mount('#root');
+    let bsonSourceStr = '{"obj": {"_id": 12345667777, "cname": {"$in": ["zhangsan"]}, "createTime": {"$gte": {"$date": "2023-12-23T09:50:44.34Z"}, "$lte": {"$date": "2023-12-31T09:50:44.34Z"}}}, "_id": 12345667777, "cname": {"$in": ["zhangsan"]}, "createTime": {"$gte": {"$date": "2023-12-23T09:50:44.34Z"}, "$lte": {"$date": "2023-12-31T09:50:44.34Z"}}}'
+
+
+    function childExec(jsonObj, preJsonObj, preKey) {
+        for (let bsonObjKey in jsonObj) {
+            let bsonObjElement = jsonObj[bsonObjKey];
+            if (bsonObjElement instanceof Object) {
+                childExec(bsonObjElement, jsonObj, bsonObjKey)
+            } else {
+                if (bsonObjKey == '$date') {
+                    let jsonObjElement = jsonObj[bsonObjKey];
+                    preJsonObj[preKey] = "new Date('" + jsonObjElement + "')";
+                }
+            }
+        }
+    }
+</script>
+</html>
