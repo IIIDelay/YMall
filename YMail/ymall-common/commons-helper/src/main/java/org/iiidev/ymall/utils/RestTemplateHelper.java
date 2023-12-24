@@ -4,6 +4,10 @@
 
 package org.iiidev.ymall.utils;
 
+import cn.hutool.core.lang.Assert;
+import com.google.common.collect.ImmutableMap;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -23,9 +27,12 @@ import java.util.Map;
  * @Date 2023/12/21 22:32
  **/
 public class RestTemplateHelper {
-    private static RestTemplate restTemplate = buildDefaultRT();
+    private static RestTemplate restTemplate = defaultRest();
 
     public static void main(String[] args) {
+        String s = urlFormat("https://pagead2.googlesyndication.com/getco", ImmutableMap.of("name", "zs"));
+        System.out.println("s = " + s);
+
         ResponseEntity<String> responseEntity = null;
         try {
             Map<String, String> map = new HashMap<>();
@@ -39,21 +46,42 @@ public class RestTemplateHelper {
 
     public static ResponseEntity<String> doGet(String url, Map<String, String> headerMap, Object... queryParams) {
         // uri = "http://localhost:8080/people/selectById?id={id}&XXX={XXX}";
-        RequestEntity<?> requestEntity = RequestEntity.get(url, queryParams).headers(httpHeaders -> headerMap.forEach((k, v) -> httpHeaders.add(k, v))).build();
+        RequestEntity<?> requestEntity = RequestEntity.get(url)
+            .headers(httpHeaders -> headerMap.forEach((k, v) -> httpHeaders.add(k, v)))
+            .build();
+
         ResponseEntity<String> responseEntity = restTemplate
             .exchange(requestEntity, String.class);
         return responseEntity;
     }
 
+    public static ResponseEntity<Resource> doPostDown(String url, String body, Map<String, String> headerMap) {
+        Assert.isNull(headerMap, () -> new RuntimeException("input param headerMap not null"));
+        RequestEntity<String> requestEntity = RequestEntity.post(url)
+            .headers(httpHeaders -> headerMap.forEach((k, v) -> httpHeaders.add(k, v)))
+            .body(body);
+        return restTemplate.exchange(requestEntity, Resource.class);
+    }
+
+
     public static ResponseEntity<String> doPost(String url, String body, Map<String, String> headerMap, Object... queryParams) {
+        Assert.isNull(headerMap, () -> new RuntimeException("input param headerMap not null"));
         RequestEntity<String> requestEntity = RequestEntity.post(url, queryParams)
             .headers(httpHeaders -> headerMap.forEach((k, v) -> httpHeaders.add(k, v)))
             .body(body);
         ResponseEntity<String> responseEntity = restTemplate.exchange(requestEntity, String.class);
         return responseEntity;
     }
-    
-    private static RestTemplate buildDefaultRT(){
+
+    public static String urlFormat(String url, Map<String, Object> queryParamMap) {
+        StringBuffer sbr = new StringBuffer();
+        queryParamMap.forEach((k, v) -> {
+            sbr.append("?").append(k).append("=").append(v);
+        });
+        return StringUtils.stripEnd(url, "/") + sbr;
+    }
+
+    private static RestTemplate defaultRest() {
         RestTemplate restTemplate = new RestTemplate();
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         requestFactory.setConnectTimeout(10000);

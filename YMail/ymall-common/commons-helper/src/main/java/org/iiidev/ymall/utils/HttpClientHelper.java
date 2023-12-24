@@ -10,20 +10,31 @@ import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.function.Failable;
+import org.apache.commons.lang3.function.FailableBiConsumer;
+import org.apache.commons.lang3.function.FailableConsumer;
+import org.apache.commons.lang3.function.FailableFunction;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.StatusLine;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIUtils;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * HttpClientHelper
@@ -35,18 +46,22 @@ public class HttpClientHelper {
     private static int requestTimeOut = 3000;
     private static int connectTimeOut = 10000;
 
-    public static HttpResponseDTO doPostByJson(String url, String jsonBody) {
-        return doPostByJson(url, null, null, null, jsonBody);
+    public static void doPostDownload(String url) {
+        doPostExecute(url, null, null, (respDto, httpEntity) -> respDto.setInputStream(httpEntity.getContent()));
     }
 
-    public static HttpResponseDTO doPostByJson(String url, Object pathParam, Map<String, Object> queryParamMap,
-                                               Map<String, String> headerMap, String jsonBody) {
+    public static HttpResponseDTO doPost(String url, String jsonBody) {
+        return doPost(url, null, null, null, jsonBody);
+    }
+
+    public static HttpResponseDTO doPost(String url, Object pathParam, Map<String, Object> queryParamMap,
+                                         Map<String, String> headerMap, String jsonBody) {
         String httpUrl = buildHttpUrl(url, pathParam, queryParamMap);
         if (MapUtils.isEmpty(headerMap)) {
             headerMap = Maps.newLinkedHashMap();
         }
         headerMap.put(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());
-        return doPostExecute(httpUrl, headerMap, jsonBody);
+        return doPostExecute(httpUrl, headerMap, jsonBody, (respDto, httpEntity) -> respDto.setBody(EntityUtils.toString(httpEntity, StandardCharsets.UTF_8)));
     }
 
     public static HttpResponseDTO doGet(String url, Object pathParam, Map<String, Object> queryParamMap,
@@ -67,7 +82,7 @@ public class HttpClientHelper {
             httpResponse = httpClient.execute(httpPost);
             StatusLine statusLine = httpResponse.getStatusLine();
             String respBody = EntityUtils.toString(httpResponse.getEntity(), StandardCharsets.UTF_8);
-            return new HttpResponseDTO(statusLine.getStatusCode(), respBody);
+            return new HttpResponseDTO(statusLine.getStatusCode(), respBody, null);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         } finally {
@@ -76,7 +91,8 @@ public class HttpClientHelper {
         }
     }
 
-    private static HttpResponseDTO doPostExecute(String url, Map<String, String> headerMap, String jsonBody) {
+    private static HttpResponseDTO doPostExecute(String url, Map<String, String> headerMap, String jsonBody,
+                                                 FailableBiConsumer<HttpResponseDTO, HttpEntity, Exception> httpEntityPeek) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse httpResponse = null;
         try {
@@ -89,8 +105,10 @@ public class HttpClientHelper {
             httpPost.setConfig(buildRequestConfig(requestTimeOut, connectTimeOut));
             httpResponse = httpClient.execute(httpPost);
             StatusLine statusLine = httpResponse.getStatusLine();
-            String respBody = EntityUtils.toString(httpResponse.getEntity(), StandardCharsets.UTF_8);
-            return new HttpResponseDTO(statusLine.getStatusCode(), respBody);
+            HttpResponseDTO responseDTO = new HttpResponseDTO();
+            httpEntityPeek.accept(responseDTO, httpResponse.getEntity());
+            responseDTO.setHttpStatus(statusLine.getStatusCode());
+            return responseDTO;
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         } finally {
@@ -125,8 +143,16 @@ public class HttpClientHelper {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class HttpResponseDTO {
+    public static class HttpResponseDTO implements AutoCloseable {
         private int httpStatus;
         private String body;
+        private InputStream inputStream;
+
+        @Override
+        public void close() throws Exception {
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        }
     }
 }
