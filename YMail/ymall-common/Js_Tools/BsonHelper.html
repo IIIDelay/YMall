@@ -19,14 +19,18 @@
     <button style="border-radius: 4px;border: coral 2px solid;font-size: 15px" @click="parseFun">解析</button>
     <br>
     <br>
-    <textarea placeholder="当前仅支持处理$date!" style=";font-family: '微软雅黑';border-radius: 8px;border: blueviolet 2px solid ;width: 60%;height: 80%" v-model="inputBson"></textarea>
+    <textarea placeholder="当前仅支持处理$date!"
+              style=";font-family: '微软雅黑';border-radius: 8px;border: blueviolet 2px solid ;width: 60%;height: 80%"
+              v-model="inputBson"></textarea>
   </div>
 
   <div style="width: 50%;height: 600px">
     <span>结果: </span>
     <br>
     <br>
-    <textarea oninput="this.style.height = this.scrollHeight + 'px';" style="font-family: '微软雅黑';border-radius: 8px;border: blueviolet 2px solid ;width: 60%;height: 80%;"  readonly>{{resultBson}}</textarea>
+    <textarea oninput="this.style.height = this.scrollHeight + 'px';"
+              style="font-family: '微软雅黑';border-radius: 8px;border: blueviolet 2px solid ;width: 60%;height: 80%;"
+              readonly>{{resultBson}}</textarea>
   </div>
 
 </div>
@@ -49,6 +53,7 @@
         },
         methods: {
             parseFun() {
+
                 if (this.inputBson == null || this.inputBson === '') {
                     return;
                 }
