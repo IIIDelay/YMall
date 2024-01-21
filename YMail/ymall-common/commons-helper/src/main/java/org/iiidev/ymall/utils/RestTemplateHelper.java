@@ -7,6 +7,7 @@ package org.iiidev.ymall.utils;
 import cn.hutool.core.lang.Assert;
 import com.google.common.collect.ImmutableMap;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -17,6 +18,7 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,13 +84,12 @@ public class RestTemplateHelper {
     }
 
     private static RestTemplate defaultRest() {
-        RestTemplate restTemplate = new RestTemplate();
-        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        requestFactory.setConnectTimeout(10000);
-        requestFactory.setReadTimeout(8000);
-        restTemplate.setRequestFactory(requestFactory);
-        restTemplate.setErrorHandler(new IgnoreErrHandler());
-        return restTemplate;
+        RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
+        return restTemplateBuilder.setConnectTimeout(Duration.ofSeconds(10))
+            .setReadTimeout(Duration.ofSeconds(8))
+            .errorHandler(new IgnoreErrHandler())
+            .rootUri("")
+            .build();
     }
 
     private static class IgnoreErrHandler implements ResponseErrorHandler {
