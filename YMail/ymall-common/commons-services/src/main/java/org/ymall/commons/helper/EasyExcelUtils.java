@@ -92,7 +92,7 @@ public class EasyExcelUtils {
         try (OutputStream os = response.getOutputStream()) {
             fileName = new String(fileName.getBytes(), StandardCharsets.UTF_8.toString());
             setResponseHeader(response, fileName + ExcelTypeEnum.XLSX.getValue());
-            ExcelWriterSheetBuilder sheet = EasyExcel.write(os, cls).sheet("sheet 0");
+            ExcelWriterSheetBuilder sheet = EasyExcel.write(os, cls).sheet(0);
             if (CollectionUtils.isNotEmpty(includeColumns)) {
                 sheet.includeColumnFieldNames(includeColumns);
             }
