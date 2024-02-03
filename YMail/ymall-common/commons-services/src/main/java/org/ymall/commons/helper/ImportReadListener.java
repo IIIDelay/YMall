@@ -7,6 +7,8 @@ package org.ymall.commons.helper;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.metadata.data.ReadCellData;
 import com.alibaba.excel.read.listener.ReadListener;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -18,6 +20,8 @@ import java.util.function.Consumer;
  * @Author IIIDelay
  * @Date 2024/1/24 20:44
  **/
+@NoArgsConstructor
+@AllArgsConstructor
 public class ImportReadListener<IN> implements ReadListener<IN> {
     private BiConsumer<IN, AnalysisContext> invokeConsumer;
     private Consumer<AnalysisContext> doAfterAllConsumer;
